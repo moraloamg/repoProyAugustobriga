@@ -26,8 +26,8 @@
 
     <ListView
         android:id="@+id/listViewCursos"
-        android:layout_width="489dp"
-        android:layout_height="804dp"
+        android:layout_width="481dp"
+        android:layout_height="774dp"
         android:divider="@null"
         android:dividerHeight="25.0sp"
         app:layout_constraintBottom_toBottomOf="parent"
