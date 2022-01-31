@@ -79,6 +79,8 @@ public class AcCursos extends AppCompatActivity{
         startActivity(i);
     }
 
+    //usar?
+
     public ArrayList<String> getContenidoFichero() {
         return contenidoFichero;
     }
