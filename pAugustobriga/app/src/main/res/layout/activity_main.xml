@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F0F0F0"
+    tools:context=".AcPrincipal">
+
+
+    <View
+        android:id="@+id/view5"
+        android:layout_width="match_parent"
+        android:layout_height="310dp"
+        android:background="@drawable/cabecera"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/view6"
+        android:layout_width="match_parent"
+        android:layout_height="260dp"
+        android:background="@drawable/fondo_pie_de_pagina"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <!-- contenedor 1 -->
+    <LinearLayout
+        android:id="@+id/cont1"
+        android:layout_width="365dp"
+        android:layout_height="150dp"
+        android:weightSum="3"
+        android:background="@drawable/cont_iconos"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="@+id/view6"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.278">
+
+        <!-- icono 1 -->
+        <LinearLayout
+            android:layout_width="25dp"
+            android:layout_height="135dp"
+            android:layout_marginTop="3dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/ico_arriba_uno"
+                android:layout_width="60dp"
+                android:layout_height="62dp"
+                android:layout_marginBottom="8dp"
+                android:src="@drawable/arriba_uno" />
+
+            <TextView
+                android:id="@+id/txtArribaUno"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nuestro centro"
+                android:textColor="#172646"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <!-- icono 2 -->
+        <LinearLayout
+            android:layout_width="25dp"
+            android:layout_height="135dp"
+            android:layout_marginTop="3dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/ico_arriba_dos"
+                android:layout_width="60dp"
+                android:layout_height="62dp"
+                android:layout_marginBottom="8dp"
+                android:src="@drawable/arriba_dos" />
+
+            <TextView
+                android:id="@+id/txtArribaDos"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Horarios"
+                android:textColor="#172646"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <!-- icono 3 -->
+        <LinearLayout
+            android:layout_width="25dp"
+            android:layout_height="135dp"
+            android:layout_marginTop="3dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/ico_arriba_tres"
+                android:layout_width="60dp"
+                android:layout_height="62dp"
+                android:layout_marginBottom="8dp"
+                android:src="@drawable/arriba_tres" />
+
+            <TextView
+                android:id="@+id/txtArribaTres"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Novedades"
+                android:textColor="#172646"
+                android:textSize="12sp" />
+        </LinearLayout>
+        <!-- fin contenedor 1 -->
+    </LinearLayout>
+
+    <!-- contenedor 3 -->
+    <LinearLayout
+        android:id="@+id/cont3"
+        android:layout_width="365dp"
+        android:layout_height="150dp"
+        android:weightSum="3"
+        android:background="@drawable/cont_iconos"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="@+id/view6"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.821">
+
+        <!-- icono 1 -->
+        <LinearLayout
+            android:layout_width="25dp"
+            android:layout_height="135dp"
+            android:layout_marginTop="3dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/ico_abajo_uno"
+                android:layout_width="60dp"
+                android:layout_height="62dp"
+                android:layout_marginBottom="8dp"
+                android:src="@drawable/abajo_uno" />
+
+            <TextView
+                android:id="@+id/txtAbajoUno"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Dónde estamos"
+                android:textColor="#172646"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <!-- icono 2 -->
+        <LinearLayout
+            android:layout_width="25dp"
+            android:layout_height="135dp"
+            android:layout_marginTop="3dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/ico_abajo_dos"
+                android:layout_width="60dp"
+                android:layout_height="62dp"
+                android:layout_marginBottom="8dp"
+                android:src="@drawable/abajo_dos" />
+
+            <TextView
+                android:id="@+id/txtAbajoDos"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Redes sociales"
+                android:textColor="#172646"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <!-- icono 3 -->
+        <LinearLayout
+            android:layout_width="25dp"
+            android:layout_height="135dp"
+            android:layout_marginTop="3dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/ico_abajo_tres"
+                android:layout_width="60dp"
+                android:layout_height="62dp"
+                android:layout_marginBottom="8dp"
+                android:src="@drawable/abajo_tres" />
+
+            <TextView
+                android:id="@+id/txtAbajoTres"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Oferta educativa"
+                android:textColor="#172646"
+                android:textSize="12sp" />
+        </LinearLayout>
+        <!-- fin contenedor 3 -->
+    </LinearLayout>
+
+    <!-- contenedor 2 -->
+    <LinearLayout
+        android:id="@+id/cont2"
+        android:layout_width="365dp"
+        android:layout_height="150dp"
+        android:weightSum="3"
+        android:background="@drawable/cont_iconos"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="@+id/view6"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.545">
+
+        <!-- icono 1 -->
+        <LinearLayout
+            android:layout_width="25dp"
+            android:layout_height="135dp"
+            android:layout_marginTop="3dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/ico_medio_uno"
+                android:layout_width="60dp"
+                android:layout_height="62dp"
+                android:layout_marginBottom="8dp"
+                android:src="@drawable/medio_uno" />
+
+            <TextView
+                android:id="@+id/txtMedioUno"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Profesorado"
+                android:textColor="#172646"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <!-- icono 2 -->
+        <LinearLayout
+            android:layout_width="25dp"
+            android:layout_height="135dp"
+            android:layout_marginTop="3dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/ico_medio_dos"
+                android:layout_width="60dp"
+                android:layout_height="62dp"
+                android:layout_marginBottom="8dp"
+                android:src="@drawable/medio_dos" />
+
+            <TextView
+                android:id="@+id/txtMedioDos"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Calendario"
+                android:textColor="#172646"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <!-- icono 3 -->
+        <LinearLayout
+            android:layout_width="25dp"
+            android:layout_height="135dp"
+            android:layout_marginTop="3dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/ico_medio_tres"
+                android:layout_width="60dp"
+                android:layout_height="62dp"
+                android:layout_marginBottom="8dp"
+                android:src="@drawable/medio_tres" />
+
+            <TextView
+                android:id="@+id/txtMedioTres"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Proyectos"
+                android:textColor="#172646"
+                android:textSize="12sp" />
+        </LinearLayout>
+        <!-- fin contenedor 2 -->
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/txtCabecera1"
+        android:layout_width="326dp"
+        android:layout_height="67dp"
+        android:text="InfoAugustóbriga"
+        android:textAlignment="center"
+        android:textSize="39sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.188"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.024" />
+
+    <TextView
+        android:id="@+id/txtCabecera2"
+        android:layout_width="195dp"
+        android:layout_height="36dp"
+        android:text="Portal de información"
+        android:textAlignment="center"
+        android:textSize="17sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.074"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.099" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
