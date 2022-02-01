@@ -92,8 +92,8 @@ public class AcHorarios extends AppCompatActivity implements AsyncRespuesta{
         String url = crearUrl(tipoCurso);
         LecturaFichero lector=new LecturaFichero(url);
         lector.delegar = this;
+        //una vez se ejecute el siguiente método, el hilo de la clase actual acabará
         lector.execute();
-
     }
 
     @Override

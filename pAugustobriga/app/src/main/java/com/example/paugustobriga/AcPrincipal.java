@@ -14,6 +14,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.paugustobriga.pArribaDos.Horarios.AcHorarios;
+import com.example.paugustobriga.pArribaDos.Profesorado.AcProfesorado;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -104,7 +105,7 @@ public class AcPrincipal extends AppCompatActivity {
        ico_medio_uno.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View view) {
-
+                cambiarActividad("medioUno");
            }
        });
     }
@@ -171,7 +172,8 @@ public class AcPrincipal extends AppCompatActivity {
                 break;
 
             case "medioUno":
-
+                Intent i4=new Intent(this, AcProfesorado.class);
+                startActivity(i4);
                 break;
 
             case "medioDos":

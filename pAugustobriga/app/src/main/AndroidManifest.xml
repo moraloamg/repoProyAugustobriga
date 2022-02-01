@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PAugustobriga">
         <activity
+            android:name=".pArribaDos.Profesorado.AcProfesorado"
+            android:exported="false" />
+        <activity
             android:name=".pArribaDos.NuestroCentro.AcNuestroCentro"
             android:exported="false" />
         <activity

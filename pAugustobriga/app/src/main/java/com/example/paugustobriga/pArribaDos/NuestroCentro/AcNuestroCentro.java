@@ -11,6 +11,6 @@ public class AcNuestroCentro extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_ac_nuestro_centro);
+        setContentView(R.layout.activity_nuestro_centro);
     }
 }
