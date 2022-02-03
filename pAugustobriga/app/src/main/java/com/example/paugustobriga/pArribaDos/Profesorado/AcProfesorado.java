@@ -19,19 +19,38 @@ public class AcProfesorado extends AppCompatActivity implements AsyncRespuestaHt
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profesorado);
-        AccesoHtml ac=new AccesoHtml("https://iesaugustobriga.educarex.es/index.php/organizacion2");
+        //AccesoHtml ac=new AccesoHtml("https://iesaugustobriga.educarex.es/index.php/organizacion2","organizacion");
+        AccesoHtml ac=new AccesoHtml("https://iesaugustobriga.educarex.es/index.php/tutores","tutorias");
         ac.delegar = this;
         ac.execute();
     }
 
 
     @Override
-    public void procesoFinalizado(ArrayList<Directivo> salida) {
-        for(Directivo x:salida){
-            Log.d("salida cargo", x.getCargo());
-            Log.d("salida nombre", x.getNombre());
+    public void procesoFinalizado(ArrayList<Object []> salida) {
+        /*
+        for(Object[] x:salida){
+
+            Log.d("salida cargo", x[0].toString());
+            Log.d("salida nombre", x[1].toString());
         }
 
         Toast.makeText(this, "parseoTerminado", Toast.LENGTH_LONG).show();
+         */
+
+        for(Object[] x:salida){
+            if(x.length==4){
+                Log.d("curso", x[0].toString());
+                Log.d("grupo", x[1].toString());
+                Log.d("tutor", x[2].toString());
+                Log.d("Hora", x[3].toString());
+            }else{
+                Log.d("grupo", x[0].toString());
+                Log.d("tutor", x[1].toString());
+                Log.d("Hora", x[2].toString());
+            }
+        }
     }
+
+
 }

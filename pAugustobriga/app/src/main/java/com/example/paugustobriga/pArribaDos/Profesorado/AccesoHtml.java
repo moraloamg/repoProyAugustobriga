@@ -3,8 +3,6 @@ package com.example.paugustobriga.pArribaDos.Profesorado;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import com.example.paugustobriga.pArribaDos.Horarios.AsyncRespuesta;
-
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -17,11 +15,16 @@ public class AccesoHtml extends AsyncTask {
 
     private String url;
     private Document html;
+    private String tipo;
     public AsyncRespuestaHtml delegar = null;
-    ArrayList<Directivo> datos=new ArrayList<>();
 
-    public AccesoHtml(String url){
+    ArrayList<Object[]> datos=new ArrayList<>();
+
+
+    public AccesoHtml(String url, String tipo)
+    {
         this.url = url;
+        this.tipo = tipo;
     }
 
     @Override
@@ -33,7 +36,7 @@ public class AccesoHtml extends AsyncTask {
     @Override
     protected Object doInBackground(Object[] objects) {
         conectarUrl();
-        obtenerElementos();
+        sacarTipo(tipo);
         return true;
     }
 
@@ -43,10 +46,23 @@ public class AccesoHtml extends AsyncTask {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
-    private void obtenerElementos(){
+    private void sacarTipo(String tipo){
+        switch (tipo){
+            case "organizacion":
+                organizacion();
+                break;
+            case "departamentos":
+
+                break;
+            case "tutorias":
+                tutorias();
+                break;
+        }
+    }
+
+    private void organizacion(){
 
         Element tabla = html.select("table").get(2);
         Elements filas = tabla.select("tr");
@@ -54,10 +70,26 @@ public class AccesoHtml extends AsyncTask {
             Element fila = filas.get(i);
             Elements columna = fila.select("td");
 
-            Directivo d=new Directivo();
-            d.setCargo(columna.get(0).text());
-            d.setNombre(columna.get(1).text());
-            datos.add(d);
+
+            Object[] o = {columna.get(0).text(), columna.get(1).text()};
+            datos.add(o);
+        }
+    }
+
+    private void tutorias(){
+        Element tabla = html.select("table").get(1);
+        Elements filas = tabla.select("tr");
+        for(int i=1;i<filas.size();i++){ //i en uno por formato de la tabla
+            Element fila =filas.get(i);
+            Elements columna = fila.select("td");
+
+            Object[] o = {};
+            if(columna.size()==4){
+                o = new Object[]{columna.get(0).text(), columna.get(1).text(), columna.get(2).text(), columna.get(3).text()};
+            }else{
+                o =new Object[]{columna.get(0).text(),columna.get(1).text(),columna.get(2).text()};
+            }
+            datos.add(o);
         }
     }
 }
