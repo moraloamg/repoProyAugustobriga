@@ -105,4 +105,18 @@
 
     </LinearLayout>
 
+    <TextView
+        android:id="@+id/txtCabeceraProfesorado"
+        android:layout_width="281dp"
+        android:layout_height="67dp"
+        android:text="Profesorado"
+        android:textAlignment="center"
+        android:textSize="50sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.106"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.024" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

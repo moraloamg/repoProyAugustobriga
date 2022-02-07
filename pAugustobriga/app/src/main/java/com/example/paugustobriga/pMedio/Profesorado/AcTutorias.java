@@ -2,11 +2,13 @@ package com.example.paugustobriga.pMedio.Profesorado;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
+import com.example.paugustobriga.AcPrincipal;
 import com.example.paugustobriga.R;
 
 import java.util.ArrayList;
@@ -26,6 +28,13 @@ public class AcTutorias extends AppCompatActivity implements AsyncRespuestaHtml{
         ac.delegar = this;
         ac.execute();
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent i=new Intent(getApplicationContext(), AcProfesorado.class);
+        i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(i);
     }
 
     @Override
