@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".pArriba.Horarios.AcCursos">
+    tools:context=".pMedio.Profesorado.AcOrganizacion">
+
 
     <View
         android:id="@+id/view5"
@@ -17,19 +18,6 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <View
-        android:id="@+id/view7"
-        android:layout_width="270dp"
-        android:layout_height="270dp"
-        android:alpha="0.3"
-        android:background="@drawable/logo_50_aniversario"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintVertical_bias="0.6"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <View
         android:id="@+id/view6"
         android:layout_width="match_parent"
         android:layout_height="260dp"
@@ -37,14 +25,16 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <ListView
-        android:id="@+id/listViewCursos"
-        android:layout_width="481dp"
-        android:layout_height="774dp"
-        android:divider="@null"
-        android:dividerHeight="25.0sp"
+    <TableLayout
+        android:id="@+id/tbTabla1"
+        android:layout_width="334dp"
+        android:layout_height="220dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+
+    </TableLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

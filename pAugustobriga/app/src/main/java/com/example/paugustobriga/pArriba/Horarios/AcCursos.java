@@ -1,4 +1,4 @@
-package com.example.paugustobriga.pArribaDos.Horarios;
+package com.example.paugustobriga.pArriba.Horarios;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.res.ResourcesCompat;
@@ -48,6 +48,12 @@ public class AcCursos extends AppCompatActivity{
             }
         });
     }
+
+    /**
+     * Este metodo carga el color del fondo el función de la elección de la actividad anterior
+     * @param tipo
+     * @return
+     */
 
     private int seleccionarFondo(String tipo) {
         int resultado=0;

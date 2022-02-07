@@ -1,4 +1,4 @@
-package com.example.paugustobriga.pArribaDos.Horarios;
+package com.example.paugustobriga.pArriba.Horarios;
 
 import java.util.ArrayList;
 

@@ -1,4 +1,4 @@
-package com.example.paugustobriga.pArribaDos.Horarios;
+package com.example.paugustobriga.pArriba.Horarios;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.res.ResourcesCompat;

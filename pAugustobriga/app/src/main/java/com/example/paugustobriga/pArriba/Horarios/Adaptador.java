@@ -1,7 +1,6 @@
-package com.example.paugustobriga.pArribaDos.Horarios;
+package com.example.paugustobriga.pArriba.Horarios;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
@@ -12,8 +11,6 @@ import android.view.animation.AnimationUtils;
 import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
-import androidx.core.content.res.ResourcesCompat;
 
 import com.example.paugustobriga.R;
 

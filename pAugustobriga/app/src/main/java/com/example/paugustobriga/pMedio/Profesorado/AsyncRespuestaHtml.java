@@ -1,6 +1,4 @@
-package com.example.paugustobriga.pArribaDos.Profesorado;
-
-import org.jsoup.nodes.Document;
+package com.example.paugustobriga.pMedio.Profesorado;
 
 import java.util.ArrayList;
 

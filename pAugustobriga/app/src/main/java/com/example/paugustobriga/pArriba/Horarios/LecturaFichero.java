@@ -1,6 +1,5 @@
-package com.example.paugustobriga.pArribaDos.Horarios;
+package com.example.paugustobriga.pArriba.Horarios;
 
-import android.app.Activity;
 import android.os.AsyncTask;
 import android.util.Log;
 

@@ -4,6 +4,105 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".pArribaDos.Profesorado.AcProfesorado">
+    tools:context=".pMedio.Profesorado.AcProfesorado">
+
+    <View
+        android:id="@+id/view5"
+        android:layout_width="match_parent"
+        android:layout_height="310dp"
+        android:background="@drawable/cabecera"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/view6"
+        android:layout_width="match_parent"
+        android:layout_height="260dp"
+        android:background="@drawable/fondo_pie_de_pagina"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <!--contenedor 1 -->
+    <LinearLayout
+        android:id="@+id/contOrganizacion"
+        android:layout_width="365dp"
+        android:layout_height="130dp"
+        android:background="@drawable/grupos_bachillerato"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:alpha="0.9"
+        app:layout_constraintBottom_toBottomOf="@+id/view6"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.278">
+
+        <TextView
+            android:id="@+id/txtOrganizacion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Organización"
+            android:textColor="#FFFFFF"
+            android:textSize="25sp"
+            android:gravity="center"
+            android:orientation="vertical"/>
+
+    </LinearLayout>
+
+    <!--contenedor 3 -->
+    <LinearLayout
+        android:id="@+id/contDepartamentos"
+        android:layout_width="365dp"
+        android:layout_height="130dp"
+        android:background="@drawable/grupos_bachillerato"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:alpha="0.9"
+        app:layout_constraintBottom_toBottomOf="@+id/view6"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.821">
+
+        <TextView
+            android:id="@+id/txtDepartamentos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Departamentos"
+            android:textColor="#FFFFFF"
+            android:textSize="25sp"
+            android:gravity="center"
+            android:orientation="vertical"/>
+
+    </LinearLayout>
+
+    <!--contenedor 2 -->
+    <LinearLayout
+        android:id="@+id/contTutorias"
+        android:layout_width="365dp"
+        android:layout_height="130dp"
+        android:background="@drawable/grupos_bachillerato"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:alpha="0.9"
+        app:layout_constraintBottom_toBottomOf="@+id/view6"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.545">
+
+        <TextView
+            android:id="@+id/txtTutorias"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tutorías"
+            android:textColor="#FFFFFF"
+            android:textSize="25sp"
+            android:gravity="center"
+            android:orientation="vertical"/>
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

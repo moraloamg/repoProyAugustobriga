@@ -5,6 +5,7 @@ import androidx.core.content.res.ResourcesCompat;
 
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.view.animation.Animation;
@@ -13,8 +14,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.example.paugustobriga.pArribaDos.Horarios.AcHorarios;
-import com.example.paugustobriga.pArribaDos.Profesorado.AcProfesorado;
+import com.example.paugustobriga.pArriba.Horarios.AcHorarios;
+import com.example.paugustobriga.pMedio.Profesorado.AcProfesorado;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -96,7 +97,7 @@ public class AcPrincipal extends AppCompatActivity {
         ico_arriba_tres.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                cambiarActividad("arribaTres");
             }
         });
     }
@@ -168,7 +169,9 @@ public class AcPrincipal extends AppCompatActivity {
                 break;
 
             case "arribaTres":
-
+                Intent irNovedades=new Intent(Intent.ACTION_VIEW,
+                        Uri.parse("https://iesaugustobriga.educarex.es/"));
+                startActivity(irNovedades);
                 break;
 
             case "medioUno":

@@ -1,7 +1,6 @@
-package com.example.paugustobriga.pArribaDos.Profesorado;
+package com.example.paugustobriga.pMedio.Profesorado;
 
 import android.os.AsyncTask;
-import android.util.Log;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -54,7 +53,7 @@ public class AccesoHtml extends AsyncTask {
                 organizacion();
                 break;
             case "departamentos":
-
+                departamentos();
                 break;
             case "tutorias":
                 tutorias();
@@ -84,12 +83,41 @@ public class AccesoHtml extends AsyncTask {
             Elements columna = fila.select("td");
 
             Object[] o = {};
-            if(columna.size()==4){
+            if(columna.size()==4){ //este if diferenciará la fila que incluye el curso de la que no
                 o = new Object[]{columna.get(0).text(), columna.get(1).text(), columna.get(2).text(), columna.get(3).text()};
             }else{
                 o =new Object[]{columna.get(0).text(),columna.get(1).text(),columna.get(2).text()};
             }
             datos.add(o);
         }
+    }
+
+    private void departamentos(){
+        Elements nombresContenedores = html.getElementsByClass("jwts_toggleControlTitle");
+        Elements contenidoContenedores = html.getElementsByClass("jwts_content");
+
+
+        for(int i=0;i<nombresContenedores.size();i++){
+            String departamento = nombresContenedores.get(i).text();
+            //de cada contenedor, se obtienen los nodos que contienen los nombres de los profesores
+            Element nombres = contenidoContenedores.get(i);
+            Elements lineas = nombres.select("p");
+            //Se eliminan aquellos nodos que no tengan texto
+            for (Element elemento : lineas.select("*")) {
+                if (!elemento.hasText() && elemento.isBlock()) {
+                    lineas.remove(elemento);
+                }
+            }
+            Object[] o=new Object[lineas.size()+1]; //los nombres de los profesores mas el nombre del departamento
+            o[0]=departamento;
+            //se recorren los nodos
+            //dado que el primer lugar lo ocupa el nombre del departamento, se le suma +1 al contador
+            for(int j=0;j<lineas.size();j++){
+                o[j+1]=lineas.get(j).text();
+            }
+
+            datos.add(o);
+        }
+
     }
 }
