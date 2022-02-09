@@ -47,7 +47,7 @@ public class AcProfesorado extends AppCompatActivity {
 
         irOrganizacion();
         irTutorias();
-
+        irDepartamentos();
 
 
     }
@@ -103,6 +103,16 @@ public class AcProfesorado extends AppCompatActivity {
             public void onClick(View view) {
                 Intent i2=new Intent(getApplicationContext(), AcTutorias.class);
                 startActivity(i2);
+            }
+        });
+    }
+
+    private void irDepartamentos(){
+        departamentos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i3=new Intent(getApplicationContext(), AcDepartamentos.class);
+                startActivity(i3);
             }
         });
     }

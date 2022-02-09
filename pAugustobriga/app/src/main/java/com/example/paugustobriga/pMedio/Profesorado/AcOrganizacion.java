@@ -3,7 +3,9 @@ package com.example.paugustobriga.pMedio.Profesorado;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -16,6 +18,7 @@ import java.util.ArrayList;
 public class AcOrganizacion extends AppCompatActivity implements AsyncRespuestaHtml{
 
     TableLayout tl;
+    TextView pantallaCarga;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +26,7 @@ public class AcOrganizacion extends AppCompatActivity implements AsyncRespuestaH
         setContentView(R.layout.activity_organizacion);
 
         tl= findViewById(R.id.tbTabla1);
+        pantallaCarga = findViewById(R.id.txtCargando);
 
 
         AccesoHtml ac=new AccesoHtml("https://iesaugustobriga.educarex.es/index.php/organizacion2","organizacion");
@@ -41,9 +45,11 @@ public class AcOrganizacion extends AppCompatActivity implements AsyncRespuestaH
     public void procesoFinalizado(ArrayList<Object[]> salida) {
         for(Object[] x:salida){
             TableRow columna = new TableRow(this);
+            columna.setBackgroundColor(Color.parseColor("#3070F0"));
             tl.addView(columna);
             TextView tv = new TextView(this);
             tv.setText(x[0].toString()+"\t");
+            tv.setTextColor(Color.WHITE);
             columna.addView(tv);
 
 
@@ -52,5 +58,6 @@ public class AcOrganizacion extends AppCompatActivity implements AsyncRespuestaH
             columna.addView(tv2);
 
         }
+        pantallaCarga.setVisibility(View.INVISIBLE);
     }
 }

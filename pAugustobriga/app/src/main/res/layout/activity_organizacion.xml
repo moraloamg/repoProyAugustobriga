@@ -17,6 +17,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:id="@+id/txtCargando"
+        android:layout_width="291dp"
+        android:layout_height="85dp"
+        android:gravity="center"
+        android:text="Cargando ..."
+        android:textColor="#172646"
+        android:textSize="45sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <View
         android:id="@+id/view6"
         android:layout_width="match_parent"
@@ -27,12 +40,14 @@
 
     <TableLayout
         android:id="@+id/tbTabla1"
-        android:layout_width="334dp"
-        android:layout_height="220dp"
+        android:layout_width="328dp"
+        android:layout_height="212dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.499">
 
 
     </TableLayout>
