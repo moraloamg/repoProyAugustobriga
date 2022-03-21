@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TableLayout;
@@ -45,11 +46,12 @@ public class AcOrganizacion extends AppCompatActivity implements AsyncRespuestaH
     public void procesoFinalizado(ArrayList<Object[]> salida) {
         for(Object[] x:salida){
             TableRow columna = new TableRow(this);
-            columna.setBackgroundColor(Color.parseColor("#3070F0"));
+            //columna.setBackgroundColor(Color.parseColor("#3070F0"));
             tl.addView(columna);
+
             TextView tv = new TextView(this);
             tv.setText(x[0].toString()+"\t");
-            tv.setTextColor(Color.WHITE);
+            tv.setTypeface(tv.getTypeface(), Typeface.BOLD);
             columna.addView(tv);
 
 

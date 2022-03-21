@@ -40,18 +40,19 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <!-- contenedor 1 -->
+
+    <!-- contenedor 3 -->
     <LinearLayout
         android:id="@+id/cont1"
         android:layout_width="365dp"
         android:layout_height="150dp"
-        android:weightSum="3"
+        android:layout_marginTop="144dp"
         android:background="@drawable/cont_iconos"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="@+id/view6"
+        android:weightSum="3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.278">
+        app:layout_constraintTop_toTopOf="parent">
 
         <!-- icono 1 -->
         <LinearLayout
@@ -130,19 +131,20 @@
         <!-- fin contenedor 1 -->
     </LinearLayout>
 
-    <!-- contenedor 3 -->
+    <!-- contenedor 2 -->
+
     <LinearLayout
         android:id="@+id/cont3"
         android:layout_width="365dp"
         android:layout_height="150dp"
-        android:weightSum="3"
         android:background="@drawable/cont_iconos"
         android:orientation="horizontal"
+        android:weightSum="3"
         app:layout_constraintBottom_toBottomOf="@+id/view6"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.821">
+        app:layout_constraintTop_toBottomOf="@+id/cont2"
+        app:layout_constraintVertical_bias="0.09">
 
         <!-- icono 1 -->
         <LinearLayout
@@ -189,7 +191,7 @@
                 android:id="@+id/txtAbajoDos"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Redes sociales"
+                android:text="Agenda"
                 android:textColor="#172646"
                 android:textSize="12sp" />
         </LinearLayout>
@@ -221,19 +223,17 @@
         <!-- fin contenedor 3 -->
     </LinearLayout>
 
-    <!-- contenedor 2 -->
     <LinearLayout
         android:id="@+id/cont2"
         android:layout_width="365dp"
         android:layout_height="150dp"
-        android:weightSum="3"
+        android:layout_marginTop="16dp"
         android:background="@drawable/cont_iconos"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="@+id/view6"
+        android:weightSum="3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.545">
+        app:layout_constraintTop_toBottomOf="@+id/cont1">
 
         <!-- icono 1 -->
         <LinearLayout

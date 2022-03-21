@@ -39,8 +39,8 @@
 
     <ScrollView
         android:id="@+id/layout"
-        android:layout_width="400dp"
-        android:layout_height="717dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:fillViewport="true"
         android:scrollbarStyle="outsideInset"
         android:scrollbars="horizontal|vertical"
@@ -52,8 +52,8 @@
 
         <TableLayout
             android:id="@+id/tbTablaTutorias"
-            android:layout_width="400dp"
-            android:layout_height="636dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.49"
