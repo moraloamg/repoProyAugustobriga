@@ -46,14 +46,12 @@ public class AcOrganizacion extends AppCompatActivity implements AsyncRespuestaH
     public void procesoFinalizado(ArrayList<Object[]> salida) {
         for(Object[] x:salida){
             TableRow columna = new TableRow(this);
-            //columna.setBackgroundColor(Color.parseColor("#3070F0"));
             tl.addView(columna);
 
             TextView tv = new TextView(this);
             tv.setText(x[0].toString()+"\t");
             tv.setTypeface(tv.getTypeface(), Typeface.BOLD);
             columna.addView(tv);
-
 
             TextView tv2 = new TextView(this);
             tv2.setText("\t"+x[1].toString());
