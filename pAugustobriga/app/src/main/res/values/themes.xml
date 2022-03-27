@@ -4,7 +4,7 @@
         <!-- Primary brand color. -->
         <item name="colorPrimary">#92CD8D</item>
         <item name="colorPrimaryVariant">#92CD8D</item>
-        <item name="colorOnPrimary">#9A9A9A</item>
+        <item name="colorOnPrimary">#92CD8D</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>
         <item name="colorSecondaryVariant">@color/teal_700</item>

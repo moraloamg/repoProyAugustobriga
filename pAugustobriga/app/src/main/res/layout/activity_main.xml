@@ -40,8 +40,6 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <!-- contenedor 1 -->
-
-    <!-- contenedor 3 -->
     <LinearLayout
         android:id="@+id/cont1"
         android:layout_width="365dp"
@@ -131,8 +129,7 @@
         <!-- fin contenedor 1 -->
     </LinearLayout>
 
-    <!-- contenedor 2 -->
-
+    <!-- contenedor 3 -->
     <LinearLayout
         android:id="@+id/cont3"
         android:layout_width="365dp"
@@ -223,6 +220,7 @@
         <!-- fin contenedor 3 -->
     </LinearLayout>
 
+    <!-- contenedor 2 -->
     <LinearLayout
         android:id="@+id/cont2"
         android:layout_width="365dp"

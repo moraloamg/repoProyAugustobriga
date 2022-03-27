@@ -53,20 +53,25 @@ public class Adaptador extends BaseAdapter {
 
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
+        //preparamos los elementos visuales de la lista
         LayoutInflater inflar=(LayoutInflater) contexto.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View list=inflar.inflate(R.layout.lista_cursos, viewGroup, false);
 
+        //disponemos las variables de los elementos gráficos
         TextView curso = (TextView) list.findViewById(R.id.txtCurso);
         LinearLayout contenedor = (LinearLayout) list.findViewById(R.id.contCurso);
 
+        //rellenamos las variables con los datos de la lista
         curso.setText(filas.get(i).toString());
         //se añade la fuente (puede ser opcional)
         if(fuente!=null){
             curso.setTypeface(fuente);
         }
+        //ponemos un fondo
         contenedor.setBackgroundResource(imagen);
         Drawable tmp = contenedor.getBackground();
 
+        //Añadimos una animacion
         Animation animacion=null;
         animacion = AnimationUtils.loadAnimation(contexto,R.anim.atg_lista_deslizar_izq);
         list.startAnimation(animacion);

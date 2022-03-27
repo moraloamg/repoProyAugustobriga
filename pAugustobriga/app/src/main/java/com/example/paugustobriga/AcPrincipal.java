@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.paugustobriga.pAbajo.Agenda.AcCalendarioAgenda;
 import com.example.paugustobriga.pArriba.Horarios.AcHorarios;
 import com.example.paugustobriga.pMedio.Profesorado.AcProfesorado;
 import com.example.paugustobriga.pMedio.Proyectos.AcProyectos;
@@ -143,7 +144,7 @@ public class AcPrincipal extends AppCompatActivity {
         ico_abajo_dos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                cambiarActividad("abajoDos");
             }
         });
     }
@@ -194,7 +195,8 @@ public class AcPrincipal extends AppCompatActivity {
                 break;
 
             case "abajoDos":
-
+                Intent i5=new Intent(this, AcCalendarioAgenda.class);
+                startActivity(i5);
                 break;
 
             case "abajoTres":

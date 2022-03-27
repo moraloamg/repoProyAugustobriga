@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.paugustobriga" >
+    package="com.example.paugustobriga">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -10,34 +10,51 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.PAugustobriga" >
+        android:theme="@style/Theme.PAugustobriga">
+        <activity
+            android:name=".pAbajo.Agenda.AcVerTareas"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".pAbajo.Agenda.AcCalendarioAgenda"
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".pMedio.Proyectos.AcProyectos"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".pMedio.Profesorado.AcOrganizacion"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".pMedio.Profesorado.AcTutorias"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".pMedio.Profesorado.AcDepartamentos"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".pMedio.Profesorado.AcProfesorado"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".pArriba.NuestroCentro.AcNuestroCentro"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".pArriba.Horarios.AcCursos"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".pArriba.Horarios.AcHorarios"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".AcPrincipal"
-            android:exported="true" >
+            android:exported="true"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
