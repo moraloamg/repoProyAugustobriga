@@ -15,6 +15,7 @@ public class AccesoHtml extends AsyncTask {
     private String url;
     private Document html;
     private String tipo;
+    //Aquí si hay poliformismo, por ende se usa una interfaz que se aplica a varias clases
     public AsyncRespuestaHtml delegar = null;
 
     ArrayList<Object[]> datos=new ArrayList<>();

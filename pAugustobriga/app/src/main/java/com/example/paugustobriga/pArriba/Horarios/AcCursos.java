@@ -97,6 +97,5 @@ public class AcCursos extends AppCompatActivity{
 
     private void importarFuentes(){
         fuenteContenedores = ResourcesCompat.getFont(this, R.font.ibm_plex_sans_thai_bold);
-
     }
 }

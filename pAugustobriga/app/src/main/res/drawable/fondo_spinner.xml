@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <item>
+        <layer-list>
+            <item>
+                <shape android:shape="rectangle">
+                    <solid android:color="#FF03DAC5"/>
+                    <corners android:radius="40dp" />
+                    <padding android:right="12dp"
+                        android:left="12dp"/>
+                </shape>
+
+            </item>
+            <item
+                android:drawable="@drawable/ic_flecha_spinner"
+                android:gravity="end"/>
+        </layer-list>
+    </item>
+
+</selector>

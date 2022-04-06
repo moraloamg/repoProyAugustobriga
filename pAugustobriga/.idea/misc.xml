@@ -15,8 +15,16 @@
         <entry key="..\:/Users/Usuario/AndroidStudioProjects/repoProyAugustobriga/pAugustobriga/app/src/main/res/drawable/circulo_azul.xml" value="0.31666666666666665" />
         <entry key="..\:/Users/Usuario/AndroidStudioProjects/repoProyAugustobriga/pAugustobriga/app/src/main/res/drawable/circulo_rojo.xml" value="0.31666666666666665" />
         <entry key="..\:/Users/Usuario/AndroidStudioProjects/repoProyAugustobriga/pAugustobriga/app/src/main/res/drawable/fondo_botones.xml" value="0.11296296296296296" />
+        <entry key="..\:/Users/Usuario/AndroidStudioProjects/repoProyAugustobriga/pAugustobriga/app/src/main/res/drawable/fondo_caja_texto.xml" value="0.31666666666666665" />
         <entry key="..\:/Users/Usuario/AndroidStudioProjects/repoProyAugustobriga/pAugustobriga/app/src/main/res/drawable/fondo_calendario.xml" value="0.12685185185185185" />
+        <entry key="..\:/Users/Usuario/AndroidStudioProjects/repoProyAugustobriga/pAugustobriga/app/src/main/res/drawable/fondo_desplegar_spinner.xml" value="0.31666666666666665" />
         <entry key="..\:/Users/Usuario/AndroidStudioProjects/repoProyAugustobriga/pAugustobriga/app/src/main/res/drawable/fondo_edit_text.xml" value="0.31666666666666665" />
+        <entry key="..\:/Users/Usuario/AndroidStudioProjects/repoProyAugustobriga/pAugustobriga/app/src/main/res/drawable/fondo_spinner.xml" value="0.31666666666666665" />
+        <entry key="..\:/Users/Usuario/AndroidStudioProjects/repoProyAugustobriga/pAugustobriga/app/src/main/res/drawable/fondo_tarea_ex.xml" value="0.31666666666666665" />
+        <entry key="..\:/Users/Usuario/AndroidStudioProjects/repoProyAugustobriga/pAugustobriga/app/src/main/res/drawable/fondo_tarea_otr.xml" value="0.31666666666666665" />
+        <entry key="..\:/Users/Usuario/AndroidStudioProjects/repoProyAugustobriga/pAugustobriga/app/src/main/res/drawable/fondo_tarea_tar.xml" value="0.31666666666666665" />
+        <entry key="..\:/Users/Usuario/AndroidStudioProjects/repoProyAugustobriga/pAugustobriga/app/src/main/res/drawable/formato_spinner.xml" value="0.31666666666666665" />
+        <entry key="..\:/Users/Usuario/AndroidStudioProjects/repoProyAugustobriga/pAugustobriga/app/src/main/res/drawable/ic_flecha_spinner.xml" value="0.31666666666666665" />
         <entry key="..\:/Users/Usuario/AndroidStudioProjects/repoProyAugustobriga/pAugustobriga/app/src/main/res/drawable/ic_launcher_background.xml" value="0.31666666666666665" />
         <entry key="..\:/Users/Usuario/AndroidStudioProjects/repoProyAugustobriga/pAugustobriga/app/src/main/res/layout/activity_calendario_agenda.xml" value="0.268" />
         <entry key="..\:/Users/Usuario/AndroidStudioProjects/repoProyAugustobriga/pAugustobriga/app/src/main/res/layout/activity_cursos.xml" value="0.2572463768115942" />
@@ -30,8 +38,11 @@
         <entry key="..\:/Users/Usuario/AndroidStudioProjects/repoProyAugustobriga/pAugustobriga/app/src/main/res/layout/activity_proyectos.xml" value="0.2608695652173913" />
         <entry key="..\:/Users/Usuario/AndroidStudioProjects/repoProyAugustobriga/pAugustobriga/app/src/main/res/layout/activity_tutorias.xml" value="0.2608695652173913" />
         <entry key="..\:/Users/Usuario/AndroidStudioProjects/repoProyAugustobriga/pAugustobriga/app/src/main/res/layout/activity_ver_tareas.xml" value="0.268" />
+        <entry key="..\:/Users/Usuario/AndroidStudioProjects/repoProyAugustobriga/pAugustobriga/app/src/main/res/layout/activity_ver_tareas_dia.xml" value="0.36" />
+        <entry key="..\:/Users/Usuario/AndroidStudioProjects/repoProyAugustobriga/pAugustobriga/app/src/main/res/layout/formato_spinner.xml" value="0.2694746376811594" />
         <entry key="..\:/Users/Usuario/AndroidStudioProjects/repoProyAugustobriga/pAugustobriga/app/src/main/res/layout/lista_cursos.xml" value="0.26992753623188404" />
         <entry key="..\:/Users/Usuario/AndroidStudioProjects/repoProyAugustobriga/pAugustobriga/app/src/main/res/layout/lista_ver_tareas.xml" value="0.44000000000000006" />
+        <entry key="..\:/Users/Usuario/AndroidStudioProjects/repoProyAugustobriga/pAugustobriga/app/src/main/res/layout/lista_ver_tareas_dia.xml" value="0.36" />
         <entry key="..\:/Users/Usuario/AndroidStudioProjects/repoProyectoAugustobriga/pAugustobriga/app/src/main/res/layout-v26/lista_cursos.xml" value="0.271286231884058" />
         <entry key="..\:/Users/Usuario/AndroidStudioProjects/repoProyectoAugustobriga/pAugustobriga/app/src/main/res/layout/activity_ac_nuestro_centro.xml" value="0.2749094202898551" />
         <entry key="..\:/Users/Usuario/AndroidStudioProjects/repoProyectoAugustobriga/pAugustobriga/app/src/main/res/layout/activity_cursos.xml" value="0.2391304347826087" />

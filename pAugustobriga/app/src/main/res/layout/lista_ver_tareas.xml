@@ -133,7 +133,7 @@
                 android:orientation="vertical">
 
                 <CheckBox
-                    android:id="@+id/chkCompletada"
+                    android:id="@+id/chkTareaCompletada"
                     android:layout_width="73dp"
                     android:layout_height="22dp"
                     android:enabled="false"
@@ -141,7 +141,7 @@
                     android:textSize="7dp" />
 
                 <CheckBox
-                    android:id="@+id/chkPasada"
+                    android:id="@+id/chkTareaPasada"
                     android:layout_width="73dp"
                     android:layout_height="22dp"
                     android:enabled="false"

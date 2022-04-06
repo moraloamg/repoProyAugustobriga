@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.example.paugustobriga.AcPrincipal;
 import com.example.paugustobriga.R;
+import com.example.paugustobriga.pMedio.Profesorado.AcOrganizacion;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -25,7 +26,7 @@ public class AcCalendarioAgenda extends AppCompatActivity {
     TextView txtAgenda,txtContRojo,txtContAzul,txtContAmarillo,txtFecha;
     Button btnAnadir,btnVerTareas;
     //Variables
-    SimpleDateFormat formato=new SimpleDateFormat("dd/mm/yyyy");
+    SimpleDateFormat formato=new SimpleDateFormat("dd/MM/yyyy");
     Date fecha;
 
     @Override
@@ -39,6 +40,11 @@ public class AcCalendarioAgenda extends AppCompatActivity {
     }
 
     private void seleccionarFecha(){
+        //por defecto seleccionaremos la fecha actual
+        fecha = new Date();
+        AnadirTarea(fecha);
+        verTareas(fecha);
+        //en caso de cambiar la fecha entra en escena el listener
         calendario.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView calendarView, int i, int i1, int i2) {
@@ -56,6 +62,8 @@ public class AcCalendarioAgenda extends AppCompatActivity {
         });
     }
 
+
+
     private void AnadirTarea(Date pFecha){
         btnAnadir.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,6 +80,8 @@ public class AcCalendarioAgenda extends AppCompatActivity {
             public void onClick(View view) {
                 String fecha2 = formato.format(pFecha);
                 Toast.makeText(getApplicationContext(), "Ver tareas del "+fecha2, Toast.LENGTH_SHORT).show();
+                Intent i=new Intent(getApplicationContext(), AcVerTareas.class);
+                startActivity(i);
             }
         });
     }

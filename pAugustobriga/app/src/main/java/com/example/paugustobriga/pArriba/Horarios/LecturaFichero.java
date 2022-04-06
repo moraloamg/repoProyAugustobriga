@@ -13,7 +13,8 @@ import java.util.ArrayList;
 public class LecturaFichero extends AsyncTask {
     private String url;
     private ArrayList<String> contenido;
-    public AsyncRespuesta delegar = null;
+    //No hay poliformismo, ya que sólo utilizamos una clase.
+    public AcHorarios delegar = null;
 
     public LecturaFichero(String url) {
         this.url = url;

@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".pAbajo.Agenda.AcVerTareas"
     >
+
     <View
         android:id="@+id/view5"
         android:layout_width="match_parent"
@@ -54,18 +55,92 @@
 
     <EditText
         android:id="@+id/editBuscarDesc"
-        android:layout_width="251dp"
-        android:layout_height="46dp"
-        android:background="@drawable/fondo_calendario"
+        android:layout_width="245dp"
+        android:layout_height="56dp"
+        android:background="@drawable/fondo_caja_texto"
         android:ems="10"
         android:inputType="textPersonName"
         android:padding="20dp"
+        android:text=""
+        android:hint="Buscar por descripción"
+        android:textSize="11dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.843"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.045" />
+
+    <Button
+        android:id="@+id/btnBuscar"
+        android:layout_width="105dp"
+        android:layout_height="56dp"
+        android:background="@drawable/fondo_botones"
+        android:text="Buscar"
+        android:textColor="#F0F0F0"
+        app:backgroundTint="@null"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.052"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.044" />
+
+    <Spinner
+        android:id="@+id/spVerTareas"
+        android:layout_width="245dp"
+        android:layout_height="56dp"
+        android:background="@drawable/fondo_spinner"
+        android:textColor="@color/white"
+        android:overlapAnchor="false"
+        android:popupBackground="@drawable/fondo_desplegar_spinner"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.843"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editBuscarDesc"
+        app:layout_constraintVertical_bias="0.023" />
+
+    <LinearLayout
+        android:layout_width="119dp"
+        android:layout_height="86dp"
+        android:orientation="vertical"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:weightSum="3"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.054"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.155">
+
+        <TextView
+            android:id="@+id/txtTotalVerTarea"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Total\t\t\t\t\t\t\t\t\t\t0"
+            android:layout_gravity="left"
+            android:textColor="#172646"
+            android:textSize="12sp" />
+        <TextView
+            android:id="@+id/txtCompletadasVerTarea"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:text="Completadas\t\t\t\t0"
+            android:textColor="#172646"
+            android:textSize="12sp" />
+        <TextView
+            android:id="@+id/txtPasadasVerTarea"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:text="Pasada\t\t\t\t\t\t\t\t0"
+            android:textColor="#172646"
+            android:textSize="12sp" />
+
+    </LinearLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

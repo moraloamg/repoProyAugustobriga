@@ -58,8 +58,8 @@ public class AdaptadorVerTareas extends BaseAdapter {
         TextView txtContRojo = (TextView) list.findViewById(R.id.txtContRojo);
         TextView txtContAzul = (TextView) list.findViewById(R.id.txtContAzul);
         TextView txtContAmarillo = (TextView) list.findViewById(R.id.txtContAmarillo);
-        CheckBox chkCompletada = (CheckBox) list.findViewById(R.id.chkCompletada);
-        CheckBox chkPasada = (CheckBox) list.findViewById(R.id.chkPasada);
+        CheckBox chkCompletada = (CheckBox) list.findViewById(R.id.chkTareaCompletada);
+        CheckBox chkPasada = (CheckBox) list.findViewById(R.id.chkTareaPasada);
 
         //rellenamos las variables con los datos de la lista
         txtfechaTarea.setText(tareas.get(i).fechaFormateada());

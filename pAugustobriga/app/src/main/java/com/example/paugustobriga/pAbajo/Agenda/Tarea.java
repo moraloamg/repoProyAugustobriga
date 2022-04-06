@@ -6,6 +6,7 @@ import java.util.Date;
 public class Tarea {
     static SimpleDateFormat formato = new SimpleDateFormat("dd/mm/yyyy");
 
+    private int id;
     private Date fecha;
     private String descripcion;
     private Date notificacion;
@@ -22,6 +23,14 @@ public class Tarea {
         this.notificacion = notificacion;
         this.realizado = realizado;
         this.tipo = tipo;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public Date getFecha() {

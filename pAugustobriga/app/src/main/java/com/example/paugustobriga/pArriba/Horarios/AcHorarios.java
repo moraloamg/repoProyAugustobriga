@@ -19,7 +19,7 @@ import com.example.paugustobriga.R;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class AcHorarios extends AppCompatActivity implements AsyncRespuesta{
+public class AcHorarios extends AppCompatActivity {
 
     //contenedores
     LinearLayout contEso, contFp, contBachillerato;
@@ -96,7 +96,7 @@ public class AcHorarios extends AppCompatActivity implements AsyncRespuesta{
         lector.execute();
     }
 
-    @Override
+
     public void procesoFinalizado(ArrayList<String> salida) {
         Log.d("procesoFinalizado", String.valueOf(salida.size()));
         //una vez conseguidos todos los datos se cambia a la actividad
