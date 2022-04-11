@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.example.paugustobriga.AcPrincipal;
 import com.example.paugustobriga.R;
+import com.example.paugustobriga.pArriba.Horarios.AcCursos;
 import com.example.paugustobriga.pMedio.Profesorado.AcOrganizacion;
 
 import java.text.ParseException;
@@ -36,6 +37,7 @@ public class AcCalendarioAgenda extends AppCompatActivity {
 
         identificarElementos();
         seleccionarFecha();
+
 
     }
 
@@ -70,6 +72,9 @@ public class AcCalendarioAgenda extends AppCompatActivity {
             public void onClick(View view) {
                 String fecha2 = formato.format(pFecha);
                 Toast.makeText(getApplicationContext(), "Añadir tarea al "+fecha2, Toast.LENGTH_SHORT).show();
+                Intent i=new Intent(getApplicationContext(), AcVerTareasDia.class);
+                i.putExtra("datos",fecha2);
+                startActivity(i);
             }
         });
     }

@@ -5,6 +5,7 @@
     android:layout_height="match_parent">
 
     <LinearLayout
+        android:id="@+id/lyTarea"
         android:layout_width="375dp"
         android:layout_height="107dp"
         android:background="@drawable/fondo_tarea_ex"
@@ -23,13 +24,13 @@
             android:layout_margin="9dp"
             android:text="Examen de matematicas"
             android:textColor="@color/white"
-            android:textSize="15dp"/>
+            android:textSize="15dp" />
 
         <LinearLayout
             android:layout_width="15dp"
             android:layout_height="89dp"
-            android:layout_marginRight="5dp"
             android:layout_marginTop="11dp"
+            android:layout_marginRight="5dp"
             android:layout_weight="1"
             android:gravity="center"
             android:orientation="vertical">

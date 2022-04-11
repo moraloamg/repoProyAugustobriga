@@ -11,9 +11,9 @@ public class TareasBD extends SQLiteOpenHelper {
     Context contexto;
 
     static String createBDSQL ="CREATE TABLE tareas (id integer primary key autoincrement," +
-                                                    " fecha int," +
+                                                    " fecha text," +
                                                     " descripcion text," +
-                                                    " notificacion int," +
+                                                    " notificacion text," +
                                                     " realizado bool," +
                                                     " tipo text)";
 

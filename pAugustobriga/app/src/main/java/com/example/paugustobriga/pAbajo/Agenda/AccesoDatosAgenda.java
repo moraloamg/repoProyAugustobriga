@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.widget.Toast;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -46,10 +47,33 @@ public class AccesoDatosAgenda {
         accesoLectura.close();
     }
 
-    public void modificarNotificacion(int id, int fecha){
+    public void modificarNotificacion(int id, String fecha){
         SQLiteDatabase accesoLectura = miBD.getReadableDatabase();
         accesoLectura.execSQL("update tarea set notificacion='"+fecha+"' where id='"+id+"'");
         accesoLectura.close();
+    }
+
+    public ArrayList<Tarea> obtenerTareasDia(String fecha){
+        ArrayList<Tarea> resultado=new ArrayList<Tarea>();
+        String[] campos =new String[] {"id","fecha","descripcion","notificacion","realizado","tipo"};
+        SQLiteDatabase accesoLectura = miBD.getReadableDatabase();
+
+        Cursor cursor = accesoLectura.query("tarea",campos,"descripcion like '%"+fecha+"%'",null,null,null,null);
+
+        while(cursor.moveToNext()){
+            Tarea t=new Tarea();
+            t.setId(cursor.getInt(0));
+            //si no funciona con un int cambiar el campo fecha por un text, también modificar lo de arriba
+            //probar también con el método getLong
+            t.setFecha(new Date(String.valueOf(cursor.getInt(1))));
+            t.setDescripcion(cursor.getString(2));
+            t.setNotificacion(new Date(String.valueOf(cursor.getInt(3))));
+            t.setRealizado(cursor.getInt(4) > 0);
+            t.setTipo(cursor.getString(5));
+            resultado.add(t);
+        }
+        accesoLectura.close();
+        return resultado;
     }
 
     public ArrayList<Tarea> obtenerTareas(){
@@ -62,13 +86,15 @@ public class AccesoDatosAgenda {
         while(cursor.moveToNext()){
             Tarea t=new Tarea();
             t.setId(cursor.getInt(0));
-            //si no funciona con un int cambiar el campo fecha por un text, también modificar lo de arriba
-            //probar también con el método getLong
-            t.setFecha(new Date(String.valueOf(cursor.getInt(1))));
-            t.setDescripcion(cursor.getString(2));
-            t.setNotificacion(new Date(String.valueOf(cursor.getInt(3))));
-            t.setRealizado(cursor.getInt(4) > 0);
-            t.setTipo(cursor.getString(5));
+            try {
+                t.setFecha(formato.parse(cursor.getString(1)));
+                t.setDescripcion(cursor.getString(2));
+                t.setNotificacion(formato.parse(cursor.getString(3)));
+                t.setRealizado(cursor.getInt(4) > 0);
+                t.setTipo(cursor.getString(5));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
             resultado.add(t);
         }
         accesoLectura.close();
@@ -89,11 +115,16 @@ public class AccesoDatosAgenda {
             t.setId(cursor.getInt(0));
             //si no funciona con un int cambiar el campo fecha por un text, también modificar lo de arriba
             //probar también con el método getLong
-            t.setFecha(new Date(String.valueOf(cursor.getInt(1))));
-            t.setDescripcion(cursor.getString(2));
-            t.setNotificacion(new Date(String.valueOf(cursor.getInt(3))));
-            t.setRealizado(cursor.getInt(4) > 0);
-            t.setTipo(cursor.getString(5));
+            try {
+                t.setFecha(formato.parse(cursor.getString(1)));
+                t.setDescripcion(cursor.getString(2));
+                t.setNotificacion(formato.parse(cursor.getString(3)));
+                //los booleanos se cogen así
+                t.setRealizado(cursor.getInt(4) > 0);
+                t.setTipo(cursor.getString(5));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
             resultado.add(t);
         }
         accesoLectura.close();
@@ -104,11 +135,9 @@ public class AccesoDatosAgenda {
         SQLiteDatabase accesoEscritura = miBD.getWritableDatabase();
 
         ContentValues registro=new ContentValues();
-        //probar con texto si no funciona con un long
-        registro.put("fecha",t.getFecha().getTime());
+        registro.put("fecha",formato.format(t.getFecha()));
         registro.put("descripcion",t.getDescripcion());
-        //probar con texto si no funciona con un long
-        registro.put("notificacion",t.getNotificacion().getTime());
+        registro.put("notificacion",formato.format(t.getNotificacion()));
         registro.put("realizado",t.isRealizado());
         registro.put("tipo",t.getTipo());
 

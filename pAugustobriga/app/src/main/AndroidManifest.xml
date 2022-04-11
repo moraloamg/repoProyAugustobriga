@@ -12,7 +12,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PAugustobriga">
         <activity
-            android:name=".AcVerTareasDia"
+            android:name=".pAbajo.Agenda.AcAnadirTarea"
+            android:exported="false" />
+        <activity
+            android:name=".pAbajo.Agenda.AcVerTareasDia"
             android:exported="false" />
         <activity
             android:name=".pAbajo.Agenda.AcVerTareas"
