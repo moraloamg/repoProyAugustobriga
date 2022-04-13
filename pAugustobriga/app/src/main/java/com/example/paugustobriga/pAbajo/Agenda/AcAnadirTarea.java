@@ -18,10 +18,11 @@ import android.widget.Toast;
 import com.example.paugustobriga.AcPrincipal;
 import com.example.paugustobriga.R;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 public class AcAnadirTarea extends AppCompatActivity {
-    AccesoDatosAgenda ad=new AccesoDatosAgenda(this);
+    AccesoDatosAgenda ad;
     SimpleDateFormat formato=new SimpleDateFormat("dd/MM/yyyy");
 
     ImageView rojo,azul,amarillo;
@@ -34,15 +35,18 @@ public class AcAnadirTarea extends AppCompatActivity {
     Typeface fuenteContenedores;
 
     String tipo="OTRO";
+    String fecha;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_anadir_tarea);
+        ad=new AccesoDatosAgenda(this);
 
         identificarElementos();
         importarFuentes();
-        String fecha = recibirDatos();
+        fecha = recibirDatos();
         txtFecha.setText(fechaFormateada(fecha));
 
         cambiarRojo();
@@ -78,6 +82,7 @@ public class AcAnadirTarea extends AppCompatActivity {
     public void onBackPressed() {
         Intent i=new Intent(getApplicationContext(), AcVerTareasDia.class);
         i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        i.putExtra("datos",fecha);
         startActivity(i);
     }
 
@@ -86,7 +91,17 @@ public class AcAnadirTarea extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if(editDescripcion.length()>0){
-
+                    Tarea t=new Tarea();
+                    t.setTipo(tipo);
+                    t.setDescripcion(editDescripcion.getText().toString());
+                    t.setRealizado(false);
+                    try {
+                        t.setFecha(formato.parse(fecha));
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                    ad.insertarTarea(t);
+                    onBackPressed();
                 }else{
                     Toast.makeText(getApplicationContext(), "no has añadido ninguna descripción", Toast.LENGTH_LONG).show();
                 }
@@ -125,7 +140,7 @@ public class AcAnadirTarea extends AppCompatActivity {
     }
 
     public String fechaFormateada(String fecha){
-        String[] cadena = formato.format(fecha).split("/");
+        String[] cadena = fecha.split("/");
         String mes="";
         switch (cadena[1]){
             case "01":

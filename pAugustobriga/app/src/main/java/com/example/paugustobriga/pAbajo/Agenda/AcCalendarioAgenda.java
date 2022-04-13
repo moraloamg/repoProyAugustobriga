@@ -14,13 +14,17 @@ import android.widget.Toast;
 import com.example.paugustobriga.AcPrincipal;
 import com.example.paugustobriga.R;
 import com.example.paugustobriga.pArriba.Horarios.AcCursos;
+import com.example.paugustobriga.pArriba.Horarios.AcHorarios;
 import com.example.paugustobriga.pMedio.Profesorado.AcOrganizacion;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class AcCalendarioAgenda extends AppCompatActivity {
+
+    AccesoDatosAgenda ad;
 
     //elementos interfaz
     CalendarView calendario;
@@ -33,12 +37,37 @@ public class AcCalendarioAgenda extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ad=new AccesoDatosAgenda(this);
         setContentView(R.layout.activity_calendario_agenda);
 
         identificarElementos();
+        //al ir para atras pasa por aquí???
+        resumenDia(formato.format(new Date()));
         seleccionarFecha();
 
+    }
 
+    private void resumenDia(String fechaS){
+        ArrayList<Tarea> listaTareas = ad.obtenerTareasDia(fechaS);
+        txtFecha.setText("Tareas del "+fechaS);
+
+        int contRojos = 0;
+        int contAzul = 0;
+        int contAmarillo = 0;
+        for(Tarea t:listaTareas){
+            if(t.getTipo().equalsIgnoreCase("EXAMEN")){
+                contRojos++;
+            }
+            if(t.getTipo().equalsIgnoreCase("TAREA")){
+                contAzul++;
+            }
+            if(t.getTipo().equalsIgnoreCase("OTRO")){
+                contAmarillo++;
+            }
+        }
+        txtContRojo.setText(String.valueOf(contRojos));
+        txtContAzul.setText(String.valueOf(contAzul));
+        txtContAmarillo.setText(String.valueOf(contAmarillo));
     }
 
     private void seleccionarFecha(){
@@ -54,6 +83,7 @@ public class AcCalendarioAgenda extends AppCompatActivity {
                     //hay que sumarle +1 al mes
                     fecha=formato.parse(i2+"/"+(i1+1)+"/"+i);
                     if(fecha!=null) {
+                        resumenDia(formato.format(fecha));
                         AnadirTarea(fecha);
                         verTareas(fecha);
                     }
@@ -71,7 +101,6 @@ public class AcCalendarioAgenda extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String fecha2 = formato.format(pFecha);
-                Toast.makeText(getApplicationContext(), "Añadir tarea al "+fecha2, Toast.LENGTH_SHORT).show();
                 Intent i=new Intent(getApplicationContext(), AcVerTareasDia.class);
                 i.putExtra("datos",fecha2);
                 startActivity(i);

@@ -23,7 +23,7 @@ import java.util.Date;
 public class AcVerTareasDia extends AppCompatActivity {
 
     SimpleDateFormat formato=new SimpleDateFormat("dd/MM/yyyy");
-    AccesoDatosAgenda ad=new AccesoDatosAgenda(this);
+    AccesoDatosAgenda ad;
 
     TextView txtFecha, txtTareasCompletadas;
     Button btnAnadirTarea;
@@ -37,13 +37,14 @@ public class AcVerTareasDia extends AppCompatActivity {
     int tareasCompletadas;
      */
 
-    Date fechaDelDia;
+    //no formateada se refiere sin el nombre del mes, solo con el número
     String fechaNoFormateada;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ver_tareas_dia);
+        ad=new AccesoDatosAgenda(getApplicationContext());
 
         identificarElementos();
         importarFuentes();
@@ -89,9 +90,10 @@ public class AcVerTareasDia extends AppCompatActivity {
                 //AQUÍ SE EDITARÍA LA TAREA, se iria a la actividad de añadir tarea
                 //CAMBIAR EL NOMBRE DE LOS DATOS DE ENVIO Y CAMBIAR EL TEXTO DEL BOTON
                 //CAMBIAR ENTRE CREAR TAREA Y EDITAR TAREA EN EL TEXTO DEL BOTON
-                //Intent i=new Intent(getApplicationContext(), AcVerTareasDia.class);
-                //i.putExtra("datos",fecha2);
-                //startActivity(i);
+                Intent i2=new Intent(getApplicationContext(), AcVerTareasDia.class);
+                i2.putExtra("datosEditar",fechaNoFormateada);
+                //i2.putExtra("datosEditar",)
+                startActivity(i2);
             }
         });
     }
@@ -120,7 +122,7 @@ public class AcVerTareasDia extends AppCompatActivity {
 
     private boolean comprobarCompletada(int cantidadTareas, int cantidadCompletada){
         boolean resultado = false;
-        if(cantidadTareas==cantidadCompletada){
+        if(cantidadTareas==cantidadCompletada && (cantidadCompletada != 0 && cantidadTareas != 0)){
             resultado = true;
         }
         return resultado;
@@ -149,7 +151,7 @@ public class AcVerTareasDia extends AppCompatActivity {
     }
 
     public String fechaFormateada(String fecha){
-        String[] cadena = formato.format(fecha).split("/");
+        String[] cadena = fecha.split("/");
         String mes="";
         switch (cadena[1]){
             case "01":

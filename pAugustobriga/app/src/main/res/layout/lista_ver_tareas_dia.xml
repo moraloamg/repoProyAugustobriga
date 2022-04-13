@@ -35,6 +35,13 @@
             android:gravity="center"
             android:orientation="vertical">
 
+            <TextView
+                android:id="@+id/idTarea"
+                android:layout_width="73dp"
+                android:layout_height="1dp"
+                android:visibility="invisible"
+                android:text="aaaa"/>
+
             <CheckBox
                 android:id="@+id/chkTareaCompletada"
                 android:layout_width="73dp"

@@ -12,11 +12,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PAugustobriga">
         <activity
-            android:name=".pAbajo.Agenda.AcAnadirTarea"
+            android:name=".AcEditarTarea"
             android:exported="false" />
         <activity
+            android:name=".pAbajo.Agenda.AcAnadirTarea"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".pAbajo.Agenda.AcVerTareasDia"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".pAbajo.Agenda.AcVerTareas"
             android:exported="false"

@@ -31,9 +31,12 @@ public class AdaptadorVerTareaDia extends BaseAdapter {
         this.fuente = fuenteContenedores;
 
         //se utiliza un for y no un foreach debido a que este ultimo no coge los datos en orden
+        /*
         for(int i=0;i<datos.size();i++){
             tareas.add(datos.get(i));
         }
+
+         */
     }
 
     @Override
@@ -59,13 +62,19 @@ public class AdaptadorVerTareaDia extends BaseAdapter {
 
         //disponemos las variables de los elementos gráficos
         TextView desc = (TextView) list.findViewById(R.id.txtDescTarea);
+        TextView idTarea = (TextView) list.findViewById(R.id.idTarea);
         TextView fechaNotif = (TextView) list.findViewById(R.id.txtFechaNotificacion);
         CheckBox hecha = (CheckBox) list.findViewById(R.id.chkTareaCompletada);
         CheckBox pasada = (CheckBox) list.findViewById(R.id.chkTareaPasada);
         LinearLayout ly = (LinearLayout) list.findViewById(R.id.lyTarea);
 
+        idTarea.setText(String.valueOf(tareas.get(i).getId()));
         desc.setText(tareas.get(i).getDescripcion());
-        fechaNotif.setText(formato.format(tareas.get(i).getNotificacion()));
+        if(tareas.get(i).getNotificacion()==null){
+            fechaNotif.setText("N/A");
+        }else{
+            fechaNotif.setText(formato.format(tareas.get(i).getNotificacion()));
+        }
         hecha.setChecked(tareas.get(i).isRealizado());
         if(new Date().after(tareas.get(i).getFecha())){
             pasada.setChecked(true);
