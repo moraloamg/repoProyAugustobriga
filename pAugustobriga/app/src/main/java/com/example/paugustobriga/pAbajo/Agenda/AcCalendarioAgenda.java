@@ -42,6 +42,7 @@ public class AcCalendarioAgenda extends AppCompatActivity {
 
         identificarElementos();
         //al ir para atras pasa por aquí???
+        //refrescar resumen sin necesidad de seleccionar una fecha diferente en el caledario
         resumenDia(formato.format(new Date()));
         seleccionarFecha();
 

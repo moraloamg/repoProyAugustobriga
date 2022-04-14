@@ -1,8 +1,10 @@
 package com.example.paugustobriga.pAbajo.Agenda;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.res.ResourcesCompat;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -12,6 +14,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.paugustobriga.R;
 
@@ -70,6 +73,9 @@ public class AcVerTareasDia extends AppCompatActivity {
 
         AnadirTarea();
         irTarea();
+        lsTareasDia.setLongClickable(true);
+        eliminarTarea();
+
     }
 
     private void AnadirTarea(){
@@ -87,13 +93,46 @@ public class AcVerTareasDia extends AppCompatActivity {
         lsTareasDia.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                //AQUÍ SE EDITARÍA LA TAREA, se iria a la actividad de añadir tarea
-                //CAMBIAR EL NOMBRE DE LOS DATOS DE ENVIO Y CAMBIAR EL TEXTO DEL BOTON
-                //CAMBIAR ENTRE CREAR TAREA Y EDITAR TAREA EN EL TEXTO DEL BOTON
-                Intent i2=new Intent(getApplicationContext(), AcVerTareasDia.class);
-                i2.putExtra("datosEditar",fechaNoFormateada);
-                //i2.putExtra("datosEditar",)
-                startActivity(i2);
+
+                String seleccionado = ((TextView) view.findViewById(R.id.idTarea)).getText().toString();
+                if(!ad.comprobarHecho(seleccionado)){
+                    Intent i2=new Intent(getApplicationContext(), AcAnadirTarea.class);
+                    i2.putExtra("datos",fechaNoFormateada+"P"+seleccionado);
+                    startActivity(i2);
+                }else{
+                    Toast.makeText(getApplicationContext(),"No puedes editar una tarea realizada", Toast.LENGTH_LONG).show();
+                }
+
+            }
+        });
+    }
+
+    private void eliminarTarea(){
+        lsTareasDia.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+                AlertDialog.Builder dialogo1=new AlertDialog.Builder(AcVerTareasDia.this);
+                dialogo1.setTitle("Borrar tarea");
+                dialogo1.setMessage("¿Está seguro que desea borrar la tarea?");
+                dialogo1.setCancelable(false);
+                dialogo1.setPositiveButton("Borrar", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        String seleccionado = ((TextView) view.findViewById(R.id.idTarea)).getText().toString();
+                        ad.borrar(Integer.parseInt(seleccionado));
+                        Toast.makeText(getApplicationContext(),"Has borrado la tarea", Toast.LENGTH_LONG).show();
+                        finish();
+                        startActivity(getIntent());
+
+                    }
+                });
+                dialogo1.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialogInterface, int id){
+                        Toast.makeText(getApplicationContext(),"Cancelar", Toast.LENGTH_LONG).show();
+                    }
+                });
+                dialogo1.show();
+                return true;
             }
         });
     }

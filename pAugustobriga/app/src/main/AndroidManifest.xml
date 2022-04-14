@@ -12,9 +12,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PAugustobriga">
         <activity
-            android:name=".AcEditarTarea"
-            android:exported="false" />
-        <activity
             android:name=".pAbajo.Agenda.AcAnadirTarea"
             android:exported="false"
             android:screenOrientation="portrait" />

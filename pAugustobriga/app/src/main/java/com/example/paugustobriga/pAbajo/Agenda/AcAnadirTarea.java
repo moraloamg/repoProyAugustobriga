@@ -36,7 +36,7 @@ public class AcAnadirTarea extends AppCompatActivity {
 
     String tipo="OTRO";
     String fecha;
-
+    String id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,13 +47,34 @@ public class AcAnadirTarea extends AppCompatActivity {
         identificarElementos();
         importarFuentes();
         fecha = recibirDatos();
-        txtFecha.setText(fechaFormateada(fecha));
+        if(fecha.contains("P")){
 
-        cambiarRojo();
-        cambiarAzul();
-        cambiarAmarillo();
+            id=fecha.split("P")[1];
+            fecha=fecha.split("P")[0];
 
-        anadirTarea();
+            txtFecha.setText(fechaFormateada(fecha));
+
+            cambiarRojo();
+            cambiarAzul();
+            cambiarAmarillo();
+
+            obtenerTipo(id);
+            obtenerDescripcion(id);
+
+            btnAnadirTarea.setText("Editar Tarea");
+            editarTarea();
+        }else {
+            txtFecha.setText(fechaFormateada(fecha));
+
+            cambiarRojo();
+            cambiarAzul();
+            cambiarAmarillo();
+
+            chkHecho.setVisibility(View.GONE);
+            chkHecho.setEnabled(false);
+
+            anadirTarea();
+        }
     }
 
     private void identificarElementos() {
@@ -65,6 +86,25 @@ public class AcAnadirTarea extends AppCompatActivity {
         editDescripcion = findViewById(R.id.editTextAnadirTarea);
         btnAnadirTarea = findViewById(R.id.btnCrearTarea);
         lyFondo = findViewById(R.id.lyFondoCrearTarea);
+    }
+
+    private void obtenerTipo(String id){
+        tipo=ad.obtenerTipo(id);
+        switch (tipo){
+            case "EXAMEN":
+                lyFondo.setBackgroundResource(R.drawable.fondo_tarea_ex);
+                break;
+            case "TAREA":
+                lyFondo.setBackgroundResource(R.drawable.fondo_tarea_tar);
+                break;
+            case "OTRO":
+                lyFondo.setBackgroundResource(R.drawable.fondo_tarea_otr);
+                break;
+        }
+    }
+
+    private void obtenerDescripcion(String id){
+        editDescripcion.setText(ad.obtenerDescripcion(id));
     }
 
     private String recibirDatos(){
@@ -84,6 +124,20 @@ public class AcAnadirTarea extends AppCompatActivity {
         i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         i.putExtra("datos",fecha);
         startActivity(i);
+    }
+
+    private void editarTarea(){
+        btnAnadirTarea.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ad.modificarTipo(Integer.parseInt(id),tipo);
+                if(chkHecho.isChecked()){
+                    ad.realizarTarea(Integer.parseInt(id));
+                }
+                ad.modificarDescripcion(Integer.parseInt(id),editDescripcion.getText().toString());
+                onBackPressed();
+            }
+        });
     }
 
     private void anadirTarea(){

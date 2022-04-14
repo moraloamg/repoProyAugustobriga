@@ -53,11 +53,39 @@ public class AccesoDatosAgenda {
         accesoLectura.close();
     }
 
+    public String obtenerDescripcion(String id){
+        String resultado="";
+        String[] campos =new String[] {"descripcion"};
+        SQLiteDatabase accesoLectura = miBD.getReadableDatabase();
+
+        Cursor cursor = accesoLectura.query("tareas",campos,"id = '"+id+"'",null,null,null,null);
+
+        if(cursor.moveToNext()){
+            resultado=cursor.getString(0);
+        }
+        accesoLectura.close();
+        return resultado;
+    }
+
+    public String obtenerTipo(String id){
+        String resultado="";
+        String[] campos =new String[] {"tipo"};
+        SQLiteDatabase accesoLectura = miBD.getReadableDatabase();
+
+        Cursor cursor = accesoLectura.query("tareas",campos,"id = '"+id+"'",null,null,null,null);
+
+        if(cursor.moveToNext()){
+            resultado=cursor.getString(0);
+        }
+        accesoLectura.close();
+        return resultado;
+    }
+
     public ArrayList<Tarea> obtenerTareasDia(String fecha){
         ArrayList<Tarea> resultado=new ArrayList<Tarea>();
         String[] campos =new String[] {"id","fecha","descripcion","notificacion","realizado","tipo"};
         SQLiteDatabase accesoLectura = miBD.getReadableDatabase();
-
+        //si no se pone el like no funciona
         Cursor cursor = accesoLectura.query("tareas",campos,"fecha like '%"+fecha+"%'",null,null,null,null);
 
         while(cursor.moveToNext()){
@@ -157,6 +185,20 @@ public class AccesoDatosAgenda {
             Toast.makeText(contexto, "Error de inserción "+resultado, Toast.LENGTH_LONG).show();
         }
         accesoEscritura.close();
+    }
+
+    public boolean comprobarHecho(String seleccionado) {
+        boolean resultado=false;
+        String[] campos =new String[] {"realizado"};
+        SQLiteDatabase accesoLectura = miBD.getReadableDatabase();
+
+        Cursor cursor = accesoLectura.query("tareas",campos,"id = '"+seleccionado+"'",null,null,null,null);
+
+        if(cursor.moveToNext()){
+            resultado = cursor.getInt(0) > 0;
+        }
+        accesoLectura.close();
+        return resultado;
     }
 
     //PONER EL RESTO DE MÉTODOS AQUÍ ABAJO CUANDO EL RESTO FUNCIONE
