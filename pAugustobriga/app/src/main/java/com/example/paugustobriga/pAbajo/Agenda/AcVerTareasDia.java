@@ -189,6 +189,13 @@ public class AcVerTareasDia extends AppCompatActivity {
         fuenteContenedores = ResourcesCompat.getFont(this, R.font.ibm_plex_sans_thai_bold);
     }
 
+    @Override
+    public void onBackPressed() {
+        Intent i=new Intent(getApplicationContext(), AcCalendarioAgenda.class);
+        i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(i);
+    }
+
     public String fechaFormateada(String fecha){
         String[] cadena = fecha.split("/");
         String mes="";

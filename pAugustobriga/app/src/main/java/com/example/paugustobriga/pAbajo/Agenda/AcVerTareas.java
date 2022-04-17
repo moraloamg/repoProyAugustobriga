@@ -1,8 +1,10 @@
 package com.example.paugustobriga.pAbajo.Agenda;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.res.ResourcesCompat;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -23,6 +25,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class AcVerTareas extends AppCompatActivity {
+    AccesoDatosAgenda ad;
     Button btnBuscar;
     EditText editBuscar;
     TextView txtTotal, txtComp, txtPas;
@@ -30,25 +33,27 @@ public class AcVerTareas extends AppCompatActivity {
     ListView lstVerTareas;
     //Estas opciones serán únicas
     final String[] opciones=new String[]{"Todo","Exámenes","Tareas","Otros"};
-    ArrayList<TareasDia> datos;
+    ArrayList<Tarea> datos;
     Typeface fuenteContenedores;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ver_tareas);
+        ad=new AccesoDatosAgenda(getApplicationContext());
 
         identificarElementos();
         iniciarOpcionesSpinner();
         elegirOpcionSpinner();
-        datos=obtenerDatos(recibirDatos());
+        datos=ad.obtenerTareas();
         importarFuentes();
-        lstVerTareas.setAdapter(new AdaptadorVerTareas(this,datos,fuenteContenedores));
-        actualizarContadores();
+        lstVerTareas.setAdapter(new AdaptadorVerTareaDia(this,fuenteContenedores,datos));
+        actualizarContadores(datos);
 
         buscarDatos();
-
-
+        irTarea();
+        lstVerTareas.setLongClickable(true);
+        eliminarTarea();
 
     }
 
@@ -66,9 +71,27 @@ public class AcVerTareas extends AppCompatActivity {
         spVerTareas.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                //PRUEBA DE DEPURACION
-                Toast.makeText(getApplicationContext(), opciones[i], Toast.LENGTH_SHORT).show();
-                //actualizarBusqueda();
+                switch (opciones[i]){
+                    case "Todo":
+                        lstVerTareas.setAdapter(new AdaptadorVerTareaDia(getApplicationContext(),fuenteContenedores,datos));
+                        actualizarContadores(datos);
+                        break;
+                    case "Exámenes":
+                        ArrayList<Tarea> tipoExamenes = ad.buscarTipo("EXAMEN");
+                        lstVerTareas.setAdapter(new AdaptadorVerTareaDia(getApplicationContext(),fuenteContenedores,tipoExamenes));
+                        actualizarContadores(tipoExamenes);
+                        break;
+                    case "Tareas":
+                        ArrayList<Tarea> tipoTarea = ad.buscarTipo("TAREA");
+                        lstVerTareas.setAdapter(new AdaptadorVerTareaDia(getApplicationContext(),fuenteContenedores,tipoTarea));
+                        actualizarContadores(tipoTarea);
+                        break;
+                    case "Otros":
+                        ArrayList<Tarea> tipoOtro = ad.buscarTipo("OTRO");
+                        lstVerTareas.setAdapter(new AdaptadorVerTareaDia(getApplicationContext(),fuenteContenedores,tipoOtro));
+                        actualizarContadores(tipoOtro);
+                        break;
+                }
             }
 
             @Override
@@ -78,38 +101,87 @@ public class AcVerTareas extends AppCompatActivity {
         });
     }
 
-    private ArrayList<TareasDia> obtenerDatos(Date fecha){
-        ArrayList<TareasDia> resultado=null;
-        //POR HACER
-        return resultado;
+    private void irTarea(){
+        lstVerTareas.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                String seleccionado = ((TextView) view.findViewById(R.id.idTarea)).getText().toString();
+                if(!ad.comprobarHecho(seleccionado)){
+                    Intent i2=new Intent(getApplicationContext(), AcAnadirTarea.class);
+                    i2.putExtra("datos",ad.obtenerFecha(seleccionado)+"P"+seleccionado+"V");
+                    startActivity(i2);
+                }else{
+                    Toast.makeText(getApplicationContext(),"No puedes editar una tarea realizada", Toast.LENGTH_LONG).show();
+                }
+
+            }
+        });
     }
+
+    private void eliminarTarea(){
+        lstVerTareas.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+                AlertDialog.Builder dialogo1=new AlertDialog.Builder(AcVerTareas.this);
+                dialogo1.setTitle("Borrar tarea");
+                dialogo1.setMessage("¿Está seguro que desea borrar la tarea?");
+                dialogo1.setCancelable(false);
+                dialogo1.setPositiveButton("Borrar", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        String seleccionado = ((TextView) view.findViewById(R.id.idTarea)).getText().toString();
+                        ad.borrar(Integer.parseInt(seleccionado));
+                        Toast.makeText(getApplicationContext(),"Has borrado la tarea", Toast.LENGTH_LONG).show();
+                        finish();
+                        startActivity(getIntent());
+
+                    }
+                });
+                dialogo1.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialogInterface, int id){
+                        Toast.makeText(getApplicationContext(),"Cancelar", Toast.LENGTH_LONG).show();
+                    }
+                });
+                dialogo1.show();
+                return true;
+            }
+        });
+    }
+
+
 
     private void buscarDatos(){
         btnBuscar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(editBuscar.getText().toString().trim().length() > 0){
-                    String resultado = editBuscar.getText().toString();
-
-                    //PRUEBA DE DEPURACION
-                    Toast.makeText(getApplicationContext(), resultado, Toast.LENGTH_SHORT).show();
-                    //actualizarBusqueda();
+                    String busqueda = editBuscar.getText().toString();
+                    ArrayList<Tarea> resultado = ad.buscarTarea(busqueda);
+                    lstVerTareas.setAdapter(new AdaptadorVerTareaDia(getApplicationContext(),fuenteContenedores,resultado));
+                    actualizarContadores(resultado);
                 }
             }
         });
     }
 
-    private void actualizarContadores(){
-
+    private void actualizarContadores(ArrayList<Tarea> t){
+        txtTotal.setText("Total   "+String.valueOf(t.size()));
+        int contPasadas=0;
+        int contCompletadas=0;
+        for(Tarea ta:t){
+            if(ta.isRealizado()){
+                contCompletadas++;
+            }
+            if(new Date().after(ta.getFecha())){
+                contPasadas++;
+            }
+        }
+        txtComp.setText("Completadas   "+String.valueOf(contCompletadas));
+        txtPas.setText("Pasadas   "+String.valueOf(contPasadas));
     }
 
-    private void actualizarBusqueda(){
 
-    }
-
-    private Date recibirDatos(){
-        return null;
-    }
 
     private void iniciarOpcionesSpinner(){
         ArrayAdapter<String> adaptador =

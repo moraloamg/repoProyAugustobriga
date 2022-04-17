@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -38,6 +39,8 @@ public class AcAnadirTarea extends AppCompatActivity {
     String fecha;
     String id;
 
+    boolean verTareas=false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,6 +55,11 @@ public class AcAnadirTarea extends AppCompatActivity {
             id=fecha.split("P")[1];
             fecha=fecha.split("P")[0];
 
+            if(id.contains("V")){
+                id = id.replace("V","");
+                verTareas=true;
+            }
+
             txtFecha.setText(fechaFormateada(fecha));
 
             cambiarRojo();
@@ -62,6 +70,7 @@ public class AcAnadirTarea extends AppCompatActivity {
             obtenerDescripcion(id);
 
             btnAnadirTarea.setText("Editar Tarea");
+            avisoRealizarTarea();
             editarTarea();
         }else {
             txtFecha.setText(fechaFormateada(fecha));
@@ -120,10 +129,17 @@ public class AcAnadirTarea extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        Intent i=new Intent(getApplicationContext(), AcVerTareasDia.class);
-        i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        i.putExtra("datos",fecha);
-        startActivity(i);
+        if(verTareas){
+            Intent i=new Intent(getApplicationContext(), AcVerTareas.class);
+            i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(i);
+        }else{
+            Intent i=new Intent(getApplicationContext(), AcVerTareasDia.class);
+            i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            i.putExtra("datos",fecha);
+            startActivity(i);
+        }
+
     }
 
     private void editarTarea(){
@@ -136,6 +152,15 @@ public class AcAnadirTarea extends AppCompatActivity {
                 }
                 ad.modificarDescripcion(Integer.parseInt(id),editDescripcion.getText().toString());
                 onBackPressed();
+            }
+        });
+    }
+
+    private void avisoRealizarTarea(){
+        chkHecho.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                Toast.makeText(getApplicationContext(), "Recuerda que no podrás editar la tarea después de realizarla", Toast.LENGTH_SHORT).show();
             }
         });
     }

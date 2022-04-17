@@ -70,6 +70,8 @@
         android:id="@+id/lstVerTareasDia"
         android:layout_width="0dp"
         android:layout_height="475dp"
+        android:divider="@null"
+        android:dividerHeight="25.0sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"

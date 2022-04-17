@@ -41,11 +41,8 @@ public class AcCalendarioAgenda extends AppCompatActivity {
         setContentView(R.layout.activity_calendario_agenda);
 
         identificarElementos();
-        //al ir para atras pasa por aquí???
-        //refrescar resumen sin necesidad de seleccionar una fecha diferente en el caledario
-        resumenDia(formato.format(new Date()));
         seleccionarFecha();
-
+        //poner aqui ver tareas
     }
 
     private void resumenDia(String fechaS){
@@ -72,10 +69,11 @@ public class AcCalendarioAgenda extends AppCompatActivity {
     }
 
     private void seleccionarFecha(){
-        //por defecto seleccionaremos la fecha actual
+        //por defecto seleccionaremos la fecha actual, en caso de darle al boton de seleccionar tarea
         fecha = new Date();
         AnadirTarea(fecha);
         verTareas(fecha);
+        resumenDia(formato.format(fecha));
         //en caso de cambiar la fecha entra en escena el listener
         calendario.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
@@ -114,7 +112,6 @@ public class AcCalendarioAgenda extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String fecha2 = formato.format(pFecha);
-                Toast.makeText(getApplicationContext(), "Ver tareas del "+fecha2, Toast.LENGTH_SHORT).show();
                 Intent i=new Intent(getApplicationContext(), AcVerTareas.class);
                 startActivity(i);
             }
