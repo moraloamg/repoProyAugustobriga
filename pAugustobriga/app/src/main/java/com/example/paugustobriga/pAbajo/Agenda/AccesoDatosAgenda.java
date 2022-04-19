@@ -25,40 +25,54 @@ public class AccesoDatosAgenda {
     public void borrar(int id){
         //poner parametros mas adelante
         SQLiteDatabase accesoLectura = miBD.getReadableDatabase();
-        accesoLectura.execSQL("delete from tareas where id='"+id+"'");
+        String[] argumentos=new String[]{String.valueOf(id)};
+        accesoLectura.delete("tareas", "id = ?", argumentos);
         accesoLectura.close();
     }
 
     public void modificarDescripcion(int id, String descripcion){
         SQLiteDatabase accesoLectura = miBD.getReadableDatabase();
-        accesoLectura.execSQL("update tareas set descripcion='"+descripcion+"' where id='"+id+"'");
+        String[] argumentos=new String[]{String.valueOf(id)};
+        ContentValues registro=new ContentValues();
+        registro.put("descripcion",descripcion);
+        accesoLectura.update("tareas", registro, "id = ?", argumentos);
         accesoLectura.close();
     }
 
     public void realizarTarea(int id){
         SQLiteDatabase accesoLectura = miBD.getReadableDatabase();
-        accesoLectura.execSQL("update tareas set realizado=true where id='"+id+"'");
+        String[] argumentos=new String[]{String.valueOf(id)};
+        ContentValues registro=new ContentValues();
+        registro.put("realizado",true);
+        accesoLectura.update("tareas", registro, "id = ?", argumentos);
         accesoLectura.close();
     }
 
     public void modificarTipo(int id, String tipo){
         SQLiteDatabase accesoLectura = miBD.getReadableDatabase();
-        accesoLectura.execSQL("update tareas set tipo='"+tipo+"' where id='"+id+"'");
+        String[] argumentos=new String[]{String.valueOf(id)};
+        ContentValues registro=new ContentValues();
+        registro.put("tipo",tipo);
+        accesoLectura.update("tareas", registro, "id = ?", argumentos);
         accesoLectura.close();
     }
 
     public void modificarNotificacion(int id, String fecha){
         SQLiteDatabase accesoLectura = miBD.getReadableDatabase();
-        accesoLectura.execSQL("update tareas set notificacion='"+fecha+"' where id='"+id+"'");
+        String[] argumentos=new String[]{String.valueOf(id)};
+        ContentValues registro=new ContentValues();
+        registro.put("notificacion",fecha);
+        accesoLectura.update("tareas", registro, "id = ?", argumentos);
         accesoLectura.close();
     }
 
     public String obtenerDescripcion(String id){
         String resultado="";
         String[] campos =new String[] {"descripcion"};
+        String[] argumentos=new String[]{id};
         SQLiteDatabase accesoLectura = miBD.getReadableDatabase();
 
-        Cursor cursor = accesoLectura.query("tareas",campos,"id = '"+id+"'",null,null,null,null);
+        Cursor cursor = accesoLectura.query("tareas",campos,"id = ?",argumentos,null,null,null);
 
         if(cursor.moveToNext()){
             resultado=cursor.getString(0);
@@ -70,9 +84,10 @@ public class AccesoDatosAgenda {
     public String obtenerTipo(String id){
         String resultado="";
         String[] campos =new String[] {"tipo"};
+        String[] argumentos=new String[]{id};
         SQLiteDatabase accesoLectura = miBD.getReadableDatabase();
 
-        Cursor cursor = accesoLectura.query("tareas",campos,"id = '"+id+"'",null,null,null,null);
+        Cursor cursor = accesoLectura.query("tareas",campos,"id = ?",argumentos,null,null,null);
 
         if(cursor.moveToNext()){
             resultado=cursor.getString(0);
@@ -84,9 +99,10 @@ public class AccesoDatosAgenda {
     public ArrayList<Tarea> obtenerTareasDia(String fecha){
         ArrayList<Tarea> resultado=new ArrayList<Tarea>();
         String[] campos =new String[] {"id","fecha","descripcion","notificacion","realizado","tipo"};
+        String[] argumentos=new String[]{fecha};
         SQLiteDatabase accesoLectura = miBD.getReadableDatabase();
 
-        Cursor cursor = accesoLectura.query("tareas",campos,"fecha = '"+fecha+"'",null,null,null,null);
+        Cursor cursor = accesoLectura.query("tareas",campos,"fecha = ?",argumentos,null,null,null);
 
         while(cursor.moveToNext()){
             Tarea t=new Tarea();
@@ -135,8 +151,9 @@ public class AccesoDatosAgenda {
     public ArrayList<Tarea> buscarTarea(String busqueda){
         ArrayList<Tarea> resultado=new ArrayList<Tarea>();
         String[] campos =new String[] {"id","fecha","descripcion","notificacion","realizado","tipo"};
+        String[] argumentos=new String[]{"%"+busqueda+"%"};
         SQLiteDatabase accesoLectura = miBD.getReadableDatabase();
-        Cursor cursor = accesoLectura.query("tareas",campos,"descripcion like '%"+busqueda+"%'",null,null,null,null);
+        Cursor cursor = accesoLectura.query("tareas",campos,"descripcion like ?",argumentos,null,null,null);
 
         while(cursor.moveToNext()){
             Tarea t=new Tarea();
@@ -160,8 +177,9 @@ public class AccesoDatosAgenda {
     public ArrayList<Tarea> buscarTipo(String tipo){
         ArrayList<Tarea> resultado=new ArrayList<Tarea>();
         String[] campos =new String[] {"id","fecha","descripcion","notificacion","realizado","tipo"};
+        String[] argumentos=new String[]{tipo};
         SQLiteDatabase accesoLectura = miBD.getReadableDatabase();
-        Cursor cursor = accesoLectura.query("tareas",campos,"tipo = '"+tipo+"'",null,null,null,null);
+        Cursor cursor = accesoLectura.query("tareas",campos,"tipo = ?",argumentos,null,null,null);
 
         while(cursor.moveToNext()){
             Tarea t=new Tarea();
@@ -258,9 +276,10 @@ public class AccesoDatosAgenda {
     public boolean comprobarHecho(String seleccionado) {
         boolean resultado=false;
         String[] campos =new String[] {"realizado"};
+        String[] argumentos=new String[]{seleccionado};
         SQLiteDatabase accesoLectura = miBD.getReadableDatabase();
 
-        Cursor cursor = accesoLectura.query("tareas",campos,"id = '"+seleccionado+"'",null,null,null,null);
+        Cursor cursor = accesoLectura.query("tareas",campos,"id = ?",argumentos,null,null,null);
 
         if(cursor.moveToNext()){
             resultado = cursor.getInt(0) > 0;
@@ -272,9 +291,10 @@ public class AccesoDatosAgenda {
     public String obtenerFecha(String seleccionado) {
         String resultado="";
         String[] campos =new String[] {"fecha"};
+        String[] argumentos=new String[]{seleccionado};
         SQLiteDatabase accesoLectura = miBD.getReadableDatabase();
 
-        Cursor cursor = accesoLectura.query("tareas",campos,"id = '"+seleccionado+"'",null,null,null,null);
+        Cursor cursor = accesoLectura.query("tareas",campos,"id = ?",argumentos,null,null,null);
 
         if(cursor.moveToNext()){
             resultado = cursor.getString(0);
