@@ -29,10 +29,9 @@ public class AcCursos extends AppCompatActivity{
 
         lViewCursos=findViewById(R.id.listViewCursos);
         contenidoFichero = recibirDatos();
-        int fondo = seleccionarFondo(contenidoFichero.get(0).toString());
         contenidoFichero.remove(0);
         importarFuentes();
-        lViewCursos.setAdapter(new Adaptador(this,contenidoFichero,fondo,fuenteContenedores));
+        lViewCursos.setAdapter(new Adaptador(this,contenidoFichero,fuenteContenedores));
         irHorario();
 
     }
@@ -47,28 +46,6 @@ public class AcCursos extends AppCompatActivity{
                 startActivity(irFoto);
             }
         });
-    }
-
-    /**
-     * Este metodo carga el color del fondo el función de la elección de la actividad anterior
-     * @param tipo
-     * @return
-     */
-
-    private int seleccionarFondo(String tipo) {
-        int resultado=0;
-        switch (tipo){
-            case "Eso":
-                resultado = R.drawable.generico_eso;
-                break;
-            case "Bachillerato":
-                resultado = R.drawable.generico_bachillerato;
-                break;
-            case "Fp":
-                resultado = R.drawable.generico_fp;
-                break;
-        }
-        return resultado;
     }
 
     private ArrayList<String> recibirDatos(){

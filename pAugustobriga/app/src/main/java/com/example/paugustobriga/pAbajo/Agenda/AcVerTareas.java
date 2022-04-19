@@ -32,7 +32,7 @@ public class AcVerTareas extends AppCompatActivity {
     Spinner spVerTareas;
     ListView lstVerTareas;
     //Estas opciones serán únicas
-    final String[] opciones=new String[]{"Todo","Exámenes","Tareas","Otros"};
+    final String[] opciones=new String[]{"Todo","Exámenes","Tareas","Otros","Realizadas","No Realizadas","Pasadas"};
     ArrayList<Tarea> datos;
     Typeface fuenteContenedores;
 
@@ -90,6 +90,26 @@ public class AcVerTareas extends AppCompatActivity {
                         ArrayList<Tarea> tipoOtro = ad.buscarTipo("OTRO");
                         lstVerTareas.setAdapter(new AdaptadorVerTareaDia(getApplicationContext(),fuenteContenedores,tipoOtro));
                         actualizarContadores(tipoOtro);
+                        break;
+                    case "Realizadas":
+                        ArrayList<Tarea> realizadas = ad.buscarRealizadas();
+                        lstVerTareas.setAdapter(new AdaptadorVerTareaDia(getApplicationContext(),fuenteContenedores,realizadas));
+                        actualizarContadores(realizadas);
+                        break;
+                    case "No Realizadas":
+                        ArrayList<Tarea> noRealizadas = ad.buscarNoRealizadas();
+                        lstVerTareas.setAdapter(new AdaptadorVerTareaDia(getApplicationContext(),fuenteContenedores,noRealizadas));
+                        actualizarContadores(noRealizadas);
+                        break;
+                    case "Pasadas":
+                        ArrayList<Tarea> listaPasadas=new ArrayList<>();
+                        for(Tarea t:datos){
+                            if(t.getFecha().before(new Date())){
+                                listaPasadas.add(t);
+                            }
+                        }
+                        lstVerTareas.setAdapter(new AdaptadorVerTareaDia(getApplicationContext(),fuenteContenedores,listaPasadas));
+                        actualizarContadores(listaPasadas);
                         break;
                 }
             }

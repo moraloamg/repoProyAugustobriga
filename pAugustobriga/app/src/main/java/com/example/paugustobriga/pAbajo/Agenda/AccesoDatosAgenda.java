@@ -85,15 +85,13 @@ public class AccesoDatosAgenda {
         ArrayList<Tarea> resultado=new ArrayList<Tarea>();
         String[] campos =new String[] {"id","fecha","descripcion","notificacion","realizado","tipo"};
         SQLiteDatabase accesoLectura = miBD.getReadableDatabase();
-        //si no se pone el like no funciona
-        Cursor cursor = accesoLectura.query("tareas",campos,"fecha like '%"+fecha+"%'",null,null,null,null);
+
+        Cursor cursor = accesoLectura.query("tareas",campos,"fecha = '"+fecha+"'",null,null,null,null);
 
         while(cursor.moveToNext()){
             Tarea t=new Tarea();
             try {
                 t.setId(cursor.getInt(0));
-                //si no funciona con un int cambiar el campo fecha por un text, también modificar lo de arriba
-                //probar también con el método getLong
                 t.setFecha(formato.parse(cursor.getString(1)));
                 t.setDescripcion(cursor.getString(2));
                 t.setNotificacion(formato.parse(cursor.getString(3)));
@@ -119,8 +117,6 @@ public class AccesoDatosAgenda {
             Tarea t=new Tarea();
             try {
                 t.setId(cursor.getInt(0));
-                //si no funciona con un int cambiar el campo fecha por un text, también modificar lo de arriba
-                //probar también con el método getLong
                 t.setFecha(formato.parse(cursor.getString(1)));
                 t.setDescripcion(cursor.getString(2));
                 t.setNotificacion(formato.parse(cursor.getString(3)));
@@ -146,8 +142,6 @@ public class AccesoDatosAgenda {
             Tarea t=new Tarea();
             try {
                 t.setId(cursor.getInt(0));
-                //si no funciona con un int cambiar el campo fecha por un text, también modificar lo de arriba
-                //probar también con el método getLong
                 t.setFecha(formato.parse(cursor.getString(1)));
                 t.setDescripcion(cursor.getString(2));
                 t.setNotificacion(formato.parse(cursor.getString(3)));
@@ -167,14 +161,62 @@ public class AccesoDatosAgenda {
         ArrayList<Tarea> resultado=new ArrayList<Tarea>();
         String[] campos =new String[] {"id","fecha","descripcion","notificacion","realizado","tipo"};
         SQLiteDatabase accesoLectura = miBD.getReadableDatabase();
-        Cursor cursor = accesoLectura.query("tareas",campos,"tipo like '%"+tipo+"%'",null,null,null,null);
+        Cursor cursor = accesoLectura.query("tareas",campos,"tipo = '"+tipo+"'",null,null,null,null);
 
         while(cursor.moveToNext()){
             Tarea t=new Tarea();
             try {
                 t.setId(cursor.getInt(0));
-                //si no funciona con un int cambiar el campo fecha por un text, también modificar lo de arriba
-                //probar también con el método getLong
+                t.setFecha(formato.parse(cursor.getString(1)));
+                t.setDescripcion(cursor.getString(2));
+                t.setNotificacion(formato.parse(cursor.getString(3)));
+
+            } catch (ParseException e) {
+                t.setNotificacion(null);
+            }
+            t.setRealizado(cursor.getInt(4) > 0);
+            t.setTipo(cursor.getString(5));
+            resultado.add(t);
+        }
+        accesoLectura.close();
+        return resultado;
+    }
+
+    public ArrayList<Tarea> buscarRealizadas(){
+        ArrayList<Tarea> resultado=new ArrayList<Tarea>();
+        String[] campos =new String[] {"id","fecha","descripcion","notificacion","realizado","tipo"};
+        SQLiteDatabase accesoLectura = miBD.getReadableDatabase();
+        Cursor cursor = accesoLectura.query("tareas",campos,"realizado = true",null,null,null,null);
+
+        while(cursor.moveToNext()){
+            Tarea t=new Tarea();
+            try {
+                t.setId(cursor.getInt(0));
+                t.setFecha(formato.parse(cursor.getString(1)));
+                t.setDescripcion(cursor.getString(2));
+                t.setNotificacion(formato.parse(cursor.getString(3)));
+
+            } catch (ParseException e) {
+                t.setNotificacion(null);
+            }
+            t.setRealizado(cursor.getInt(4) > 0);
+            t.setTipo(cursor.getString(5));
+            resultado.add(t);
+        }
+        accesoLectura.close();
+        return resultado;
+    }
+
+    public ArrayList<Tarea> buscarNoRealizadas(){
+        ArrayList<Tarea> resultado=new ArrayList<Tarea>();
+        String[] campos =new String[] {"id","fecha","descripcion","notificacion","realizado","tipo"};
+        SQLiteDatabase accesoLectura = miBD.getReadableDatabase();
+        Cursor cursor = accesoLectura.query("tareas",campos,"realizado = false",null,null,null,null);
+
+        while(cursor.moveToNext()){
+            Tarea t=new Tarea();
+            try {
+                t.setId(cursor.getInt(0));
                 t.setFecha(formato.parse(cursor.getString(1)));
                 t.setDescripcion(cursor.getString(2));
                 t.setNotificacion(formato.parse(cursor.getString(3)));
@@ -241,7 +283,7 @@ public class AccesoDatosAgenda {
         return resultado;
     }
 
-    //PONER EL RESTO DE MÉTODOS AQUÍ ABAJO CUANDO EL RESTO FUNCIONE
+
 
 
 }

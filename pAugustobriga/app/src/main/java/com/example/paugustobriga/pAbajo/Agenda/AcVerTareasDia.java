@@ -35,11 +35,6 @@ public class AcVerTareasDia extends AppCompatActivity {
 
     Typeface fuenteContenedores;
 
-    /*
-    boolean pasada,completada;
-    int tareasCompletadas;
-     */
-
     //no formateada se refiere sin el nombre del mes, solo con el número
     String fechaNoFormateada;
 

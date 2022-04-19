@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F0F0F0"
     tools:context=".AcPrincipal">
 
 
@@ -130,6 +129,9 @@
     </LinearLayout>
 
     <!-- contenedor 3 -->
+
+    <!-- contenedor 2 -->
+
     <LinearLayout
         android:id="@+id/cont3"
         android:layout_width="365dp"
@@ -141,7 +143,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cont2"
-        app:layout_constraintVertical_bias="0.09">
+        app:layout_constraintVertical_bias="0.333">
 
         <!-- icono 1 -->
         <LinearLayout
@@ -163,7 +165,7 @@
                 android:id="@+id/txtAbajoUno"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Dónde estamos"
+                android:text="Plano"
                 android:textColor="#172646"
                 android:textSize="12sp" />
         </LinearLayout>
@@ -182,7 +184,7 @@
                 android:layout_width="60dp"
                 android:layout_height="62dp"
                 android:layout_marginBottom="8dp"
-                android:src="@drawable/abajo_dos" />
+                android:src="@drawable/abajo_tres" />
 
             <TextView
                 android:id="@+id/txtAbajoDos"
@@ -207,7 +209,7 @@
                 android:layout_width="60dp"
                 android:layout_height="62dp"
                 android:layout_marginBottom="8dp"
-                android:src="@drawable/abajo_tres" />
+                android:src="@drawable/abajo_dos" />
 
             <TextView
                 android:id="@+id/txtAbajoTres"
@@ -220,12 +222,11 @@
         <!-- fin contenedor 3 -->
     </LinearLayout>
 
-    <!-- contenedor 2 -->
     <LinearLayout
         android:id="@+id/cont2"
         android:layout_width="365dp"
         android:layout_height="150dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="32dp"
         android:background="@drawable/cont_iconos"
         android:orientation="horizontal"
         android:weightSum="3"

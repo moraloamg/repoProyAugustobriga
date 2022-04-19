@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".pArriba.Horarios.AcHorarios">
+    tools:context=".pMedio.calendario.AcCalendario">
 
     <View
         android:id="@+id/view5"
@@ -39,7 +39,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <LinearLayout
-        android:id="@+id/contFp"
+        android:id="@+id/contFpCalendario"
         android:layout_width="365dp"
         android:layout_height="130dp"
         android:background="@drawable/cont_iconos"
@@ -52,7 +52,7 @@
         app:layout_constraintVertical_bias="0.278">
 
         <TextView
-            android:id="@+id/txtFp"
+            android:id="@+id/txtFpCalendario"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Formación Profesional"
@@ -63,7 +63,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/contEso"
+        android:id="@+id/contEsoCalendario"
         android:layout_width="365dp"
         android:layout_height="130dp"
         android:background="@drawable/cont_iconos"
@@ -76,7 +76,7 @@
         app:layout_constraintVertical_bias="0.821">
 
         <TextView
-            android:id="@+id/txtEso"
+            android:id="@+id/txtEsoCalendario"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Educación Secundaria"
@@ -87,7 +87,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/contBachillerato"
+        android:id="@+id/contBachilleratoCalendario"
         android:layout_width="365dp"
         android:layout_height="130dp"
         android:background="@drawable/cont_iconos"
@@ -100,7 +100,7 @@
         app:layout_constraintVertical_bias="0.545">
 
         <TextView
-            android:id="@+id/txtBachillerato"
+            android:id="@+id/txtBachilleratoCalendario"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Bachillerato"
@@ -111,10 +111,10 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/txtCabeceraHorarios"
-        android:layout_width="195dp"
-        android:layout_height="73dp"
-        android:text="Horarios"
+        android:id="@+id/txtCabeceraCalendarios"
+        android:layout_width="302dp"
+        android:layout_height="69dp"
+        android:text="Calendarios"
         android:textAlignment="center"
         android:textSize="50sp"
         app:layout_constraintBottom_toBottomOf="parent"

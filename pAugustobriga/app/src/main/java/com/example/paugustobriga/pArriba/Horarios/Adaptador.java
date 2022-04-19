@@ -20,13 +20,11 @@ public class Adaptador extends BaseAdapter {
 
     ArrayList<String> filas;
     Context contexto;
-    int imagen;
     Typeface fuente;
 
-    public Adaptador(Context c,ArrayList<String> datos, int img, Typeface fuenteContenedores){
+    public Adaptador(Context c,ArrayList<String> datos, Typeface fuenteContenedores){
         contexto=c;
         filas=new ArrayList<>();
-        imagen = img;
         fuente = fuenteContenedores;
 
         //se utiliza un for y no un foreach debido a que este ultimo no coge los datos en orden
@@ -67,9 +65,6 @@ public class Adaptador extends BaseAdapter {
         if(fuente!=null){
             curso.setTypeface(fuente);
         }
-        //ponemos un fondo
-        contenedor.setBackgroundResource(imagen);
-        Drawable tmp = contenedor.getBackground();
 
         //Añadimos una animacion
         Animation animacion=null;

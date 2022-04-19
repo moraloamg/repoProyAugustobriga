@@ -18,6 +18,7 @@ import com.example.paugustobriga.pAbajo.Agenda.AcCalendarioAgenda;
 import com.example.paugustobriga.pArriba.Horarios.AcHorarios;
 import com.example.paugustobriga.pMedio.Profesorado.AcProfesorado;
 import com.example.paugustobriga.pMedio.Proyectos.AcProyectos;
+import com.example.paugustobriga.pMedio.calendario.AcCalendario;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -117,7 +118,7 @@ public class AcPrincipal extends AppCompatActivity {
         ico_medio_dos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                cambiarActividad("medioDos");
             }
         });
     }
@@ -135,7 +136,7 @@ public class AcPrincipal extends AppCompatActivity {
         ico_abajo_uno.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                cambiarActividad("abajoUno");
             }
         });
     }
@@ -182,21 +183,24 @@ public class AcPrincipal extends AppCompatActivity {
                 break;
 
             case "medioDos":
-
-                break;
-
-            case "medioTres":
-                Intent i4=new Intent(this, AcProyectos.class);
+                Intent i4=new Intent(this, AcCalendario.class);
                 startActivity(i4);
                 break;
 
-            case "abajoUno":
+            case "medioTres":
+                Intent i5=new Intent(this, AcProyectos.class);
+                startActivity(i5);
+                break;
 
+            case "abajoUno":
+                Intent irPlano=new Intent(Intent.ACTION_VIEW,
+                        Uri.parse("https://raw.githubusercontent.com/moraloamg/pruebaAugustobriga/main/plano/plano.png"));
+                startActivity(irPlano);
                 break;
 
             case "abajoDos":
-                Intent i5=new Intent(this, AcCalendarioAgenda.class);
-                startActivity(i5);
+                Intent i6=new Intent(this, AcCalendarioAgenda.class);
+                startActivity(i6);
                 break;
 
             case "abajoTres":
