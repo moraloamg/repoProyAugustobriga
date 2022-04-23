@@ -91,8 +91,9 @@ public class AcHorarios extends AppCompatActivity {
     private void obtenerDatosFichero(String tipoCurso){
         String url = crearUrl(tipoCurso);
         LecturaFichero lector=new LecturaFichero(url);
+        //creamos una referencia de esta objeto en la clase LecturaFichero
         lector.delegar = this;
-        //una vez se ejecute el siguiente método, el hilo de la clase actual acabará
+        //una vez se ejecute el siguiente método, el hilo de la clase actual acabará y empezará el hilo de lectura
         lector.execute();
     }
 

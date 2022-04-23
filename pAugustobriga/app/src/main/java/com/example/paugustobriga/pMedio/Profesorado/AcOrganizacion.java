@@ -48,11 +48,12 @@ public class AcOrganizacion extends AppCompatActivity implements AsyncRespuestaH
             TableRow columna = new TableRow(this);
             tl.addView(columna);
 
+            //puesto/cargo
             TextView tv = new TextView(this);
             tv.setText(x[0].toString()+"\t");
             tv.setTypeface(tv.getTypeface(), Typeface.BOLD);
             columna.addView(tv);
-
+            //nombre
             TextView tv2 = new TextView(this);
             tv2.setText("\t"+x[1].toString());
             columna.addView(tv2);

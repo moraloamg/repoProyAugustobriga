@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.example.paugustobriga.R;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -63,23 +64,29 @@ public class AdaptadorVerTareaDia extends BaseAdapter {
         //disponemos las variables de los elementos gráficos
         TextView desc = (TextView) list.findViewById(R.id.txtDescTarea);
         TextView idTarea = (TextView) list.findViewById(R.id.idTarea);
-        TextView fechaNotif = (TextView) list.findViewById(R.id.txtFechaNotificacion);
+        TextView fechaNotif = (TextView) list.findViewById(R.id.txtFecha);
+        TextView fecha = (TextView) list.findViewById(R.id.txtFechaTarea);
         CheckBox hecha = (CheckBox) list.findViewById(R.id.chkTareaCompletada);
         CheckBox pasada = (CheckBox) list.findViewById(R.id.chkTareaPasada);
         LinearLayout ly = (LinearLayout) list.findViewById(R.id.lyTarea);
 
         idTarea.setText(String.valueOf(tareas.get(i).getId()));
         desc.setText(tareas.get(i).getDescripcion());
+        fecha.setText(formato.format(tareas.get(i).getFecha()));
         if(tareas.get(i).getNotificacion()==null){
-            fechaNotif.setText("N/A");
+            fechaNotif.setText("No notif");
         }else{
             fechaNotif.setText(formato.format(tareas.get(i).getNotificacion()));
         }
         hecha.setChecked(tareas.get(i).isRealizado());
-        if(new Date().after(tareas.get(i).getFecha())){
-            pasada.setChecked(true);
-        }else{
-            pasada.setChecked(false);
+        try {
+            if(formato.parse(formato.format(new Date())).after(tareas.get(i).getFecha())){
+                pasada.setChecked(true);
+            }else{
+                pasada.setChecked(false);
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
         }
 
         switch (tareas.get(i).getTipo()){

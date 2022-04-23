@@ -47,10 +47,13 @@ public class AcTutorias extends AppCompatActivity implements AsyncRespuestaHtml{
 
     @Override
     public void procesoFinalizado(ArrayList<Object[]> salida) {
-        tl.setStretchAllColumns(true);
+        tl.setStretchAllColumns(true); //encogemos y estiramos las filas
         tl.setShrinkAllColumns(true);
-
+        //cada objeto de la lista tiene información sobre un curso
         for(Object[] x:salida){
+            //por formato de la tabla del HTML, la primera fila de cada grupo contiene 4 elementos, nombre del curso
+            //grupo, tutor, y horario
+            //el resto de filas contiene 3 elementos; grupo, tutor y horario
             if(x.length==4){
                 //--------fila con el nombre del curso----------
                 TableRow columnaCurso = new TableRow(this);
@@ -90,15 +93,15 @@ public class AcTutorias extends AppCompatActivity implements AsyncRespuestaHtml{
             }else{
                 TableRow columna2 = new TableRow(this);
                 tl.addView(columna2);
-
+                //grupo
                 TextView tv5 = new TextView(this);
                 tv5.setText(x[0].toString());
                 columna2.addView(tv5);
-
+                //tutor
                 TextView tv6 = new TextView(this);
                 tv6.setText(x[1].toString());
                 columna2.addView(tv6);
-
+                //horario
                 TextView tv7 = new TextView(this);
                 tv7.setText(x[2].toString());
                 columna2.addView(tv7);

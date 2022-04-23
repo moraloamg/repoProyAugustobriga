@@ -21,6 +21,8 @@ import android.widget.Toast;
 import com.example.paugustobriga.AcPrincipal;
 import com.example.paugustobriga.R;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -35,6 +37,7 @@ public class AcVerTareas extends AppCompatActivity {
     final String[] opciones=new String[]{"Todo","Exámenes","Tareas","Otros","Realizadas","No Realizadas","Pasadas"};
     ArrayList<Tarea> datos;
     Typeface fuenteContenedores;
+    SimpleDateFormat formato=new SimpleDateFormat("dd/MM/yyyy");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,8 +107,12 @@ public class AcVerTareas extends AppCompatActivity {
                     case "Pasadas":
                         ArrayList<Tarea> listaPasadas=new ArrayList<>();
                         for(Tarea t:datos){
-                            if(t.getFecha().before(new Date())){
-                                listaPasadas.add(t);
+                            try {
+                                if(t.getFecha().before(formato.parse(formato.format(new Date())))){
+                                    listaPasadas.add(t);
+                                }
+                            } catch (ParseException e) {
+                                e.printStackTrace();
                             }
                         }
                         lstVerTareas.setAdapter(new AdaptadorVerTareaDia(getApplicationContext(),fuenteContenedores,listaPasadas));
@@ -193,8 +200,12 @@ public class AcVerTareas extends AppCompatActivity {
             if(ta.isRealizado()){
                 contCompletadas++;
             }
-            if(new Date().after(ta.getFecha())){
-                contPasadas++;
+            try {
+                if(formato.parse(formato.format(new Date())).after(ta.getFecha())){
+                    contPasadas++;
+                }
+            } catch (ParseException e) {
+                e.printStackTrace();
             }
         }
         txtComp.setText("Completadas   "+String.valueOf(contCompletadas));

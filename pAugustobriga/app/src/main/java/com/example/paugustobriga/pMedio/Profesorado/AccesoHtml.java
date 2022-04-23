@@ -97,13 +97,15 @@ public class AccesoHtml extends AsyncTask {
         Elements nombresContenedores = html.getElementsByClass("jwts_toggleControlTitle");
         Elements contenidoContenedores = html.getElementsByClass("jwts_content");
 
-
+        //nombreContenedores almacena el nombre y el número de departamentos, contenidoContenedores el personal docente
+        //Una iteración por cada departamento
         for(int i=0;i<nombresContenedores.size();i++){
             String departamento = nombresContenedores.get(i).text();
             //de cada contenedor, se obtienen los nodos que contienen los nombres de los profesores
             Element nombres = contenidoContenedores.get(i);
+            //lineas obtendrá aquellas etiquetas del bloque nombres que contengan el nombre de los profesores
             Elements lineas = nombres.select("p");
-            //Se eliminan aquellos nodos que no tengan texto
+            //Se eliminan aquellos nodos que no tengan texto o tengan imágenes
             for (Element elemento : lineas.select("*")) {
                 if (!elemento.hasText() && elemento.isBlock()) {
                     lineas.remove(elemento);
@@ -112,7 +114,7 @@ public class AccesoHtml extends AsyncTask {
             Object[] o=new Object[lineas.size()+1]; //los nombres de los profesores mas el nombre del departamento
             o[0]=departamento;
             //se recorren los nodos
-            //dado que el primer lugar lo ocupa el nombre del departamento, se le suma +1 al contador
+            //dado que el primer lugar lo ocupa el nombre del departamento, se le suma +1 al contador para introducir los nombre
             for(int j=0;j<lineas.size();j++){
                 o[j+1]=lineas.get(j).text();
             }

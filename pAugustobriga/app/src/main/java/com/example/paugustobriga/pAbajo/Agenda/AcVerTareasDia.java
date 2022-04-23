@@ -148,8 +148,12 @@ public class AcVerTareasDia extends AppCompatActivity {
 
     private boolean comprobarPasada(Date fecha){
         boolean resultado=false;
-        if(new Date().after(fecha)){
-            resultado=true;
+        try {
+            if(formato.parse(formato.format(new Date())).after(fecha)){
+                resultado=true;
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
         }
         return resultado;
     }

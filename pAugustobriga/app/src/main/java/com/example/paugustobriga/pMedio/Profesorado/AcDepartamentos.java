@@ -46,41 +46,42 @@ public class AcDepartamentos extends AppCompatActivity implements AsyncRespuesta
 
     @Override
     public void procesoFinalizado(ArrayList<Object[]> salida) {
-        tl.setStretchAllColumns(true);
+        tl.setStretchAllColumns(true); //encogemos y estiramos las filas
         tl.setShrinkAllColumns(true);
-        for(Object[] x: salida){
-            for(int i=0;i<x.length;i++){
+        for(Object[] x: salida){ //cada objeto de la lista contendrá información de un departamento
+            for(int i=0;i<x.length;i++){   //el indice cero siempre será el nombre del departamento, el resto el personal
                 if(i==0){
+                    //En esta parte se dispone el nombre del departamento
                     TableRow columnaDepartamentos = new TableRow(this);
-                    columnaDepartamentos.setGravity(Gravity.CENTER_HORIZONTAL);
 
                     TextView tv = new TextView(this);
-                    tv.setText(x[0].toString());   //el nombre del departamento
-                    tv.setTextColor(Color.WHITE);
+                    tv.setText(x[0].toString());   //añadimos el nombre del departamento
+                    tv.setTextColor(Color.WHITE); //damos color a la letra
 
                     TableRow.LayoutParams params = new TableRow.LayoutParams();
-                    params.gravity = Gravity.CENTER;
-
+                    params.gravity = Gravity.CENTER; //centramos el texto
+                    //añadimos propiedades a la columna
                     columnaDepartamentos.addView(tv,params);
                     columnaDepartamentos.setBackgroundColor(Color.parseColor("#3070F0"));
                     columnaDepartamentos.setAlpha(0.7f);
 
-                    tl.addView(columnaDepartamentos);
+                    tl.addView(columnaDepartamentos); //añadimos la fila a la tabla
                 }else{
+                    //aquí disponemos el personal del departamento
                     TableRow columna2 = new TableRow(this);
                     tl.addView(columna2);
 
                     TextView tv2 = new TextView(this);
-                    tv2.setText(x[i].toString());
+                    tv2.setText(x[i].toString()); //añadimos el nombre del personal
 
                     TableRow.LayoutParams params = new TableRow.LayoutParams();
-                    params.gravity = Gravity.CENTER;
+                    params.gravity = Gravity.CENTER; //centramos el texto
 
-                    columna2.addView(tv2,params);
+                    columna2.addView(tv2,params); //añadimos la fila a la tabla
 
                 }
             }
         }
-        pantallaCarga.setVisibility(View.INVISIBLE);
+        pantallaCarga.setVisibility(View.INVISIBLE); //hacemos invisible el proceso cuando se ha completado
     }
 }

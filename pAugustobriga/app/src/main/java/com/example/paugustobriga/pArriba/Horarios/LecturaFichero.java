@@ -35,8 +35,6 @@ public class LecturaFichero extends AsyncTask {
         URL urlFichero = null;
 
         try {
-            //limpiamos los datos de la lista
-            contenido.clear();
             //leemos el fichero
             urlFichero = new URL(url);
             BufferedReader fichero = new BufferedReader(new InputStreamReader(urlFichero.openStream()));
