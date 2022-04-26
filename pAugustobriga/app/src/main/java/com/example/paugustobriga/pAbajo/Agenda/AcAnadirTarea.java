@@ -57,7 +57,7 @@ public class AcAnadirTarea extends AppCompatActivity {
 
             if(id.contains("V")){
                 id = id.replace("V","");
-                verTareas=true;
+                verTareas=true;  //implementar una interfaz para ver de que actividad viene la peticion??
             }
 
             txtFecha.setText(fechaFormateada(fecha));
@@ -146,12 +146,18 @@ public class AcAnadirTarea extends AppCompatActivity {
         btnAnadirTarea.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ad.modificarTipo(Integer.parseInt(id),tipo);
-                if(chkHecho.isChecked()){
-                    ad.realizarTarea(Integer.parseInt(id));
+                if(editDescripcion.getText().toString().length()>0) {
+                    ad.modificarTipo(Integer.parseInt(id),tipo);
+                    if(chkHecho.isChecked()){
+                        ad.realizarTarea(Integer.parseInt(id));
+                    }
+
+                    ad.modificarDescripcion(Integer.parseInt(id), editDescripcion.getText().toString());
+                    onBackPressed();
+                }else{
+                    Toast.makeText(getApplicationContext(), "no has añadido ninguna descripción", Toast.LENGTH_LONG).show();
                 }
-                ad.modificarDescripcion(Integer.parseInt(id),editDescripcion.getText().toString());
-                onBackPressed();
+
             }
         });
     }

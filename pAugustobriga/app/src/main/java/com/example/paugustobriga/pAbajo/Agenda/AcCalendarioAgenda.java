@@ -42,7 +42,7 @@ public class AcCalendarioAgenda extends AppCompatActivity {
 
         identificarElementos();
         seleccionarFecha();
-        //poner aqui ver tareas
+
     }
 
     private void resumenDia(String fechaS){

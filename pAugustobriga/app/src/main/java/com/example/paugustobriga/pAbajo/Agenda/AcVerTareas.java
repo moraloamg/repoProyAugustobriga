@@ -8,6 +8,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -54,6 +56,7 @@ public class AcVerTareas extends AppCompatActivity {
         actualizarContadores(datos);
 
         buscarDatos();
+        cambioTexto();
         irTarea();
         lstVerTareas.setLongClickable(true);
         eliminarTarea();
@@ -68,6 +71,34 @@ public class AcVerTareas extends AppCompatActivity {
         txtPas = findViewById(R.id.txtPasadasVerTarea);
         spVerTareas = findViewById(R.id.spVerTareas);
         lstVerTareas = findViewById(R.id.lstTareas);
+    }
+
+    //método que comprueba que al estar vacío el EditText no se quede vacía la lista
+    private void cambioTexto(){
+        editBuscar.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                comprobarEditTextVacio();
+            }
+        });
+    }
+
+    //método que comprueba que al estar vacío el EditText no se quede vacía la lista
+    private void comprobarEditTextVacio(){
+        if(editBuscar.getText().toString().length()==0){
+            lstVerTareas.setAdapter(new AdaptadorVerTareaDia(getApplicationContext(),fuenteContenedores,datos));
+            actualizarContadores(datos);
+        }
     }
 
     private void elegirOpcionSpinner(){
