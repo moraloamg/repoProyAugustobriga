@@ -26,7 +26,7 @@ public class AcAnadirTarea extends AppCompatActivity {
     //primera prueba con SourceTree
     AccesoDatosAgenda ad;
     SimpleDateFormat formato=new SimpleDateFormat("dd/MM/yyyy");
-    //segundo avance rama principal
+    //tercer avance rama principal
 
 
     ImageView rojo,azul,amarillo;
@@ -43,7 +43,7 @@ public class AcAnadirTarea extends AppCompatActivity {
     String id;
 
     boolean verTareas=false;
-    //avance rama prueba 2
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
