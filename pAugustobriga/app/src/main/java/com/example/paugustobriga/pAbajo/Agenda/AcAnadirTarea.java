@@ -23,11 +23,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 public class AcAnadirTarea extends AppCompatActivity {
-    //primera prueba con SourceTree
     AccesoDatosAgenda ad;
     SimpleDateFormat formato=new SimpleDateFormat("dd/MM/yyyy");
-    //tercer avance rama principal
-
 
     ImageView rojo,azul,amarillo;
     TextView txtFecha;
@@ -43,7 +40,6 @@ public class AcAnadirTarea extends AppCompatActivity {
     String id;
 
     boolean verTareas=false;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
