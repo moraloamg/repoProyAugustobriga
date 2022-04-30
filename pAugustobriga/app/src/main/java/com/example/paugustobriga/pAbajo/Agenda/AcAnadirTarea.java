@@ -52,13 +52,17 @@ public class AcAnadirTarea extends AppCompatActivity {
         //a2222222222
         //a2222222222
 
-    
-
     //caracteristica 1
         //a1111111111
         //a1111111111
         //a1111111111
         //a1111111111
+
+    //caracteristica 3
+        //a3333333333
+        //a3333333333
+        //a3333333333
+    
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
