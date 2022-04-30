@@ -26,8 +26,7 @@ public class AcAnadirTarea extends AppCompatActivity {
     //primera prueba con SourceTree
     AccesoDatosAgenda ad;
     SimpleDateFormat formato=new SimpleDateFormat("dd/MM/yyyy");
-
-    //avance rama prueba 1
+    //segundo avance rama principal
 
 
     ImageView rojo,azul,amarillo;
