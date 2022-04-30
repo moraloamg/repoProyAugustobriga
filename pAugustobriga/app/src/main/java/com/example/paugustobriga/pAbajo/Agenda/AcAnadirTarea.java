@@ -43,6 +43,10 @@ public class AcAnadirTarea extends AppCompatActivity {
 
     //IMPLEMENTAR NOTIFICACIONES
 
+    //caracteristica 1
+        //aaaaaaaaaa
+        //aaaaaaaaaa
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
