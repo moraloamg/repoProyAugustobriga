@@ -48,6 +48,10 @@ public class AcAnadirTarea extends AppCompatActivity {
         //aaaaaaaaaaaaaa
         //aaaaaaaaaaaaaa
 
+    //caracteristica 2
+        //a2222222222
+        //a2222222222
+
     
 
     @Override
