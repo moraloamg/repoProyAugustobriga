@@ -68,6 +68,7 @@ public class AcCalendarioAgenda extends AppCompatActivity {
         txtContAmarillo.setText(String.valueOf(contAmarillo));
     }
 
+
     private void seleccionarFecha(){
         //por defecto seleccionaremos la fecha actual, en caso de darle al boton de seleccionar tarea
         fecha = new Date();
@@ -92,6 +93,7 @@ public class AcCalendarioAgenda extends AppCompatActivity {
             }
         });
     }
+
 
 
 

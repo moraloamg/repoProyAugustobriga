@@ -3,7 +3,9 @@ package com.example.paugustobriga.pAbajo.Agenda;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.res.ResourcesCompat;
+import androidx.work.WorkManager;
 
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
@@ -14,13 +16,13 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.paugustobriga.AcPrincipal;
 import com.example.paugustobriga.R;
 
 import java.text.ParseException;
@@ -59,7 +61,7 @@ public class AcVerTareas extends AppCompatActivity {
         cambioTexto();
         irTarea();
         lstVerTareas.setLongClickable(true);
-        eliminarTarea();
+        opcionesTarea();
 
     }
 
@@ -177,31 +179,76 @@ public class AcVerTareas extends AppCompatActivity {
         });
     }
 
-    private void eliminarTarea(){
+
+    private void opcionesTarea(){
         lstVerTareas.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
-                AlertDialog.Builder dialogo1=new AlertDialog.Builder(AcVerTareas.this);
-                dialogo1.setTitle("Borrar tarea");
-                dialogo1.setMessage("¿Está seguro que desea borrar la tarea?");
-                dialogo1.setCancelable(false);
-                dialogo1.setPositiveButton("Borrar", new DialogInterface.OnClickListener() {
+
+                final Dialog myDialog = new Dialog(AcVerTareas.this);
+                myDialog.setContentView(R.layout.dialog_tarea);
+                myDialog.setTitle("Elige una opción"); //?? esto no se porqué no sale
+                myDialog.setCancelable(true);
+
+                Button irNotificacion = (Button) myDialog.findViewById(R.id.irNotificacion);
+                irNotificacion.setOnClickListener(new View.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        String seleccionado = ((TextView) view.findViewById(R.id.idTarea)).getText().toString();
-                        ad.borrar(Integer.parseInt(seleccionado));
-                        Toast.makeText(getApplicationContext(),"Has borrado la tarea", Toast.LENGTH_LONG).show();
-                        finish();
-                        startActivity(getIntent());
+                    public void onClick(View view1) {
+                        String id = ((TextView) view.findViewById(R.id.idTarea)).getText().toString();
+                        boolean hecha = ((CheckBox) view.findViewById(R.id.chkTareaCompletada)).isChecked();
+                        boolean pasada = ((CheckBox) view.findViewById(R.id.chkTareaPasada)).isChecked();
+                        String notif = ((TextView) view.findViewById(R.id.txtNotificacion)).getText().toString();
+
+                        if(!hecha && !pasada && notif.equalsIgnoreCase("No notif")) {
+                            Intent i2 = new Intent(getApplicationContext(), AcNotificacion.class);
+                            i2.putExtra("datos", id + "@AcVerTareas");
+                            startActivity(i2);
+                        }else if(!hecha && !pasada && notif.equalsIgnoreCase("Con notif")){
+                            Intent i2 = new Intent(getApplicationContext(), AcNotificacion.class);
+                            i2.putExtra("datos", id + "@AcVerTareas");
+                            i2.putExtra("editar", ad.obtenerNotificacion(id));
+                            startActivity(i2);
+                        }else{
+                            Toast.makeText(getApplicationContext(),"No puedes añadir una notificación a una tarea atrasada o completada", Toast.LENGTH_LONG).show();
+                        }
+                    }
+                });
+
+                Button irBorrar= (Button) myDialog.findViewById(R.id.irBorrarTarea);
+                irBorrar.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view2) {
+
+                        AlertDialog.Builder dialogo1=new AlertDialog.Builder(AcVerTareas.this);
+                        dialogo1.setTitle("Borrar tarea");
+                        dialogo1.setMessage("¿Está seguro que desea borrar la tarea?");
+                        dialogo1.setCancelable(false);
+                        dialogo1.setPositiveButton("Borrar", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                String seleccionado = ((TextView) view.findViewById(R.id.idTarea)).getText().toString();
+                                ad.borrar(Integer.parseInt(seleccionado));
+                                WorkManager.getInstance(getApplicationContext()).cancelAllWorkByTag(seleccionado);
+                                ad.modificarNotificacion(Integer.parseInt(seleccionado),null);
+
+                                Toast.makeText(getApplicationContext(),"Has borrado la tarea", Toast.LENGTH_LONG).show();
+                                finish();
+                                startActivity(getIntent());
+
+                            }
+                        });
+                        dialogo1.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialogInterface, int id){
+                                Toast.makeText(getApplicationContext(),"Cancelar", Toast.LENGTH_LONG).show();
+                            }
+                        });
+                        dialogo1.show();
+
 
                     }
                 });
-                dialogo1.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialogInterface, int id){
-                        Toast.makeText(getApplicationContext(),"Cancelar", Toast.LENGTH_LONG).show();
-                    }
-                });
-                dialogo1.show();
+
+                myDialog.show();
                 return true;
             }
         });

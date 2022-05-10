@@ -96,6 +96,21 @@ public class AccesoDatosAgenda {
         return resultado;
     }
 
+    public String obtenerNotificacion(String id){
+        String resultado="";
+        String[] campos =new String[] {"notificacion"};
+        String[] argumentos=new String[]{id};
+        SQLiteDatabase accesoLectura = miBD.getReadableDatabase();
+
+        Cursor cursor = accesoLectura.query("tareas",campos,"id = ?",argumentos,null,null,null);
+
+        if(cursor.moveToNext()){
+            resultado=cursor.getString(0);
+        }
+        accesoLectura.close();
+        return resultado;
+    }
+
     public ArrayList<Tarea> obtenerTareasDia(String fecha){
         ArrayList<Tarea> resultado=new ArrayList<Tarea>();
         String[] campos =new String[] {"id","fecha","descripcion","notificacion","realizado","tipo"};
@@ -110,7 +125,10 @@ public class AccesoDatosAgenda {
                 t.setId(cursor.getInt(0));
                 t.setFecha(formato.parse(cursor.getString(1)));
                 t.setDescripcion(cursor.getString(2));
-                t.setNotificacion(formato.parse(cursor.getString(3)));
+                if(cursor.getString(3)!=null){
+                    t.setNotificacion(formato.parse(cursor.getString(3)));
+                }
+
 
             } catch (ParseException e) {
                 t.setNotificacion(null);
@@ -135,7 +153,10 @@ public class AccesoDatosAgenda {
                 t.setId(cursor.getInt(0));
                 t.setFecha(formato.parse(cursor.getString(1)));
                 t.setDescripcion(cursor.getString(2));
-                t.setNotificacion(formato.parse(cursor.getString(3)));
+                if (cursor.getString(3) != null) {
+                    t.setNotificacion(formato.parse(cursor.getString(3)));
+                }
+
 
             } catch (ParseException e) {
                 t.setNotificacion(null);
@@ -161,7 +182,9 @@ public class AccesoDatosAgenda {
                 t.setId(cursor.getInt(0));
                 t.setFecha(formato.parse(cursor.getString(1)));
                 t.setDescripcion(cursor.getString(2));
-                t.setNotificacion(formato.parse(cursor.getString(3)));
+                if (cursor.getString(3) != null) {
+                    t.setNotificacion(formato.parse(cursor.getString(3)));
+                }
 
             } catch (ParseException e) {
                 t.setNotificacion(null);
@@ -187,7 +210,9 @@ public class AccesoDatosAgenda {
                 t.setId(cursor.getInt(0));
                 t.setFecha(formato.parse(cursor.getString(1)));
                 t.setDescripcion(cursor.getString(2));
-                t.setNotificacion(formato.parse(cursor.getString(3)));
+                if (cursor.getString(3) != null) {
+                    t.setNotificacion(formato.parse(cursor.getString(3)));
+                }
 
             } catch (ParseException e) {
                 t.setNotificacion(null);
@@ -212,7 +237,9 @@ public class AccesoDatosAgenda {
                 t.setId(cursor.getInt(0));
                 t.setFecha(formato.parse(cursor.getString(1)));
                 t.setDescripcion(cursor.getString(2));
-                t.setNotificacion(formato.parse(cursor.getString(3)));
+                if (cursor.getString(3) != null) {
+                    t.setNotificacion(formato.parse(cursor.getString(3)));
+                }
 
             } catch (ParseException e) {
                 t.setNotificacion(null);
@@ -237,7 +264,9 @@ public class AccesoDatosAgenda {
                 t.setId(cursor.getInt(0));
                 t.setFecha(formato.parse(cursor.getString(1)));
                 t.setDescripcion(cursor.getString(2));
-                t.setNotificacion(formato.parse(cursor.getString(3)));
+                if (cursor.getString(3) != null) {
+                    t.setNotificacion(formato.parse(cursor.getString(3)));
+                }
 
             } catch (ParseException e) {
                 t.setNotificacion(null);
@@ -287,6 +316,8 @@ public class AccesoDatosAgenda {
         accesoLectura.close();
         return resultado;
     }
+
+
 
     public String obtenerFecha(String seleccionado) {
         String resultado="";

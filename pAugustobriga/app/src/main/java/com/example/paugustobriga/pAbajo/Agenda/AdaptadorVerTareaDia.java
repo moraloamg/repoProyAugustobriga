@@ -64,7 +64,7 @@ public class AdaptadorVerTareaDia extends BaseAdapter {
         //disponemos las variables de los elementos gráficos
         TextView desc = (TextView) list.findViewById(R.id.txtDescTarea);
         TextView idTarea = (TextView) list.findViewById(R.id.idTarea);
-        TextView fechaNotif = (TextView) list.findViewById(R.id.txtFecha);
+        TextView fechaNotif = (TextView) list.findViewById(R.id.txtNotificacion);
         TextView fecha = (TextView) list.findViewById(R.id.txtFechaTarea);
         CheckBox hecha = (CheckBox) list.findViewById(R.id.chkTareaCompletada);
         CheckBox pasada = (CheckBox) list.findViewById(R.id.chkTareaPasada);
@@ -76,7 +76,7 @@ public class AdaptadorVerTareaDia extends BaseAdapter {
         if(tareas.get(i).getNotificacion()==null){
             fechaNotif.setText("No notif");
         }else{
-            fechaNotif.setText(formato.format(tareas.get(i).getNotificacion()));
+            fechaNotif.setText("Con notif");
         }
         hecha.setChecked(tareas.get(i).isRealizado());
         try {

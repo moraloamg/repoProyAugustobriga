@@ -1,32 +1,45 @@
 package com.example.paugustobriga.pAbajo.Agenda;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.res.ResourcesCompat;
 
+import android.app.AlertDialog;
+import android.app.TimePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.os.Debug;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CalendarView;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
-import com.example.paugustobriga.AcPrincipal;
 import com.example.paugustobriga.R;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 
 public class AcAnadirTarea extends AppCompatActivity {
     AccesoDatosAgenda ad;
     SimpleDateFormat formato=new SimpleDateFormat("dd/MM/yyyy");
 
-    ImageView rojo,azul,amarillo;
+    ImageView rojo,azul,amarillo, btnNotificacion;
     TextView txtFecha;
     CheckBox chkHecho;
     EditText editDescripcion;
@@ -41,11 +54,6 @@ public class AcAnadirTarea extends AppCompatActivity {
 
     boolean verTareas=false;
 
-    //IMPLEMENTAR NOTIFICACIONES
-
-    //caracteristica 1
-        //aaaaaaaaaa
-        //aaaaaaaaaa
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,7 +109,9 @@ public class AcAnadirTarea extends AppCompatActivity {
         editDescripcion = findViewById(R.id.editTextAnadirTarea);
         btnAnadirTarea = findViewById(R.id.btnCrearTarea);
         lyFondo = findViewById(R.id.lyFondoCrearTarea);
+
     }
+
 
     private void obtenerTipo(String id){
         tipo=ad.obtenerTipo(id);
@@ -128,6 +138,7 @@ public class AcAnadirTarea extends AppCompatActivity {
         resultado = extras.getString("datos");
         return resultado;
     }
+
 
     private void importarFuentes(){
         fuenteContenedores = ResourcesCompat.getFont(this, R.font.ibm_plex_sans_thai_bold);
@@ -230,6 +241,7 @@ public class AcAnadirTarea extends AppCompatActivity {
         });
     }
 
+
     public String fechaFormateada(String fecha){
         String[] cadena = fecha.split("/");
         String mes="";
@@ -273,4 +285,6 @@ public class AcAnadirTarea extends AppCompatActivity {
         }
         return cadena[0]+" de "+mes+" de "+cadena[2];
     }
+
+
 }

@@ -31,6 +31,7 @@
         android:layout_height="492dp"
         android:background="@drawable/fondo_tarea_otr"
         android:orientation="vertical"
+        android:weightSum="2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -78,21 +79,21 @@
         <EditText
             android:id="@+id/editTextAnadirTarea"
             android:layout_width="match_parent"
-            android:layout_height="218dp"
-            android:padding="10dp"
+            android:layout_height="204dp"
+            android:background="@null"
             android:ems="10"
             android:hint="\t\tEscribre aquí la descripcion de la tarea"
             android:inputType="textMultiLine"
-            android:background="@null"
             android:lines="4"
             android:maxLines="4"
             android:minHeight="48dp"
+            android:padding="10dp"
             android:text=""
             android:textColor="@color/white"
             android:textColorHint="@color/white" />
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="324dp"
             android:layout_height="89dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginLeft="40dp"
@@ -107,6 +108,7 @@
                 android:layout_marginTop="20dp"
                 android:background="@drawable/fondo_botones"
                 android:gravity="center"
+                android:layout_marginRight="11dp"
                 android:text="Crear tarea"
                 android:textColor="@color/white"
                 android:textSize="20dp" />

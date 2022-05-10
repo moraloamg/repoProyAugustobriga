@@ -12,9 +12,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PAugustobriga">
         <activity
+            android:name=".pAbajo.Agenda.AcNotificacion"
+            android:exported="false" />
+        <activity
             android:name=".pMedio.calendario.AcCalendario"
             android:exported="false"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".pAbajo.Agenda.AcAnadirTarea"
             android:exported="false"

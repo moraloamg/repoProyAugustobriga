@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/dialog"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" >
+
+
+    <Button
+        android:id="@+id/irNotificacion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/fondo_botones"
+        android:text="Añadir notificacion"
+        android:textColor="@color/white"
+        android:textSize="20dp"></Button>
+
+    <Button
+        android:id="@+id/irBorrarTarea"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/irNotificacion"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10dp"
+        android:text="Borrar tarea"
+        android:background="@drawable/fondo_botones"
+        android:textColor="@color/white"
+        android:textSize="20dp">
+    </Button>
+
+</RelativeLayout>
