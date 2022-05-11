@@ -14,6 +14,7 @@ import java.util.Date;
 public class AccesoDatosAgenda {
 
     SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+    SimpleDateFormat formatoFinal = new SimpleDateFormat("dd/MM/yyyy HH:mm");
     private Context contexto;
     TareasBD miBD;
 
@@ -126,7 +127,7 @@ public class AccesoDatosAgenda {
                 t.setFecha(formato.parse(cursor.getString(1)));
                 t.setDescripcion(cursor.getString(2));
                 if(cursor.getString(3)!=null){
-                    t.setNotificacion(formato.parse(cursor.getString(3)));
+                    t.setNotificacion(formatoFinal.parse(cursor.getString(3)));
                 }
 
 
@@ -154,7 +155,7 @@ public class AccesoDatosAgenda {
                 t.setFecha(formato.parse(cursor.getString(1)));
                 t.setDescripcion(cursor.getString(2));
                 if (cursor.getString(3) != null) {
-                    t.setNotificacion(formato.parse(cursor.getString(3)));
+                    t.setNotificacion(formatoFinal.parse(cursor.getString(3)));
                 }
 
 
@@ -183,7 +184,7 @@ public class AccesoDatosAgenda {
                 t.setFecha(formato.parse(cursor.getString(1)));
                 t.setDescripcion(cursor.getString(2));
                 if (cursor.getString(3) != null) {
-                    t.setNotificacion(formato.parse(cursor.getString(3)));
+                    t.setNotificacion(formatoFinal.parse(cursor.getString(3)));
                 }
 
             } catch (ParseException e) {
@@ -211,7 +212,7 @@ public class AccesoDatosAgenda {
                 t.setFecha(formato.parse(cursor.getString(1)));
                 t.setDescripcion(cursor.getString(2));
                 if (cursor.getString(3) != null) {
-                    t.setNotificacion(formato.parse(cursor.getString(3)));
+                    t.setNotificacion(formatoFinal.parse(cursor.getString(3)));
                 }
 
             } catch (ParseException e) {
@@ -238,7 +239,7 @@ public class AccesoDatosAgenda {
                 t.setFecha(formato.parse(cursor.getString(1)));
                 t.setDescripcion(cursor.getString(2));
                 if (cursor.getString(3) != null) {
-                    t.setNotificacion(formato.parse(cursor.getString(3)));
+                    t.setNotificacion(formatoFinal.parse(cursor.getString(3)));
                 }
 
             } catch (ParseException e) {
@@ -265,7 +266,7 @@ public class AccesoDatosAgenda {
                 t.setFecha(formato.parse(cursor.getString(1)));
                 t.setDescripcion(cursor.getString(2));
                 if (cursor.getString(3) != null) {
-                    t.setNotificacion(formato.parse(cursor.getString(3)));
+                    t.setNotificacion(formatoFinal.parse(cursor.getString(3)));
                 }
 
             } catch (ParseException e) {
@@ -286,7 +287,7 @@ public class AccesoDatosAgenda {
         registro.put("fecha",formato.format(t.getFecha()));
         registro.put("descripcion",t.getDescripcion());
         if(t.getNotificacion()!=null){
-            registro.put("notificacion",formato.format(t.getNotificacion()));
+            registro.put("notificacion",formatoFinal.format(t.getNotificacion()));
         }else{
             registro.put("notificacion","n/a");
         }

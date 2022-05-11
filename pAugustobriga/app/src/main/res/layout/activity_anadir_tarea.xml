@@ -101,14 +101,14 @@
             android:gravity="center_horizontal"
             android:orientation="horizontal">
 
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btnCrearTarea"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="177dp"
+                android:layout_height="63dp"
                 android:layout_marginTop="20dp"
+                android:layout_marginRight="11dp"
                 android:background="@drawable/fondo_botones"
                 android:gravity="center"
-                android:layout_marginRight="11dp"
                 android:text="Crear tarea"
                 android:textColor="@color/white"
                 android:textSize="20dp" />

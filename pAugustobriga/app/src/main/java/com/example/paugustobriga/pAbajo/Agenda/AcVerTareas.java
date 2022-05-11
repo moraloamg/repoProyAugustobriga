@@ -8,7 +8,9 @@ import androidx.work.WorkManager;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.Typeface;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -52,8 +54,9 @@ public class AcVerTareas extends AppCompatActivity {
         identificarElementos();
         iniciarOpcionesSpinner();
         elegirOpcionSpinner();
-        datos=ad.obtenerTareas();
         importarFuentes();
+        datos=ad.obtenerTareas();
+        limpiarNotificacionesPasadas(datos);
         lstVerTareas.setAdapter(new AdaptadorVerTareaDia(this,fuenteContenedores,datos));
         actualizarContadores(datos);
 
@@ -180,17 +183,26 @@ public class AcVerTareas extends AppCompatActivity {
     }
 
 
+    //MEJORAR ESTA PARTE
     private void opcionesTarea(){
         lstVerTareas.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
 
                 final Dialog myDialog = new Dialog(AcVerTareas.this);
-                myDialog.setContentView(R.layout.dialog_tarea);
+                myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                myDialog.setContentView(R.layout.dialog_tareas);
                 myDialog.setTitle("Elige una opción"); //?? esto no se porqué no sale
                 myDialog.setCancelable(true);
 
                 Button irNotificacion = (Button) myDialog.findViewById(R.id.irNotificacion);
+
+                //mejorar esto más adelante, hacer que aparezca el botón o no en función de si está pasada
+                String compNoti = ((TextView) view.findViewById(R.id.txtNotificacion)).getText().toString();
+                if(compNoti.equalsIgnoreCase("Con notif")){
+                    irNotificacion.setText("Editar notificacion");
+                }
+
                 irNotificacion.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view1) {
@@ -202,11 +214,13 @@ public class AcVerTareas extends AppCompatActivity {
                         if(!hecha && !pasada && notif.equalsIgnoreCase("No notif")) {
                             Intent i2 = new Intent(getApplicationContext(), AcNotificacion.class);
                             i2.putExtra("datos", id + "@AcVerTareas");
+                            i2.putExtra("tipo", ad.obtenerTipo(id));
                             startActivity(i2);
                         }else if(!hecha && !pasada && notif.equalsIgnoreCase("Con notif")){
                             Intent i2 = new Intent(getApplicationContext(), AcNotificacion.class);
                             i2.putExtra("datos", id + "@AcVerTareas");
                             i2.putExtra("editar", ad.obtenerNotificacion(id));
+                            i2.putExtra("tipo", ad.obtenerTipo(id));
                             startActivity(i2);
                         }else{
                             Toast.makeText(getApplicationContext(),"No puedes añadir una notificación a una tarea atrasada o completada", Toast.LENGTH_LONG).show();
@@ -229,6 +243,7 @@ public class AcVerTareas extends AppCompatActivity {
                                 String seleccionado = ((TextView) view.findViewById(R.id.idTarea)).getText().toString();
                                 ad.borrar(Integer.parseInt(seleccionado));
                                 WorkManager.getInstance(getApplicationContext()).cancelAllWorkByTag(seleccionado);
+                                //borrar en vez de modificar?
                                 ad.modificarNotificacion(Integer.parseInt(seleccionado),null);
 
                                 Toast.makeText(getApplicationContext(),"Has borrado la tarea", Toast.LENGTH_LONG).show();
@@ -309,5 +324,24 @@ public class AcVerTareas extends AppCompatActivity {
 
     private void importarFuentes(){
         fuenteContenedores = ResourcesCompat.getFont(this, R.font.ibm_plex_sans_thai_bold);
+    }
+
+    //arreglar o refactorizar eso? ponerlo en una interfaz?
+    private void limpiarNotificacionesPasadas(ArrayList<Tarea> t){
+        for(Tarea ta:t){
+            if(ta.getNotificacion()!=null){
+                if(ta.isRealizado() || ta.getNotificacion().before(new Date())){
+                    boolean realizadoTmp = ta.isRealizado();
+                    boolean tardeTmp = ta.getNotificacion().before(new Date());
+
+
+                    //borrar en vez de modificar????
+                    ad.modificarNotificacion(ta.getId(),null);
+                    WorkManager.getInstance(getApplicationContext()).cancelAllWorkByTag(String.valueOf(ta.getId()));
+                    t.get(t.indexOf(ta)).setNotificacion(null);
+                }
+
+            }
+        }
     }
 }

@@ -42,6 +42,8 @@ public class AcNotificacion extends AppCompatActivity {
 
     String fechaRecibida;
 
+    String tipoTarea;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,6 +56,7 @@ public class AcNotificacion extends AppCompatActivity {
         id=datos.split("@")[0];
         claseOrigen = datos.split("@")[1];
 
+        tipoTarea = recibirTipo();
         fechaRecibida = recibirFecha();
         if(fechaRecibida!=null){
             disponerFechaRecibida(fechaRecibida);
@@ -67,6 +70,13 @@ public class AcNotificacion extends AppCompatActivity {
         guardarAlarma();
         borrarAlarma(id);
 
+    }
+
+    private String recibirTipo() {
+        String resultado;
+        Bundle extras = getIntent().getExtras();
+        resultado = extras.getString("tipo");
+        return resultado;
     }
 
     private void disponerFechaActual() {
@@ -109,6 +119,7 @@ public class AcNotificacion extends AppCompatActivity {
 
                         String strDate = formato.format(calendar.getTime());
                         try {
+                            //no se puede comprobar con el comprobarFecha() ya que ahí se utiliza junto con la hora
                             if(formato.parse(strDate).before(formato.parse(formato.format(new Date())))){
                                 Toast.makeText(getApplicationContext(), "No puedes poner una alarma anterior a hoy",Toast.LENGTH_SHORT).show();
                             }else{
@@ -140,6 +151,7 @@ public class AcNotificacion extends AppCompatActivity {
                             calendar.set(Calendar.HOUR_OF_DAY, i);
                             calendar.set(Calendar.MINUTE, i1);
                             calendar.set(Calendar.SECOND,0);
+                            calendar.set(Calendar.MILLISECOND,0);
 
                             if (comprobarFecha(calendar)) {
                                 txtHora.setText(String.format("%02d:%02d", i, i1));
@@ -167,7 +179,7 @@ public class AcNotificacion extends AppCompatActivity {
 
                 if(comprobarFecha(calendar)){
                     int tmp=Integer.parseInt(id);
-                    Data data = guardarDatos("Notificacion prueba", "detalle prueba",tmp);
+                    Data data = guardarDatos("Agenda de InfoAugustóbriga", "Recordatorio: "+tipoTarea.toLowerCase()+" por hacer",tmp);
                     EjecutarNotificacion.almacenarNotificacion(alerta,data,tag);
                     if(fechaRecibida!=null){
                         borrarAlarma(id);
@@ -253,4 +265,7 @@ public class AcNotificacion extends AppCompatActivity {
         }
 
     }
+
+
+
 }

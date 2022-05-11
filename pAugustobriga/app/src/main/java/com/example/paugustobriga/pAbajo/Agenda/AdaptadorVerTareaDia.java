@@ -115,4 +115,6 @@ public class AdaptadorVerTareaDia extends BaseAdapter {
 
         return list;
     }
+
+
 }
