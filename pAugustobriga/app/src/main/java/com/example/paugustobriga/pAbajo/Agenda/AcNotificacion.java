@@ -60,15 +60,16 @@ public class AcNotificacion extends AppCompatActivity {
         fechaRecibida = recibirFecha();
         if(fechaRecibida!=null){
             disponerFechaRecibida(fechaRecibida);
+            borrarAlarma(id);
         }else{
             disponerFechaActual();
+            btnBorrarNot.setVisibility(View.GONE);
         }
 
         seleccionarDia();
         seleccionarHora();
 
         guardarAlarma();
-        borrarAlarma(id);
 
     }
 
@@ -132,6 +133,8 @@ public class AcNotificacion extends AppCompatActivity {
 
                     }
                 },anio,mes,dia);
+                //le cambiamos el fondo
+                datePickerDialog.getWindow().setBackgroundDrawable(getResources().getDrawable(R.drawable.fondo_calendario));
                 datePickerDialog.show();
             }
         });
@@ -161,6 +164,7 @@ public class AcNotificacion extends AppCompatActivity {
 
                         }
                     }, hora, minutos, true);
+                    timePickerDialog.getWindow().setBackgroundDrawable(getResources().getDrawable(R.drawable.fondo_calendario));
                     timePickerDialog.show();
                 }else {
                     Toast.makeText(getApplicationContext(), "Debes de elegir un día",Toast.LENGTH_SHORT).show();
@@ -186,6 +190,7 @@ public class AcNotificacion extends AppCompatActivity {
                     }
                     ad.modificarNotificacion(Integer.parseInt(id),formatoFinal.format(calendar.getTime()));
                     Toast.makeText(getApplicationContext(), "Alarma guardada", Toast.LENGTH_SHORT).show();
+                    volver();
                 }else{
                     Toast.makeText(getApplicationContext(), "No puedes poner una alarma anterior a hoy",Toast.LENGTH_SHORT).show();
 
@@ -201,6 +206,7 @@ public class AcNotificacion extends AppCompatActivity {
                 WorkManager.getInstance(getApplicationContext()).cancelAllWorkByTag(tag);
                 ad.modificarNotificacion(Integer.parseInt(id),null); //??
                 Toast.makeText(getApplicationContext(), "Alarma eliminada", Toast.LENGTH_SHORT).show();
+                volver();
 
             }
         });
@@ -251,7 +257,10 @@ public class AcNotificacion extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        volver();
+    }
 
+    private void volver(){
         if(claseOrigen.equalsIgnoreCase("AcVerTareas")){
             Intent i=new Intent(getApplicationContext(), AcVerTareas.class);
             i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -260,10 +269,9 @@ public class AcNotificacion extends AppCompatActivity {
         if(claseOrigen.equalsIgnoreCase("AcVerTareasDia")){
             Intent i=new Intent(getApplicationContext(), AcVerTareasDia.class);
             i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            //i.putExtra("datos",fecha);
+            i.putExtra("datos",ad.obtenerFecha(id));
             startActivity(i);
         }
-
     }
 
 

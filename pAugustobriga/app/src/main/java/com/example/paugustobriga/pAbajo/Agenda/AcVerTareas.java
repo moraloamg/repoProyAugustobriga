@@ -40,7 +40,7 @@ public class AcVerTareas extends AppCompatActivity {
     Spinner spVerTareas;
     ListView lstVerTareas;
     //Estas opciones serán únicas
-    final String[] opciones=new String[]{"Todo","Exámenes","Tareas","Otros","Realizadas","No Realizadas","Pasadas"};
+    final String[] opciones=new String[]{"Todo","Exámenes","Tareas","Otros","Realizadas","No Realizadas","Pasadas","Con Notificación"};
     ArrayList<Tarea> datos;
     Typeface fuenteContenedores;
     SimpleDateFormat formato=new SimpleDateFormat("dd/MM/yyyy");
@@ -140,6 +140,11 @@ public class AcVerTareas extends AppCompatActivity {
                         lstVerTareas.setAdapter(new AdaptadorVerTareaDia(getApplicationContext(),fuenteContenedores,noRealizadas));
                         actualizarContadores(noRealizadas);
                         break;
+                    case "Con Notificación":
+                        ArrayList<Tarea> lsNotif = ad.buscarConNotificaciones();
+                        lstVerTareas.setAdapter(new AdaptadorVerTareaDia(getApplicationContext(),fuenteContenedores,lsNotif));
+                        actualizarContadores(lsNotif);
+                        break;
                     case "Pasadas":
                         ArrayList<Tarea> listaPasadas=new ArrayList<>();
                         for(Tarea t:datos){
@@ -181,95 +186,6 @@ public class AcVerTareas extends AppCompatActivity {
             }
         });
     }
-
-
-    //MEJORAR ESTA PARTE
-    private void opcionesTarea(){
-        lstVerTareas.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
-
-                final Dialog myDialog = new Dialog(AcVerTareas.this);
-                myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                myDialog.setContentView(R.layout.dialog_tareas);
-                myDialog.setTitle("Elige una opción"); //?? esto no se porqué no sale
-                myDialog.setCancelable(true);
-
-                Button irNotificacion = (Button) myDialog.findViewById(R.id.irNotificacion);
-
-                //mejorar esto más adelante, hacer que aparezca el botón o no en función de si está pasada
-                String compNoti = ((TextView) view.findViewById(R.id.txtNotificacion)).getText().toString();
-                if(compNoti.equalsIgnoreCase("Con notif")){
-                    irNotificacion.setText("Editar notificacion");
-                }
-
-                irNotificacion.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view1) {
-                        String id = ((TextView) view.findViewById(R.id.idTarea)).getText().toString();
-                        boolean hecha = ((CheckBox) view.findViewById(R.id.chkTareaCompletada)).isChecked();
-                        boolean pasada = ((CheckBox) view.findViewById(R.id.chkTareaPasada)).isChecked();
-                        String notif = ((TextView) view.findViewById(R.id.txtNotificacion)).getText().toString();
-
-                        if(!hecha && !pasada && notif.equalsIgnoreCase("No notif")) {
-                            Intent i2 = new Intent(getApplicationContext(), AcNotificacion.class);
-                            i2.putExtra("datos", id + "@AcVerTareas");
-                            i2.putExtra("tipo", ad.obtenerTipo(id));
-                            startActivity(i2);
-                        }else if(!hecha && !pasada && notif.equalsIgnoreCase("Con notif")){
-                            Intent i2 = new Intent(getApplicationContext(), AcNotificacion.class);
-                            i2.putExtra("datos", id + "@AcVerTareas");
-                            i2.putExtra("editar", ad.obtenerNotificacion(id));
-                            i2.putExtra("tipo", ad.obtenerTipo(id));
-                            startActivity(i2);
-                        }else{
-                            Toast.makeText(getApplicationContext(),"No puedes añadir una notificación a una tarea atrasada o completada", Toast.LENGTH_LONG).show();
-                        }
-                    }
-                });
-
-                Button irBorrar= (Button) myDialog.findViewById(R.id.irBorrarTarea);
-                irBorrar.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view2) {
-
-                        AlertDialog.Builder dialogo1=new AlertDialog.Builder(AcVerTareas.this);
-                        dialogo1.setTitle("Borrar tarea");
-                        dialogo1.setMessage("¿Está seguro que desea borrar la tarea?");
-                        dialogo1.setCancelable(false);
-                        dialogo1.setPositiveButton("Borrar", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                String seleccionado = ((TextView) view.findViewById(R.id.idTarea)).getText().toString();
-                                ad.borrar(Integer.parseInt(seleccionado));
-                                WorkManager.getInstance(getApplicationContext()).cancelAllWorkByTag(seleccionado);
-                                //borrar en vez de modificar?
-                                ad.modificarNotificacion(Integer.parseInt(seleccionado),null);
-
-                                Toast.makeText(getApplicationContext(),"Has borrado la tarea", Toast.LENGTH_LONG).show();
-                                finish();
-                                startActivity(getIntent());
-
-                            }
-                        });
-                        dialogo1.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialogInterface, int id){
-                                Toast.makeText(getApplicationContext(),"Cancelar", Toast.LENGTH_LONG).show();
-                            }
-                        });
-                        dialogo1.show();
-
-
-                    }
-                });
-
-                myDialog.show();
-                return true;
-            }
-        });
-    }
-
-
 
     private void buscarDatos(){
         btnBuscar.setOnClickListener(new View.OnClickListener() {
@@ -326,14 +242,104 @@ public class AcVerTareas extends AppCompatActivity {
         fuenteContenedores = ResourcesCompat.getFont(this, R.font.ibm_plex_sans_thai_bold);
     }
 
+    //-------------------------- NOTIFICACIONES ---------------------------------------
+
+    //MEJORAR ESTA PARTE
+    private void opcionesTarea(){
+        lstVerTareas.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                final Dialog myDialog = new Dialog(AcVerTareas.this);
+                myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                myDialog.setContentView(R.layout.dialog_tareas);
+                myDialog.setTitle("Elige una opción"); //?? esto no se porqué no sale
+                myDialog.setCancelable(true);
+
+                Button irNotificacion = (Button) myDialog.findViewById(R.id.irNotificacion);
+
+                //mejorar esto más adelante, hacer que aparezca el botón o no en función de si está pasada
+                String compNoti = ((TextView) view.findViewById(R.id.txtNotificacion)).getText().toString();
+                if(compNoti.equalsIgnoreCase("Con notif")){
+                    irNotificacion.setText("Editar notificacion");
+                }
+
+                irNotificacion.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view1) {
+                        opcionNotificacion(view);
+                    }
+                });
+
+                Button irBorrar= (Button) myDialog.findViewById(R.id.irBorrarTarea);
+                irBorrar.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view2) {
+                        opcionBorrarTarea(view);
+                    }
+                });
+
+                myDialog.show();
+                return true;
+            }
+        });
+    }
+
+    private void opcionNotificacion(View view){
+        String id = ((TextView) view.findViewById(R.id.idTarea)).getText().toString();
+        boolean hecha = ((CheckBox) view.findViewById(R.id.chkTareaCompletada)).isChecked();
+        boolean pasada = ((CheckBox) view.findViewById(R.id.chkTareaPasada)).isChecked();
+        String notif = ((TextView) view.findViewById(R.id.txtNotificacion)).getText().toString();
+
+        if(!hecha && !pasada && notif.equalsIgnoreCase("No notif")) {
+            Intent i2 = new Intent(getApplicationContext(), AcNotificacion.class);
+            i2.putExtra("datos", id + "@AcVerTareas");
+            i2.putExtra("tipo", ad.obtenerTipo(id));
+            startActivity(i2);
+        }else if(!hecha && !pasada && notif.equalsIgnoreCase("Con notif")){
+            Intent i2 = new Intent(getApplicationContext(), AcNotificacion.class);
+            i2.putExtra("datos", id + "@AcVerTareas");
+            i2.putExtra("editar", ad.obtenerNotificacion(id));
+            i2.putExtra("tipo", ad.obtenerTipo(id));
+            startActivity(i2);
+        }else{
+            Toast.makeText(getApplicationContext(),"No puedes añadir una notificación a una tarea atrasada o completada", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    private void opcionBorrarTarea(View view){
+        AlertDialog.Builder dialogo1=new AlertDialog.Builder(AcVerTareas.this);
+        dialogo1.setTitle("Borrar tarea");
+        dialogo1.setMessage("¿Está seguro que desea borrar la tarea?");
+        dialogo1.setCancelable(false);
+        dialogo1.setPositiveButton("Borrar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                String seleccionado = ((TextView) view.findViewById(R.id.idTarea)).getText().toString();
+                ad.borrar(Integer.parseInt(seleccionado));
+                WorkManager.getInstance(getApplicationContext()).cancelAllWorkByTag(seleccionado);
+                //borrar en vez de modificar?
+                ad.modificarNotificacion(Integer.parseInt(seleccionado),null);
+
+                Toast.makeText(getApplicationContext(),"Has borrado la tarea", Toast.LENGTH_LONG).show();
+                finish();
+                startActivity(getIntent());
+
+            }
+        });
+        dialogo1.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialogInterface, int id){
+                Toast.makeText(getApplicationContext(),"Cancelar", Toast.LENGTH_LONG).show();
+            }
+        });
+        dialogo1.show();
+    }
+
     //arreglar o refactorizar eso? ponerlo en una interfaz?
     private void limpiarNotificacionesPasadas(ArrayList<Tarea> t){
         for(Tarea ta:t){
             if(ta.getNotificacion()!=null){
                 if(ta.isRealizado() || ta.getNotificacion().before(new Date())){
-                    boolean realizadoTmp = ta.isRealizado();
-                    boolean tardeTmp = ta.getNotificacion().before(new Date());
-
 
                     //borrar en vez de modificar????
                     ad.modificarNotificacion(ta.getId(),null);

@@ -24,6 +24,7 @@ import java.util.concurrent.TimeUnit;
 
 public class EjecutarNotificacion extends Worker{
 
+    AccesoDatosAgenda ad=new AccesoDatosAgenda(getApplicationContext());
 
     public EjecutarNotificacion(@NonNull Context context, @NonNull WorkerParameters workerParams) {
         super(context, workerParams);
@@ -43,13 +44,14 @@ public class EjecutarNotificacion extends Worker{
         String titulo = getInputData().getString("titulo");
         String detalle = getInputData().getString("detalle");
         int id = (int) getInputData().getLong("idnoti", 0);
+        int idTarea = getInputData().getInt("idnoti",0);
 
-        formatoNotificacion(titulo,detalle);
+        formatoNotificacion(idTarea, titulo,detalle);
 
         return Result.success();
     }
 
-    private void formatoNotificacion(String t, String d){
+    private void formatoNotificacion(int idTarea, String t, String d){
         String id ="message";
         NotificationManager nm = (NotificationManager) getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
         NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext(),id);
@@ -62,7 +64,8 @@ public class EjecutarNotificacion extends Worker{
             nm.createNotificationChannel(nc);
         }
 
-        Intent intent = new Intent(getApplicationContext(), AcPrincipal.class);
+        Intent intent = new Intent(getApplicationContext(), AcVerTareasDia.class);
+        intent.putExtra("datos",ad.obtenerFecha(String.valueOf(idTarea)));
 
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivity(getApplicationContext(),0,intent,PendingIntent.FLAG_ONE_SHOT);
