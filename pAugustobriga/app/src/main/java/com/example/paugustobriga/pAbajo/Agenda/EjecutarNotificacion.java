@@ -60,6 +60,9 @@ public class EjecutarNotificacion extends Worker{
             NotificationChannel nc = new NotificationChannel(id,"nuevo",NotificationManager.IMPORTANCE_HIGH);
             nc.setDescription("Notification FCM");
             nc.setShowBadge(true);
+            nc.setVibrationPattern(new long[] {2000});
+            nc.enableVibration(true);
+            nc.setLockscreenVisibility(Notification.VISIBILITY_PUBLIC);
             assert nm != null;
             nm.createNotificationChannel(nc);
         }
@@ -76,6 +79,7 @@ public class EjecutarNotificacion extends Worker{
                 .setTicker("Nueva notificacion")
                 .setSmallIcon(R.mipmap.ic_launcher)
                 .setContentText(d)
+                .setVibrate(new long[] { 1000, 1000, 1000, 1000, 1000 })
                 .setContentIntent(pendingIntent)
                 .setContentInfo("nuevo");
 

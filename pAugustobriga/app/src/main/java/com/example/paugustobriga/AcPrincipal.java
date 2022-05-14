@@ -284,4 +284,10 @@ public class AcPrincipal extends AppCompatActivity {
         txtCab1 = findViewById(R.id.txtCabecera1);
         txtCab2 = findViewById(R.id.txtCabecera2);
     }
+
+    @Override
+    public void onBackPressed() {
+        this.finishAffinity();
+        //System.exit(0);
+    }
 }

@@ -3,6 +3,7 @@
     package="com.example.paugustobriga">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
         android:allowBackup="true"
@@ -13,8 +14,8 @@
         android:theme="@style/Theme.PAugustobriga">
         <activity
             android:name=".pAbajo.Agenda.AcNotificacion"
-            android:exported="false" />
-        android:screenOrientation="portrait" />
+            android:exported="false"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".pMedio.calendario.AcCalendario"
             android:exported="false"
