@@ -15,6 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.paugustobriga.pAbajo.Agenda.AcCalendarioAgenda;
+import com.example.paugustobriga.pAbajo.Examenes.AcExamenes;
 import com.example.paugustobriga.pArriba.Horarios.AcHorarios;
 import com.example.paugustobriga.pMedio.Profesorado.AcProfesorado;
 import com.example.paugustobriga.pMedio.Proyectos.AcProyectos;
@@ -154,7 +155,7 @@ public class AcPrincipal extends AppCompatActivity {
         ico_abajo_tres.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                cambiarActividad("abajoTres");
             }
         });
     }
@@ -204,7 +205,8 @@ public class AcPrincipal extends AppCompatActivity {
                 break;
 
             case "abajoTres":
-
+                Intent i7=new Intent(this, AcExamenes.class);
+                startActivity(i7);
                 break;
 
 

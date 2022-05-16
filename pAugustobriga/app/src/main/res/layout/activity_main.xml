@@ -209,13 +209,13 @@
                 android:layout_width="60dp"
                 android:layout_height="62dp"
                 android:layout_marginBottom="8dp"
-                android:src="@drawable/abajo_dos" />
+                android:src="@drawable/medio_tres" />
 
             <TextView
                 android:id="@+id/txtAbajoTres"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Oferta educativa"
+                android:text="Calificaciones"
                 android:textColor="#172646"
                 android:textSize="12sp" />
         </LinearLayout>
@@ -298,7 +298,7 @@
                 android:layout_width="60dp"
                 android:layout_height="62dp"
                 android:layout_marginBottom="8dp"
-                android:src="@drawable/medio_tres" />
+                android:src="@drawable/abajo_dos" />
 
             <TextView
                 android:id="@+id/txtMedioTres"
