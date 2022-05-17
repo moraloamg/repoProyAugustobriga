@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 public class Asignatura {
 
-    private int id;
     private String nombre;
     private ArrayList<Examen> examenes=new ArrayList<>();
 
@@ -12,19 +11,11 @@ public class Asignatura {
 
     }
 
-    public Asignatura(int id, String nombre, ArrayList<Examen> examenes) {
-        this.id = id;
+    public Asignatura( String nombre, ArrayList<Examen> examenes) {
         this.nombre = nombre;
         this.examenes = examenes;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getNombre() {
         return nombre;

@@ -4,34 +4,25 @@ import java.util.ArrayList;
 
 public class Trimestre {
 
-    private int id;
-    private int numTrimestre;
+    private String nombreTrimestre;
     private ArrayList<Examen> examenes = new ArrayList<>();
 
     public Trimestre(){
 
     }
 
-    public Trimestre(int id, int numTrimestre, ArrayList<Examen> examenes) {
-        this.id = id;
-        this.numTrimestre = numTrimestre;
+    public Trimestre( String nombTrimestre, ArrayList<Examen> examenes) {
+        this.nombreTrimestre = nombTrimestre;
         this.examenes = examenes;
     }
 
-    public int getId() {
-        return id;
+
+    public String getNombreTrimestre() {
+        return nombreTrimestre;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public int getNumTrimestre() {
-        return numTrimestre;
-    }
-
-    public void setNumTrimestre(int numTrimestre) {
-        this.numTrimestre = numTrimestre;
+    public void setNombreTrimestre(String nombreTrimestre) {
+        this.nombreTrimestre = nombreTrimestre;
     }
 
     public ArrayList<Examen> getExamenes() {

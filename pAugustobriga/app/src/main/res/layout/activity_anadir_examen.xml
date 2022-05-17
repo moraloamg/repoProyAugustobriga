@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".pAbajo.Examenes.AcAnadirExamen">
+
+    <View
+        android:id="@+id/view5"
+        android:layout_width="match_parent"
+        android:layout_height="310dp"
+        android:background="@drawable/cabecera"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <View
+        android:id="@+id/view6"
+        android:layout_width="match_parent"
+        android:layout_height="260dp"
+        android:background="@drawable/fondo_pie_de_pagina"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <View
+        android:id="@+id/view8"
+        android:layout_width="339dp"
+        android:layout_height="105dp"
+        android:background="@drawable/cont_iconos"
+        app:layout_constraintBottom_toTopOf="@+id/view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.65" />
+
+    <View
+        android:id="@+id/view2"
+        android:layout_width="341dp"
+        android:layout_height="104dp"
+        android:background="@drawable/cont_iconos"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.571"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.709" />
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="330dp"
+        android:layout_height="239dp"
+        android:background="@drawable/cont_iconos"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.382" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnAnadirExamen"
+        android:layout_width="224dp"
+        android:layout_height="70dp"
+        android:background="@drawable/fondo_botones"
+        android:gravity="center"
+        android:text="Añadir Examen"
+        android:textColor="@color/white"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view"
+        app:layout_constraintVertical_bias="0.807" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="266dp"
+        android:layout_height="49dp"
+        android:gravity="center"
+        android:text="Añadir Examen"
+        android:textSize="25dp"
+        app:layout_constraintBottom_toBottomOf="@+id/view5"
+        app:layout_constraintEnd_toEndOf="@+id/view8"
+        app:layout_constraintHorizontal_bias="0.479"
+        app:layout_constraintStart_toStartOf="@+id/view8"
+        app:layout_constraintTop_toTopOf="@+id/view8"
+        app:layout_constraintVertical_bias="0.113" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="119dp"
+        android:layout_height="25dp"
+        android:gravity="center"
+        android:text="escribe el nombre"
+        app:layout_constraintBottom_toBottomOf="@+id/view"
+        app:layout_constraintEnd_toEndOf="@+id/view"
+        app:layout_constraintHorizontal_bias="0.126"
+        app:layout_constraintStart_toStartOf="@+id/view"
+        app:layout_constraintTop_toTopOf="@+id/view"
+        app:layout_constraintVertical_bias="0.104" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="119dp"
+        android:layout_height="25dp"
+        android:gravity="center"
+        android:text="escribe la nota"
+        app:layout_constraintBottom_toBottomOf="@+id/view"
+        app:layout_constraintEnd_toEndOf="@+id/view"
+        app:layout_constraintHorizontal_bias="0.126"
+        app:layout_constraintStart_toStartOf="@+id/view"
+        app:layout_constraintTop_toTopOf="@+id/view"
+        app:layout_constraintVertical_bias="0.59" />
+
+    <EditText
+        android:id="@+id/editTextExamen"
+        android:layout_width="261dp"
+        android:layout_height="53dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text=""
+        app:layout_constraintBottom_toBottomOf="@+id/view"
+        app:layout_constraintEnd_toEndOf="@+id/view"
+        app:layout_constraintHorizontal_bias="0.354"
+        app:layout_constraintStart_toStartOf="@+id/view"
+        app:layout_constraintTop_toTopOf="@+id/view"
+        app:layout_constraintVertical_bias="0.27" />
+
+    <EditText
+        android:id="@+id/editTextCalificacion"
+        android:layout_width="109dp"
+        android:layout_height="43dp"
+        android:ems="10"
+        android:inputType="number"
+        app:layout_constraintBottom_toBottomOf="@+id/view"
+        app:layout_constraintEnd_toEndOf="@+id/view"
+        app:layout_constraintHorizontal_bias="0.121"
+        app:layout_constraintStart_toStartOf="@+id/view"
+        app:layout_constraintTop_toTopOf="@+id/view"
+        app:layout_constraintVertical_bias="0.759" />
+
+    <Spinner
+        android:id="@+id/spAsignatura"
+        android:layout_width="123dp"
+        android:layout_height="40dp"
+        android:background="@drawable/fondo_spinner"
+        android:textColor="@color/white"
+        android:overlapAnchor="false"
+        android:popupBackground="@drawable/fondo_desplegar_spinner"
+        app:layout_constraintBottom_toBottomOf="@+id/view2"
+        app:layout_constraintEnd_toStartOf="@+id/spTrimestre"
+        app:layout_constraintHorizontal_bias="0.446"
+        app:layout_constraintStart_toStartOf="@+id/view2"
+        app:layout_constraintTop_toTopOf="@+id/view2" />
+
+    <Spinner
+        android:id="@+id/spTrimestre"
+        android:layout_width="123dp"
+        android:layout_height="40dp"
+        android:background="@drawable/fondo_spinner"
+        android:textColor="@color/white"
+        android:overlapAnchor="false"
+        android:popupBackground="@drawable/fondo_desplegar_spinner"
+        app:layout_constraintBottom_toBottomOf="@+id/view2"
+        app:layout_constraintEnd_toEndOf="@+id/view2"
+        app:layout_constraintHorizontal_bias="0.821"
+        app:layout_constraintStart_toStartOf="@+id/view2"
+        app:layout_constraintTop_toTopOf="@+id/view2" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

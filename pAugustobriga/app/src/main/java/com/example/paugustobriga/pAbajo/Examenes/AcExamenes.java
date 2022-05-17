@@ -6,9 +6,9 @@ import androidx.core.content.res.ResourcesCompat;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 
 import com.example.paugustobriga.AcPrincipal;
@@ -23,6 +23,7 @@ public class AcExamenes extends AppCompatActivity {
     Typeface fuenteContenedores;
     AccesoDatosExamenes ad;
     ListView lsPestanas;
+    Button btnAnadirGenerico, btnBuscarGenerico;
 
     ArrayList<Trimestre> lTrimestres = new ArrayList<>();
     ArrayList<Examen> lExamenes = new ArrayList<>();
@@ -37,19 +38,48 @@ public class AcExamenes extends AppCompatActivity {
 
         identificarElementos();
         importarFuentes();
+        lAsignaturas = ad.obtenerAsignaturas();
+        lsPestanas.setAdapter(new AdaptadorAsignatura(getApplicationContext(),fuenteContenedores,lAsignaturas));
         elegirPestana();
-        irSeleccion();
+        anadirGenerico();
+        opcionesSeleccion();
 
 
     }
 
-    private void irSeleccion(){
+    private void opcionesSeleccion(){
         lsPestanas.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 //averiguar el tipo, si es examen, tarea o trimestre
+                //añadirAqui el borrar y el editar
             }
         });
+    }
+
+    private void anadirGenerico(){
+        btnAnadirGenerico.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String tmp = btnAnadirGenerico.getText().toString();
+                switch (btnAnadirGenerico.getText().toString()){
+                    case " Añadir Asignaturas ":
+                        Intent i=new Intent(getApplicationContext(), AcAnadirAsignatura.class);
+                        startActivity(i);
+                        break;
+                    case " Añadir Trimestres ":
+                        Intent i2=new Intent(getApplicationContext(), AcAnadirTrimestre.class);
+                        startActivity(i2);
+                        break;
+
+                    case " Añadir Exámenes ":
+                        Intent i3=new Intent(getApplicationContext(), AcAnadirExamen.class);
+                        startActivity(i3);
+                        break;
+                }
+            }
+        });
+
     }
 
     private void elegirPestana(){
@@ -58,16 +88,19 @@ public class AcExamenes extends AppCompatActivity {
             public void onTabSelected(TabLayout.Tab tab) {
                 switch (tab.getPosition()) {
                     case 0:
+                        btnAnadirGenerico.setText(" Añadir Asignaturas ");
                         lAsignaturas = ad.obtenerAsignaturas();
                         lsPestanas.setAdapter(new AdaptadorAsignatura(getApplicationContext(),fuenteContenedores,lAsignaturas));
                         break;
                     case 1:
+                        btnAnadirGenerico.setText(" Añadir Trimestres ");
                         lTrimestres = ad.obtenerTrimestres();
-                        lsPestanas.setAdapter(new AdaptadorTrimestre(getApplicationContext(),fuenteContenedores,lAsignaturas));
+                        lsPestanas.setAdapter(new AdaptadorTrimestre(getApplicationContext(),fuenteContenedores,lTrimestres));
                         break;
                     case 2:
+                        btnAnadirGenerico.setText(" Añadir Exámenes ");
                         lExamenes = ad.obtenerExamenes();
-                        lsPestanas.setAdapter(new AdaptadorExamenes(getApplicationContext(),fuenteContenedores,lAsignaturas));
+                        lsPestanas.setAdapter(new AdaptadorExamenes(getApplicationContext(),fuenteContenedores,lExamenes));
                         break;
                 }
 
@@ -88,6 +121,8 @@ public class AcExamenes extends AppCompatActivity {
     private void identificarElementos(){
         lsPestanas = findViewById(R.id.lstPestanas);
         pestanas = findViewById(R.id.tabLayout);
+        btnAnadirGenerico = findViewById(R.id.btnAnadirGenerico);
+        btnBuscarGenerico = findViewById(R.id.btnBuscarGenerico);
     }
 
     private void importarFuentes(){

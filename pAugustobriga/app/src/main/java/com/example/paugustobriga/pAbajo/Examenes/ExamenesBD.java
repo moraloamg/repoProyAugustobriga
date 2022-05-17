@@ -10,19 +10,17 @@ public class ExamenesBD extends SQLiteOpenHelper {
 
     Context contexto;
 
-    static String tablaAsignatura = "CREATE TABLE Asignatura (id integer primary key autoincrement," +
-                                                    " nombre text)";
+    static String tablaAsignatura = "CREATE TABLE Asignatura (nombre text primary key)";
 
-    static String tablaTrimestre = "CREATE TABlE Trimestre (id integer primary key autoincrement," +
-                                                    " nombre text)";
+    static String tablaTrimestre = "CREATE TABlE Trimestre (nombre text primary key)";
 
     static String tablaExamen = "CREATE TABLE Examen (id integer primary key autoincrement," +
-                                                    " idAsignatura int," +
-                                                    " idTrimestre int," +
+                                                    " idAsignatura text," +
+                                                    " idTrimestre text," +
                                                     " nota real," +
                                                     " nombre text," +
-                                                    " FOREIGN KEY (\"+idAsignatura+\") REFERENCES \"+Asignatura+\"(\"+id+\")," +
-                                                    " FOREIGN KEY (\"+idTrimestre+\") REFERENCES \"+Trimestre+\"(\"+id+\"))";
+                                                    " FOREIGN KEY (\"idAsignatura\") REFERENCES \"Asignatura\"(\"nombre\")," +
+                                                    " FOREIGN KEY (\"idTrimestre\") REFERENCES \"Trimestre\"(\"nombre\"))";
 
 
 
