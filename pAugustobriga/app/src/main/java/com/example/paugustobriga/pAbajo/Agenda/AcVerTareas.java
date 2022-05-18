@@ -258,7 +258,7 @@ public class AcVerTareas extends AppCompatActivity {
 
                 Button irNotificacion = (Button) myDialog.findViewById(R.id.irNotificacion);
 
-                //mejorar esto más adelante, hacer que aparezca el botón o no en función de si está pasada
+
                 String compNoti = ((TextView) view.findViewById(R.id.txtNotificacion)).getText().toString();
                 if(compNoti.equalsIgnoreCase("Con notif")){
                     irNotificacion.setText("Editar notificacion");

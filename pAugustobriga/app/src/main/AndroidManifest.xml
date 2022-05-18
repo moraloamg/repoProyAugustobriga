@@ -27,7 +27,8 @@
         <activity
             android:name=".pAbajo.Examenes.AcExamenes"
             android:exported="false"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustNothing"/>
         <activity
             android:name=".pAbajo.Agenda.AcNotificacion"
             android:exported="false"

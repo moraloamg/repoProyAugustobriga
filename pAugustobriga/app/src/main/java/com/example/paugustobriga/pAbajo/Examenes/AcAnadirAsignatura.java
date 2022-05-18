@@ -20,6 +20,8 @@ public class AcAnadirAsignatura extends AppCompatActivity {
     Typeface fuenteContenedores;
     AccesoDatosExamenes ad;
 
+    String nombre="";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,7 +31,41 @@ public class AcAnadirAsignatura extends AppCompatActivity {
 
         identificarElementos();
         importarFuentes();
-        anadirAsignatura();
+
+        //mejorar esto
+        try{
+            nombre = recibirDatos();
+        }catch (Exception ex){
+
+        }
+
+        if(nombre.length()>0){
+            editEscribirAsignatura.setText(nombre);
+            editarAsignatura(nombre);
+        }else{
+            anadirAsignatura();
+        }
+
+
+
+    }
+
+    private void editarAsignatura(String nombre) {
+        btnAnadirAsignatura.setText("Editar asignatura");
+        btnAnadirAsignatura.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(editEscribirAsignatura.getText().toString().length()>0){
+                    if(!ad.modificarAsignatura(nombre,new Asignatura(editEscribirAsignatura.getText().toString(),null))){
+                        Toast.makeText(getApplicationContext(), "Ha ocurrido un error al editar la asignatura", Toast.LENGTH_LONG).show();
+                    }else{
+                        Intent i=new Intent(getApplicationContext(), AcExamenes.class);
+                        i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        startActivity(i);
+                    }
+                }
+            }
+        });
     }
 
     private void anadirAsignatura(){
@@ -48,6 +84,13 @@ public class AcAnadirAsignatura extends AppCompatActivity {
             }
         });
 
+    }
+
+    private String recibirDatos(){
+        String resultado;
+        Bundle extras = getIntent().getExtras();
+        resultado = extras.getString("nombre");
+        return resultado;
     }
 
     private void importarFuentes(){

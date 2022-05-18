@@ -20,6 +20,8 @@ public class AcAnadirTrimestre extends AppCompatActivity {
     Typeface fuenteContenedores;
     AccesoDatosExamenes ad;
 
+    String nombre="";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,8 +31,41 @@ public class AcAnadirTrimestre extends AppCompatActivity {
 
         identificarElementos();
         importarFuentes();
-        anadirTrimestre();
 
+        //mejorar esto
+        try{
+            nombre = recibirDatos();
+        }catch (Exception ex){
+
+        }
+        if(nombre.length()>0){
+            editEscribirTrimestre.setText(nombre);
+            editarTrimestre(nombre);
+        }else{
+            anadirTrimestre();
+        }
+
+
+
+
+    }
+
+    private void editarTrimestre(String nombre) {
+        btnAnadirTrimestre.setText("Editar trimestre");
+        btnAnadirTrimestre.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(editEscribirTrimestre.getText().toString().length()>0){
+                    if(!ad.editarTrimestre(nombre,new Trimestre(editEscribirTrimestre.getText().toString(),null))){
+                        Toast.makeText(getApplicationContext(), "Ha ocurrido un error al modificar el trimestre", Toast.LENGTH_LONG).show();
+                    }else{
+                        Intent i=new Intent(getApplicationContext(), AcExamenes.class);
+                        i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        startActivity(i);
+                    }
+                }
+            }
+        });
     }
 
     private void anadirTrimestre(){
@@ -49,6 +84,13 @@ public class AcAnadirTrimestre extends AppCompatActivity {
             }
         });
 
+    }
+
+    private String recibirDatos(){
+        String resultado;
+        Bundle extras = getIntent().getExtras();
+        resultado = extras.getString("nombre");
+        return resultado;
     }
 
     private void importarFuentes(){

@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -33,6 +34,8 @@ public class AcAnadirExamen extends AppCompatActivity {
     ArrayList<Trimestre> listaTrimestes;
     ArrayList<Asignatura> listaAsignaturas;
 
+    Examen ex = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,19 +46,107 @@ public class AcAnadirExamen extends AppCompatActivity {
         identificarElementos();
         importarFuentes();
 
+        //mejorar esto
+        try{
+            ex = recibirDatos();
+        }catch (Exception ex){
+
+        }
+
         iniciarOpcionesSpinnerAsignatura(ad.obtenerAsignaturas());
         iniciarOpcionesSpinnerTrimestre(ad.obtenerTrimestres());
-        anadir();
-
+        if(ex!=null){
+            editNombreExamen.setText(ex.getNombre());
+            editCalificacion.setText(String.valueOf(ex.getNota()));
+            spTrimestre.setSelection(disponerTrimestre());
+            spAsignatura.setSelection(disponerAsignatura());
+            editarAsignatura(ex.getId());
+        }else{
+            anadir();
+        }
 
     }
+
+    private int disponerTrimestre(){
+        int resultado=-1;
+        Adapter adapter = spTrimestre.getAdapter();
+        int n = adapter.getCount();
+        for(int i=0;i<n;i++){
+            if(spTrimestre.getItemAtPosition(i).toString().equals(ex.getTri().getNombreTrimestre())){
+                resultado = i;
+            }
+        }
+        return resultado;
+
+    }
+
+    private int disponerAsignatura(){
+        int resultado=-1;
+        Adapter adapter = spAsignatura.getAdapter();
+        int n = adapter.getCount();
+        for(int i=0;i<n;i++){
+            if(spAsignatura.getItemAtPosition(i).toString().equals(ex.getAsig().getNombre())){
+                resultado = i;
+            }
+        }
+        return resultado;
+    }
+
+    private Examen recibirDatos(){
+        Examen resultado = new Examen();
+        Bundle extras = getIntent().getExtras();
+        String cadena = extras.getString("examen");
+        resultado.setId(Integer.parseInt(cadena.split("##")[0]));
+        resultado.setNombre(cadena.split("##")[1]);
+        resultado.setNota(Float.parseFloat(cadena.split("##")[2]));
+        resultado.setAsig(new Asignatura(cadena.split("##")[3],null));
+        resultado.setTri(new Trimestre(cadena.split("##")[4],null));
+        return resultado;
+    }
+
+    private void editarAsignatura(int id){
+        btnAnadirExamen.setText("Editar examen");
+        btnAnadirExamen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(editNombreExamen.getText().toString().length()>0){
+                    if(editCalificacion.getText().toString().length()>0){
+                        if(spAsignatura.getAdapter().getCount() > 0 && spTrimestre.getAdapter().getCount() > 0){
+                            Examen ex=new Examen();
+                            ex.setNombre(editNombreExamen.getText().toString());
+                            ex.setNota(Float.parseFloat(editCalificacion.getText().toString()));
+                            ex.setAsig(new Asignatura(spAsignatura.getSelectedItem().toString(),null));
+                            ex.setTri(new Trimestre(spTrimestre.getSelectedItem().toString(), null));
+                            if(!ad.editarExamen(id,ex)){
+                                Toast.makeText(getApplicationContext(), "Ha ocurrido un error al crear el examen", Toast.LENGTH_LONG).show();
+                            }else{
+                                Intent i=new Intent(getApplicationContext(), AcExamenes.class);
+                                i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                startActivity(i);
+                            }
+                        }else{
+                            Toast.makeText(getApplicationContext(), "debes tener asignaturas o trimestres creados", Toast.LENGTH_LONG).show();
+                        }
+                        String text = spAsignatura.getSelectedItem().toString();
+                    }else{
+                        Toast.makeText(getApplicationContext(), "no has añadido ninguna nota", Toast.LENGTH_LONG).show();
+                    }
+                }else{
+                    Toast.makeText(getApplicationContext(), "no has añadido ningun nombre", Toast.LENGTH_LONG).show();
+                }
+            }
+
+        });
+
+    }
+
 
     private void anadir(){
         btnAnadirExamen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(editNombreExamen.getText().toString().length()>0){
-                    if(editCalificacion.getText().toString().length()>0){
+                    if(editCalificacion.getText().toString().length()>0 && (Float.parseFloat(editCalificacion.getText().toString()) >=0 && Float.parseFloat(editCalificacion.getText().toString())<=10)){
                         if(spAsignatura.getAdapter().getCount() > 0 && spTrimestre.getAdapter().getCount() > 0){
                             Examen ex=new Examen();
                             ex.setNombre(editNombreExamen.getText().toString());
@@ -74,7 +165,7 @@ public class AcAnadirExamen extends AppCompatActivity {
                         }
                         String text = spAsignatura.getSelectedItem().toString();
                     }else{
-                        Toast.makeText(getApplicationContext(), "no has añadido ninguna nota", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "debes añadir una nota entre el 0 y el 10", Toast.LENGTH_LONG).show();
                     }
                 }else{
                     Toast.makeText(getApplicationContext(), "no has añadido ningun nombre", Toast.LENGTH_LONG).show();

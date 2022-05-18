@@ -19,8 +19,8 @@ public class ExamenesBD extends SQLiteOpenHelper {
                                                     " idTrimestre text," +
                                                     " nota real," +
                                                     " nombre text," +
-                                                    " FOREIGN KEY (\"idAsignatura\") REFERENCES \"Asignatura\"(\"nombre\")," +
-                                                    " FOREIGN KEY (\"idTrimestre\") REFERENCES \"Trimestre\"(\"nombre\"))";
+                                                    " FOREIGN KEY (\"idAsignatura\") REFERENCES \"Asignatura\"(\"nombre\") ON UPDATE CASCADE ON DELETE RESTRICT," +
+                                                    " FOREIGN KEY (\"idTrimestre\") REFERENCES \"Trimestre\"(\"nombre\") ON UPDATE CASCADE ON DELETE RESTRICT)";
 
 
 
@@ -30,11 +30,18 @@ public class ExamenesBD extends SQLiteOpenHelper {
     }
 
     @Override
+    public void onOpen(SQLiteDatabase db){
+        super.onOpen(db);
+        db.execSQL("PRAGMA foreign_keys=ON");
+    }
+
+    @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         try {
             sqLiteDatabase.execSQL(tablaAsignatura);
             sqLiteDatabase.execSQL(tablaTrimestre);
             sqLiteDatabase.execSQL(tablaExamen);
+            sqLiteDatabase.execSQL("PRAGMA foreign_keys = ON");
         }catch (SQLException e){
             Toast.makeText(contexto, "Error al crear la base de datos "+e, Toast.LENGTH_SHORT).show();
         }
