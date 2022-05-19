@@ -273,4 +273,49 @@ public class AccesoDatosExamenes {
         accesoLectura.close();
         return true;
     }
+
+
+    //estos dos métodos se pueden juntar en uno sólo???
+
+    public ArrayList<Examen> obtenerExamenAsig(String tabla) {
+        ArrayList<Examen> resultado=new ArrayList<Examen>();
+        String[] campos =new String[] {"id","idAsignatura","idTrimestre","nota","nombre"};
+        String[] argumentos=new String[]{tabla};
+        SQLiteDatabase accesoLectura = examenesBD.getReadableDatabase();
+
+        Cursor cursor = accesoLectura.query("Examen",campos,"idAsignatura = ?",argumentos,null,null,null);
+
+        while(cursor.moveToNext()){
+            Examen ex = new Examen();
+            ex.setId(cursor.getInt(0));
+            ex.setAsig(new Asignatura(cursor.getString(1),null));
+            ex.setTri(new Trimestre(cursor.getString(2),null));
+            ex.setNota(cursor.getFloat(3));
+            ex.setNombre(cursor.getString(4));
+            resultado.add(ex);
+        }
+        accesoLectura.close();
+        return resultado;
+    }
+
+    public ArrayList<Examen> obtenerExamenTri(String tabla) {
+        ArrayList<Examen> resultado=new ArrayList<Examen>();
+        String[] campos =new String[] {"id","idAsignatura","idTrimestre","nota","nombre"};
+        String[] argumentos=new String[]{tabla};
+        SQLiteDatabase accesoLectura = examenesBD.getReadableDatabase();
+
+        Cursor cursor = accesoLectura.query("Examen",campos,"idTrimestre = ?",argumentos,null,null,null);
+
+        while(cursor.moveToNext()){
+            Examen ex = new Examen();
+            ex.setId(cursor.getInt(0));
+            ex.setAsig(new Asignatura(cursor.getString(1),null));
+            ex.setTri(new Trimestre(cursor.getString(2),null));
+            ex.setNota(cursor.getFloat(3));
+            ex.setNombre(cursor.getString(4));
+            resultado.add(ex);
+        }
+        accesoLectura.close();
+        return resultado;
+    }
 }

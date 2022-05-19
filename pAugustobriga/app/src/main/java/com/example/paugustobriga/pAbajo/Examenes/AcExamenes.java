@@ -59,7 +59,32 @@ public class AcExamenes extends AppCompatActivity {
         anadirGenerico();
         opcionesSeleccion();
         buscarDatos();
+        genericoExamen();
 
+    }
+
+
+    private void genericoExamen(){
+        lsPestanas.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                String seleccionado="";
+                if(btnAnadirGenerico.getText().toString().equals(" Añadir Asignaturas ")){
+                    seleccionado = ((TextView) view.findViewById(R.id.txtAsignatura)).getText().toString();
+                    Intent i1=new Intent(getApplicationContext(), AclGenerica.class);
+                    i1.putExtra("datos", seleccionado);
+                    i1.putExtra("tipo", "Asignatura");
+                    startActivity(i1);
+                }
+                else if(btnAnadirGenerico.getText().toString().equals(" Añadir Trimestres ")){
+                    seleccionado = ((TextView) view.findViewById(R.id.txtTrimestre)).getText().toString();
+                    Intent i2=new Intent(getApplicationContext(), AclGenerica.class);
+                    i2.putExtra("datos", seleccionado);
+                    i2.putExtra("tipo", "Trimestre");
+                    startActivity(i2);
+                }
+            }
+        });
     }
 
 
