@@ -26,6 +26,7 @@ public class AclGenerica extends AppCompatActivity {
 
     String tabla, tipo;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,11 +48,14 @@ public class AclGenerica extends AppCompatActivity {
         lGenerica.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
                 String seleccionado = ((TextView) view.findViewById(R.id.txtIdExamen)).getText().toString();
                 Intent i3=new Intent(getApplicationContext(), AcAnadirExamen.class);
                 Examen exTmp = ad.obtenerExamen(seleccionado);
                 String datos = exTmp.getId()+"##"+ exTmp.getNombre()+"##"+exTmp.getNota()+"##"+exTmp.getAsig().getNombre()+"##"+exTmp.getTri().getNombreTrimestre();
                 i3.putExtra("examen",datos);
+                i3.putExtra("tabla",tabla);
+                i3.putExtra("tipo",tipo);
                 startActivity(i3);
             }
         });
@@ -115,4 +119,6 @@ public class AclGenerica extends AppCompatActivity {
     private void importarFuentes(){
         fuenteContenedores = ResourcesCompat.getFont(this, R.font.ibm_plex_sans_thai_bold);
     }
+
+
 }

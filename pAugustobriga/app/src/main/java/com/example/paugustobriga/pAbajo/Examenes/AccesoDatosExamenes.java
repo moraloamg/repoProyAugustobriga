@@ -318,4 +318,67 @@ public class AccesoDatosExamenes {
         accesoLectura.close();
         return resultado;
     }
+
+    public int obtenerSuspensos() {
+        int cantidad = 0;
+        Cursor cursor = examenesBD.getReadableDatabase().rawQuery("select count(*) from Examen where nota < 5 ",null);
+        if(cursor.moveToNext()){
+            cantidad = cursor.getInt(0);
+        }
+        cursor.close();
+        return cantidad;
+    }
+
+    public int obtenerAprobados() {
+        int cantidad = 0;
+        Cursor cursor = examenesBD.getReadableDatabase().rawQuery("select count(*) from Examen where nota >= 5 ",null);
+        if(cursor.moveToNext()){
+            cantidad = cursor.getInt(0);
+        }
+        cursor.close();
+        return cantidad;
+    }
+
+    public ArrayList<Object[]> aprobadosPorTrimestre(){
+        ArrayList<Object[]> listaTrimestres = new ArrayList<Object[]>();
+        Cursor cursor = examenesBD.getReadableDatabase().rawQuery(
+                "select t.nombre, count(*) from Trimestre as t " +
+                        "inner join Examen as e on t.nombre=e.idTrimestre where nota >= 5 group by t.nombre",null);
+        while(cursor.moveToNext()){
+            String trimestre=cursor.getString(0);
+            int cantidad = cursor.getInt(1);
+            listaTrimestres.add(new Object[]{trimestre,cantidad});
+        }
+        cursor.close();
+        return listaTrimestres;
+    }
+
+    public ArrayList<Object[]> aprobadosPorAsignatura() {
+        ArrayList<Object[]> aprobadosAsignatura = new ArrayList<Object[]>();
+        Cursor cursor = examenesBD.getReadableDatabase().rawQuery(
+                "select asig.nombre, count(*) from Asignatura as asig " +
+                        "inner join Examen as e on asig.nombre=e.idAsignatura where nota >= 5 group by asig.nombre",null);
+        while(cursor.moveToNext()){
+            String asignatura=cursor.getString(0);
+            int cantidad = cursor.getInt(1);
+            aprobadosAsignatura.add(new Object[]{asignatura,cantidad});
+        }
+        cursor.close();
+        return aprobadosAsignatura;
+
+    }
+
+    public ArrayList<Object[]> suspensosPorAsignatura() {
+        ArrayList<Object[]> suspensosAsignatura = new ArrayList<Object[]>();
+        Cursor cursor = examenesBD.getReadableDatabase().rawQuery(
+                "select asig.nombre, count(*) from Asignatura as asig " +
+                        "inner join Examen as e on asig.nombre=e.idAsignatura where nota < 5 group by asig.nombre",null);
+        while(cursor.moveToNext()){
+            String asignatura=cursor.getString(0);
+            int cantidad = cursor.getInt(1);
+            suspensosAsignatura.add(new Object[]{asignatura,cantidad});
+        }
+        cursor.close();
+        return suspensosAsignatura;
+    }
 }

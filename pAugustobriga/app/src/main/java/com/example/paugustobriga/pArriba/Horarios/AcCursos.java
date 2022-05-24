@@ -42,7 +42,7 @@ public class AcCursos extends AppCompatActivity{
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 String horario = lViewCursos.getItemAtPosition(i).toString();
                 Intent irFoto=new Intent(Intent.ACTION_VIEW,
-                        Uri.parse("https://raw.githubusercontent.com/moraloamg/pruebaAugustobriga/main/horarios/"+horario+".PNG"));
+                        Uri.parse("https://raw.githubusercontent.com/moraloamg/pruebaAugustobriga/main/horarios/"+horario+".png"));
                 startActivity(irFoto);
             }
         });

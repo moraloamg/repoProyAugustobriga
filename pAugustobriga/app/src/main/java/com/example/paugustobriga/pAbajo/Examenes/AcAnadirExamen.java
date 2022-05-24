@@ -36,6 +36,8 @@ public class AcAnadirExamen extends AppCompatActivity {
 
     Examen ex = null;
 
+    String tabla,tipo;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,11 +49,12 @@ public class AcAnadirExamen extends AppCompatActivity {
         importarFuentes();
 
         //mejorar esto
-        try{
-            ex = recibirDatos();
+        try {
+            recibirDatos();
         }catch (Exception ex){
 
         }
+
 
         iniciarOpcionesSpinnerAsignatura(ad.obtenerAsignaturas());
         iniciarOpcionesSpinnerTrimestre(ad.obtenerTrimestres());
@@ -64,6 +67,7 @@ public class AcAnadirExamen extends AppCompatActivity {
         }else{
             anadir();
         }
+
 
     }
 
@@ -92,16 +96,22 @@ public class AcAnadirExamen extends AppCompatActivity {
         return resultado;
     }
 
-    private Examen recibirDatos(){
-        Examen resultado = new Examen();
+    private void recibirDatos(){
         Bundle extras = getIntent().getExtras();
         String cadena = extras.getString("examen");
-        resultado.setId(Integer.parseInt(cadena.split("##")[0]));
-        resultado.setNombre(cadena.split("##")[1]);
-        resultado.setNota(Float.parseFloat(cadena.split("##")[2]));
-        resultado.setAsig(new Asignatura(cadena.split("##")[3],null));
-        resultado.setTri(new Trimestre(cadena.split("##")[4],null));
-        return resultado;
+
+        ex = new Examen();
+        ex.setId(Integer.parseInt(cadena.split("##")[0]));
+        ex.setNombre(cadena.split("##")[1]);
+        ex.setNota(Float.parseFloat(cadena.split("##")[2]));
+        ex.setAsig(new Asignatura(cadena.split("##")[3],null));
+        ex.setTri(new Trimestre(cadena.split("##")[4],null));
+
+        tabla = extras.getString("tabla");
+        tipo = extras.getString("tipo");
+
+
+
     }
 
     private void editarAsignatura(int id){
@@ -120,9 +130,17 @@ public class AcAnadirExamen extends AppCompatActivity {
                             if(!ad.editarExamen(id,ex)){
                                 Toast.makeText(getApplicationContext(), "Ha ocurrido un error al crear el examen", Toast.LENGTH_LONG).show();
                             }else{
-                                Intent i=new Intent(getApplicationContext(), AcExamenes.class);
-                                i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                                startActivity(i);
+                                if(tabla != null && tipo != null){
+                                    Intent i=new Intent(getApplicationContext(), AclGenerica.class);
+                                    i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                    i.putExtra("datos",tabla);
+                                    i.putExtra("tipo",tipo);
+                                    startActivity(i);
+                                }else{
+                                    Intent i=new Intent(getApplicationContext(), AcExamenes.class);
+                                    i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                    startActivity(i);
+                                }
                             }
                         }else{
                             Toast.makeText(getApplicationContext(), "debes tener asignaturas o trimestres creados", Toast.LENGTH_LONG).show();
@@ -213,34 +231,21 @@ public class AcAnadirExamen extends AppCompatActivity {
         spAsignatura.setAdapter(adaptador);
     }
 
-    /*
-    private void elegirOpcionSpinnerTrimestre(){
-        spTrimestre.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-            }
-        });
-    }
-
-     */
-
-    /*
-    private void elegirOpcionSpinnerAsignatura(){
-        spAsignatura.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
-            }
-        });
-    }
-
-     */
 
     @Override
     public void onBackPressed() {
-        Intent i=new Intent(getApplicationContext(), AcExamenes.class);
-        i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(i);
+        if(tabla != null && tipo != null){
+            Intent i=new Intent(getApplicationContext(), AclGenerica.class);
+            i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            i.putExtra("datos",tabla);
+            i.putExtra("tipo",tipo);
+            startActivity(i);
+        }else{
+            Intent i=new Intent(getApplicationContext(), AcExamenes.class);
+            i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(i);
+        }
+
     }
 }

@@ -83,6 +83,21 @@
         app:layout_constraintVertical_bias="0.875" />
 
     <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnEstadisticas"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/fondo_botones"
+        android:text=" Ver estadísticas "
+        android:textColor="#F0F0F0"
+        app:backgroundTint="@null"
+        app:layout_constraintBottom_toTopOf="@+id/tabLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.05"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.51" />
+
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnBuscarGenerico"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

@@ -14,6 +14,8 @@ import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -22,9 +24,11 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.paugustobriga.AcEstadisticas;
 import com.example.paugustobriga.AcPrincipal;
 import com.example.paugustobriga.R;
 import com.example.paugustobriga.pAbajo.Agenda.AcVerTareas;
+import com.example.paugustobriga.pAbajo.Agenda.AdaptadorVerTareaDia;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
@@ -35,7 +39,7 @@ public class AcExamenes extends AppCompatActivity {
     Typeface fuenteContenedores;
     AccesoDatosExamenes ad;
     ListView lsPestanas;
-    Button btnAnadirGenerico, btnBuscarGenerico;
+    Button btnAnadirGenerico, btnBuscarGenerico, btnEstadisticas;
     EditText busqueda;
 
     ArrayList<Trimestre> lTrimestres = new ArrayList<>();
@@ -58,9 +62,53 @@ public class AcExamenes extends AppCompatActivity {
         elegirPestana();
         anadirGenerico();
         opcionesSeleccion();
+        irEstadisticas();
         buscarDatos();
+        cambioTexto();
         genericoExamen();
 
+    }
+
+    //método que comprueba que al estar vacío el EditText no se quede vacía la lista
+    private void cambioTexto(){
+        busqueda.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                comprobarEditTextVacio();
+            }
+        });
+    }
+
+    //método que comprueba que al estar vacío el EditText no se quede vacía la lista
+    private void comprobarEditTextVacio(){
+        if(busqueda.getText().toString().length()==0){
+            switch (btnAnadirGenerico.getText().toString()){
+                case " Añadir Asignaturas ":
+                    lAsignaturas = ad.obtenerAsignaturas();
+                    lsPestanas.setAdapter(new AdaptadorAsignatura(getApplicationContext(),fuenteContenedores,lAsignaturas));
+                    break;
+                case " Añadir Trimestres ":
+                    lTrimestres = ad.obtenerTrimestres();
+                    lsPestanas.setAdapter(new AdaptadorTrimestre(getApplicationContext(),fuenteContenedores,lTrimestres));
+                    break;
+
+                case " Añadir Exámenes ":
+                    lExamenes = ad.obtenerExamenes();
+                    lsPestanas.setAdapter(new AdaptadorExamenes(getApplicationContext(),fuenteContenedores,lExamenes));
+                    break;
+            }
+
+        }
     }
 
 
@@ -273,12 +321,24 @@ public class AcExamenes extends AppCompatActivity {
 
     }
 
+    private void irEstadisticas(){
+        btnEstadisticas.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i2=new Intent(getApplicationContext(), AcEstadisticas.class);
+                startActivity(i2);
+            }
+        });
+
+    }
+
     private void identificarElementos(){
         lsPestanas = findViewById(R.id.lstPestanas);
         pestanas = findViewById(R.id.tabLayout);
         btnAnadirGenerico = findViewById(R.id.btnAnadirGenerico);
         btnBuscarGenerico = findViewById(R.id.btnBuscarGenerico);
         busqueda = findViewById(R.id.editTextBusquedaGenerica);
+        btnEstadisticas = findViewById(R.id.btnEstadisticas);
     }
 
     private void importarFuentes(){

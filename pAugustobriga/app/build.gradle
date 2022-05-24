@@ -39,4 +39,5 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
     // jsoup HTML parser library @ https://jsoup.org/
     implementation 'org.jsoup:jsoup:1.14.3'
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
 }

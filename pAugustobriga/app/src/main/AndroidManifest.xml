@@ -13,8 +13,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PAugustobriga">
         <activity
+            android:name=".AcEstadisticas"
+            android:exported="false"
+            android:screenOrientation="portrait"/>
+        <activity
             android:name=".pAbajo.Examenes.AclGenerica"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".pAbajo.Examenes.AcAnadirExamen"
             android:exported="false"
