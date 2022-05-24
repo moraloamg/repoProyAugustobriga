@@ -62,6 +62,9 @@ public class AccesoDatosAgenda {
         SQLiteDatabase accesoLectura = miBD.getReadableDatabase();
         String[] argumentos=new String[]{String.valueOf(id)};
         ContentValues registro=new ContentValues();
+        if(fecha == null){
+            fecha="n_a";
+        }
         registro.put("notificacion",fecha);
         accesoLectura.update("tareas", registro, "id = ?", argumentos);
         accesoLectura.close();
@@ -154,13 +157,15 @@ public class AccesoDatosAgenda {
                 t.setId(cursor.getInt(0));
                 t.setFecha(formato.parse(cursor.getString(1)));
                 t.setDescripcion(cursor.getString(2));
-                if (cursor.getString(3) != null) {
+                if (!cursor.getString(3).equals("n_a")) {
                     t.setNotificacion(formatoFinal.parse(cursor.getString(3)));
+                }else{
+                    t.setNotificacion(null);
                 }
 
 
             } catch (ParseException e) {
-                t.setNotificacion(null);
+                t.setNotificacion(null); //?
             }
             t.setRealizado(cursor.getInt(4) > 0);
             t.setTipo(cursor.getString(5));
@@ -289,7 +294,7 @@ public class AccesoDatosAgenda {
         if(t.getNotificacion()!=null){
             registro.put("notificacion",formatoFinal.format(t.getNotificacion()));
         }else{
-            registro.put("notificacion","n/a");
+            registro.put("notificacion","n_a");
         }
         registro.put("realizado",t.isRealizado());
         registro.put("tipo",t.getTipo());
@@ -340,7 +345,7 @@ public class AccesoDatosAgenda {
         ArrayList<Tarea> resultado=new ArrayList<Tarea>();
         String[] campos =new String[] {"id","fecha","descripcion","notificacion","realizado","tipo"};
         SQLiteDatabase accesoLectura = miBD.getReadableDatabase();
-        Cursor cursor = accesoLectura.query("tareas",campos,"notificacion != \"\"",null,null,null,null);
+        Cursor cursor = accesoLectura.query("tareas",campos,"notificacion != 'n_a'",null,null,null,null);
 
         while(cursor.moveToNext()){
             Tarea t=new Tarea();

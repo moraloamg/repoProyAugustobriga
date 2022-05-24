@@ -199,6 +199,7 @@ public class AcAnadirTarea extends AppCompatActivity {
                     t.setRealizado(false);
                     try {
                         t.setFecha(formato.parse(fecha));
+                        t.setNotificacion(null);
                     } catch (ParseException e) {
                         e.printStackTrace();
                     }
