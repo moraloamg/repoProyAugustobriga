@@ -6,4 +6,101 @@
     android:layout_height="match_parent"
     tools:context=".pArriba.NuestroCentro.AcNuestroCentro">
 
+    <View
+        android:id="@+id/view5"
+        android:layout_width="match_parent"
+        android:layout_height="310dp"
+        android:background="@drawable/cabecera"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/view6"
+        android:layout_width="match_parent"
+        android:layout_height="260dp"
+        android:background="@drawable/fondo_pie_de_pagina"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/txtCabeceraNuestroCentro"
+        android:layout_width="290dp"
+        android:layout_height="65dp"
+        android:text="Nuestro centro"
+        android:textAlignment="gravity"
+        android:textSize="40dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.19"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.024" />
+
+    <ScrollView
+        android:layout_width="389dp"
+        android:layout_height="584dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0">
+
+        <LinearLayout
+            android:layout_width="386dp"
+            android:layout_height="597dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.48"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0">
+
+            <TextView
+                android:id="@+id/txtParrafo1"
+                android:layout_width="match_parent"
+                android:layout_height="562dp"
+                android:text=""
+                android:textSize="20dp" />
+
+            <ImageView
+                android:id="@+id/txtImagen1"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="30dp"
+                android:layout_width="match_parent"
+                android:layout_height="230dp" />
+
+            <TextView
+                android:id="@+id/txtParrafo2"
+                android:layout_width="match_parent"
+                android:layout_height="922dp"
+                android:text=""
+                android:textSize="20dp" />
+            <ImageView
+                android:id="@+id/txtImagen2"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="30dp"
+                android:layout_width="match_parent"
+                android:layout_height="230dp" />
+
+            <TextView
+                android:id="@+id/txtParrafo3"
+                android:layout_width="match_parent"
+                android:layout_height="429dp"
+                android:text=""
+                android:textSize="20dp" />
+            <ImageView
+                android:id="@+id/txtImagen3"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="30dp"
+                android:layout_width="match_parent"
+                android:layout_height="230dp" />
+
+
+    </LinearLayout>
+</ScrollView>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

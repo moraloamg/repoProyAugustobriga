@@ -1,4 +1,4 @@
-package com.example.paugustobriga;
+package com.example.paugustobriga.pAbajo.Examenes;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 
+import com.example.paugustobriga.R;
 import com.example.paugustobriga.pAbajo.Examenes.AcExamenes;
 import com.example.paugustobriga.pAbajo.Examenes.AccesoDatosExamenes;
 import com.github.mikephil.charting.charts.BarChart;

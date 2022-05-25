@@ -17,6 +17,7 @@ import android.widget.TextView;
 import com.example.paugustobriga.pAbajo.Agenda.AcCalendarioAgenda;
 import com.example.paugustobriga.pAbajo.Examenes.AcExamenes;
 import com.example.paugustobriga.pArriba.Horarios.AcHorarios;
+import com.example.paugustobriga.pArriba.NuestroCentro.AcNuestroCentro;
 import com.example.paugustobriga.pMedio.Profesorado.AcProfesorado;
 import com.example.paugustobriga.pMedio.Proyectos.AcProyectos;
 import com.example.paugustobriga.pMedio.calendario.AcCalendario;
@@ -83,7 +84,7 @@ public class AcPrincipal extends AppCompatActivity {
         ico_arriba_uno.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                cambiarActividad("arribaUno");
             }
         });
     }
@@ -164,7 +165,8 @@ public class AcPrincipal extends AppCompatActivity {
 
         switch (actividad){
             case "arribaUno":
-
+                Intent i1=new Intent(this, AcNuestroCentro.class);
+                startActivity(i1);
                 break;
 
             case "arribaDos":
@@ -189,7 +191,8 @@ public class AcPrincipal extends AppCompatActivity {
                 break;
 
             case "medioTres":
-                Intent i5=new Intent(this, AcProyectos.class);
+                Intent i5=new Intent(Intent.ACTION_VIEW,
+                        Uri.parse("https://www.youtube.com/channel/UCYqTO4pG-fD9KPyjvdI3f6w"));
                 startActivity(i5);
                 break;
 

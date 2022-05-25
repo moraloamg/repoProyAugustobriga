@@ -3,17 +3,14 @@ package com.example.paugustobriga.pAbajo.Examenes;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.res.ResourcesCompat;
-import androidx.work.WorkManager;
 
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
@@ -24,11 +21,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.paugustobriga.AcEstadisticas;
 import com.example.paugustobriga.AcPrincipal;
 import com.example.paugustobriga.R;
-import com.example.paugustobriga.pAbajo.Agenda.AcVerTareas;
-import com.example.paugustobriga.pAbajo.Agenda.AdaptadorVerTareaDia;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
