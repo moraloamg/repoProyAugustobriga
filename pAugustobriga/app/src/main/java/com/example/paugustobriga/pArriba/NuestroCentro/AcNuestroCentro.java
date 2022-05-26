@@ -1,8 +1,10 @@
 package com.example.paugustobriga.pArriba.NuestroCentro;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.res.ResourcesCompat;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
@@ -14,9 +16,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.example.paugustobriga.AcPrincipal;
 import com.example.paugustobriga.R;
 import com.example.paugustobriga.pArriba.Horarios.AcCursos;
 import com.example.paugustobriga.pArriba.Horarios.LecturaFichero;
+import com.example.paugustobriga.pMedio.Profesorado.AcTutorias;
 
 import java.io.InputStream;
 import java.net.URL;
@@ -63,9 +67,25 @@ public class AcNuestroCentro extends AppCompatActivity {
     }
 
     public void procesoFinalizado(String salida) {
-        parrafo1.setText(salida.split("--")[0]);
-        parrafo2.setText(salida.split("--")[1]);
-        parrafo3.setText(salida.split("--")[2]);
+        try {
+            parrafo1.setText(salida.split("--")[0]);
+            parrafo2.setText(salida.split("--")[1]);
+            parrafo3.setText(salida.split("--")[2]);
+        }catch (Exception ex){
+            AlertDialog.Builder dialogo1=new AlertDialog.Builder(AcNuestroCentro.this);
+            dialogo1.setTitle("Error");
+            dialogo1.setMessage("Error de conexión");
+            dialogo1.setCancelable(false);
+            dialogo1.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    Intent i1=new Intent(getApplicationContext(), AcPrincipal.class);
+                    i1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(i1);
+                }
+            });
+            dialogo1.show();
+        }
     }
 
     private void disponerFuentes(){

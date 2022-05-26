@@ -1,7 +1,10 @@
 package com.example.paugustobriga.pMedio.Profesorado;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.work.WorkManager;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -10,9 +13,11 @@ import android.view.View;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.paugustobriga.AcPrincipal;
 import com.example.paugustobriga.R;
+import com.example.paugustobriga.pAbajo.Agenda.AcVerTareas;
 
 import java.util.ArrayList;
 
@@ -33,7 +38,27 @@ public class AcOrganizacion extends AppCompatActivity implements AsyncRespuestaH
         AccesoHtml ac=new AccesoHtml("https://iesaugustobriga.educarex.es/index.php/organizacion2","organizacion");
         ac.delegar = this;
         ac.execute();
+
     }
+
+    @Override
+    public void errorDeConexion(){
+        AlertDialog.Builder dialogo1=new AlertDialog.Builder(AcOrganizacion.this);
+        dialogo1.setTitle("Error");
+        dialogo1.setMessage("Error de conexión");
+        dialogo1.setCancelable(false);
+        dialogo1.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                Intent i1=new Intent(getApplicationContext(), AcPrincipal.class);
+                i1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(i1);
+            }
+        });
+        dialogo1.show();
+
+    }
+
 
     @Override
     public void onBackPressed() {

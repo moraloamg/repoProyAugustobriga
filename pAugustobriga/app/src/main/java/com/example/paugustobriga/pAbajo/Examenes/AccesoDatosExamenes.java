@@ -73,62 +73,67 @@ public class AccesoDatosExamenes {
     }
 
     public boolean insertarExamen(Examen ex) {
-        boolean devolucion = false;
-        SQLiteDatabase accesoEscritura = examenesBD.getWritableDatabase();
+        try {
+            SQLiteDatabase accesoEscritura = examenesBD.getWritableDatabase();
 
-        ContentValues registro=new ContentValues();
-        registro.put("idAsignatura",ex.getAsig().getNombre());
-        registro.put("idTrimestre",ex.getTri().getNombreTrimestre());
-        registro.put("nota",ex.getNota());
-        registro.put("nombre",ex.getNombre());
+            ContentValues registro = new ContentValues();
+            registro.put("idAsignatura", ex.getAsig().getNombre());
+            registro.put("idTrimestre", ex.getTri().getNombreTrimestre());
+            registro.put("nota", ex.getNota());
+            registro.put("nombre", ex.getNombre());
 
-        long resultado=accesoEscritura.insert("Examen",null,registro);
-        if(resultado!=-1){
-            Toast.makeText(contexto, "Se ha creado el registro con id "+resultado, Toast.LENGTH_SHORT).show();
-            devolucion = true;
-        }else{
-            Toast.makeText(contexto, "Error de inserción "+resultado, Toast.LENGTH_LONG).show();
+            long resultado = accesoEscritura.insert("Examen", null, registro);
+            accesoEscritura.close();
+            if (resultado != -1) {
+                return true;
+            } else {
+                return false;
+            }
+        }catch (Exception exc){
+            return false;
         }
-        accesoEscritura.close();
-        return  devolucion;
     }
 
     public boolean insertarTrimestre(Trimestre tri) {
-        boolean devolucion = false;
-        SQLiteDatabase accesoEscritura = examenesBD.getWritableDatabase();
+        try{
+            SQLiteDatabase accesoEscritura = examenesBD.getWritableDatabase();
 
-        ContentValues registro=new ContentValues();
-        registro.put("nombre",tri.getNombreTrimestre());
+            ContentValues registro=new ContentValues();
+            registro.put("nombre",tri.getNombreTrimestre());
 
 
-        long resultado=accesoEscritura.insert("Trimestre",null,registro);
-        if(resultado!=-1){
-            Toast.makeText(contexto, "Se ha creado el registro con id "+resultado, Toast.LENGTH_SHORT).show();
-            devolucion = true;
-        }else{
-            Toast.makeText(contexto, "Error de inserción "+resultado, Toast.LENGTH_LONG).show();
+            long resultado=accesoEscritura.insert("Trimestre",null,registro);
+            accesoEscritura.close();
+            if(resultado!=-1){
+                return true;
+            }else {
+                return false;
+            }
+        }catch (Exception exc){
+            return false;
         }
-        accesoEscritura.close();
-        return  devolucion;
     }
 
     public boolean insertarAsignatura(Asignatura aisg) {
-        boolean devolucion = false;
-        SQLiteDatabase accesoEscritura = examenesBD.getWritableDatabase();
+        try{
+            SQLiteDatabase accesoEscritura = examenesBD.getWritableDatabase();
 
-        ContentValues registro=new ContentValues();
-        registro.put("nombre",aisg.getNombre());
+            ContentValues registro=new ContentValues();
+            registro.put("nombre",aisg.getNombre());
 
 
-        long resultado=accesoEscritura.insert("Asignatura",null,registro);
-        if(resultado!=-1){
-            Toast.makeText(contexto, "Se ha creado el registro con id "+resultado, Toast.LENGTH_SHORT).show();
-            devolucion = true;
-        }else{
-            Toast.makeText(contexto, "Error de inserción "+resultado, Toast.LENGTH_LONG).show();
+            long resultado=accesoEscritura.insert("Asignatura",null,registro);
+            accesoEscritura.close();
+            if(resultado!=-1){
+                return true;
+            }else{
+                return false;
+            }
+        }catch (Exception exc){
+            return false;
         }
-        accesoEscritura.close();
-        return  devolucion;
+
+
     }
 
 
@@ -215,12 +220,17 @@ public class AccesoDatosExamenes {
         return resultado;
     }
 
-    public void borrarExamen(int id) {
-        //poner parametros mas adelante
-        SQLiteDatabase accesoLectura = examenesBD.getReadableDatabase();
-        String[] argumentos=new String[]{String.valueOf(id)};
-        accesoLectura.delete("Examen", "id = ?", argumentos);
-        accesoLectura.close();
+    public boolean borrarExamen(int id) {
+        Boolean resultado = true;
+        try{
+            SQLiteDatabase accesoLectura = examenesBD.getReadableDatabase();
+            String[] argumentos=new String[]{String.valueOf(id)};
+            accesoLectura.delete("Examen", "id = ?", argumentos);
+            accesoLectura.close();
+        }catch (Exception ex){
+            resultado=false;
+        }
+        return resultado;
     }
 
     public Examen obtenerExamen(String seleccionado) {
@@ -242,36 +252,51 @@ public class AccesoDatosExamenes {
     }
 
     public boolean modificarAsignatura(String id, Asignatura asignatura) {
-        SQLiteDatabase accesoLectura = examenesBD.getReadableDatabase();
-        String[] argumentos=new String[]{id};
-        ContentValues registro=new ContentValues();
-        registro.put("nombre", asignatura.getNombre());
-        accesoLectura.update("Asignatura", registro, "nombre = ?", argumentos);
-        accesoLectura.close();
-        return  true;
+        Boolean resultado = true;
+        try{
+            SQLiteDatabase accesoLectura = examenesBD.getReadableDatabase();
+            String[] argumentos=new String[]{id};
+            ContentValues registro=new ContentValues();
+            registro.put("nombre", asignatura.getNombre());
+            accesoLectura.update("Asignatura", registro, "nombre = ?", argumentos);
+            accesoLectura.close();
+        }catch (Exception ex){
+            resultado=false;
+        }
+        return resultado;
     }
 
     public boolean editarTrimestre(String id, Trimestre trimestre) {
-        SQLiteDatabase accesoLectura = examenesBD.getReadableDatabase();
-        String[] argumentos=new String[]{id};
-        ContentValues registro=new ContentValues();
-        registro.put("nombre",trimestre.getNombreTrimestre());
-        accesoLectura.update("Trimestre", registro, "nombre = ?", argumentos);
-        accesoLectura.close();
-        return true;
+        Boolean resultado = true;
+        try{
+            SQLiteDatabase accesoLectura = examenesBD.getReadableDatabase();
+            String[] argumentos=new String[]{id};
+            ContentValues registro=new ContentValues();
+            registro.put("nombre",trimestre.getNombreTrimestre());
+            accesoLectura.update("Trimestre", registro, "nombre = ?", argumentos);
+            accesoLectura.close();
+        }catch (Exception ex){
+            resultado=false;
+        }
+        return resultado;
     }
 
     public boolean editarExamen(int id, Examen ex) {
-        SQLiteDatabase accesoLectura = examenesBD.getReadableDatabase();
-        String[] argumentos=new String[]{String.valueOf(id)};
-        ContentValues registro=new ContentValues();
-        registro.put("nombre",ex.getNombre());
-        registro.put("nota",ex.getNota());
-        registro.put("idAsignatura",ex.getAsig().getNombre());
-        registro.put("idTrimestre",ex.getTri().getNombreTrimestre());
-        accesoLectura.update("Examen", registro, "id = ?", argumentos);
-        accesoLectura.close();
-        return true;
+        Boolean resultado = true;
+        try{
+            SQLiteDatabase accesoLectura = examenesBD.getReadableDatabase();
+            String[] argumentos=new String[]{String.valueOf(id)};
+            ContentValues registro=new ContentValues();
+            registro.put("nombre",ex.getNombre());
+            registro.put("nota",ex.getNota());
+            registro.put("idAsignatura",ex.getAsig().getNombre());
+            registro.put("idTrimestre",ex.getTri().getNombreTrimestre());
+            accesoLectura.update("Examen", registro, "id = ?", argumentos);
+            accesoLectura.close();
+        }catch (Exception exc){
+            resultado=false;
+        }
+        return resultado;
     }
 
 

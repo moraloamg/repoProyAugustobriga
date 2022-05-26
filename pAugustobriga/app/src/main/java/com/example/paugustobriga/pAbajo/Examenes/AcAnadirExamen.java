@@ -127,20 +127,24 @@ public class AcAnadirExamen extends AppCompatActivity {
                             ex.setNota(Float.parseFloat(editCalificacion.getText().toString()));
                             ex.setAsig(new Asignatura(spAsignatura.getSelectedItem().toString(),null));
                             ex.setTri(new Trimestre(spTrimestre.getSelectedItem().toString(), null));
-                            if(!ad.editarExamen(id,ex)){
-                                Toast.makeText(getApplicationContext(), "Ha ocurrido un error al crear el examen", Toast.LENGTH_LONG).show();
-                            }else{
-                                if(tabla != null && tipo != null){
-                                    Intent i=new Intent(getApplicationContext(), AclGenerica.class);
-                                    i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                                    i.putExtra("datos",tabla);
-                                    i.putExtra("tipo",tipo);
-                                    startActivity(i);
-                                }else{
-                                    Intent i=new Intent(getApplicationContext(), AcExamenes.class);
-                                    i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                                    startActivity(i);
+                            if(ex.getNota()<=10 && ex.getNota()>=0) {
+                                if (!ad.editarExamen(id, ex)) {
+                                    Toast.makeText(getApplicationContext(), "Ha ocurrido un error al crear el examen", Toast.LENGTH_LONG).show();
+                                } else {
+                                    if (tabla != null && tipo != null) {
+                                        Intent i = new Intent(getApplicationContext(), AclGenerica.class);
+                                        i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                        i.putExtra("datos", tabla);
+                                        i.putExtra("tipo", tipo);
+                                        startActivity(i);
+                                    } else {
+                                        Intent i = new Intent(getApplicationContext(), AcExamenes.class);
+                                        i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                        startActivity(i);
+                                    }
                                 }
+                            }else{
+                                Toast.makeText(getApplicationContext(), "debes añadir una nota entre el 0 y el 10", Toast.LENGTH_LONG).show();
                             }
                         }else{
                             Toast.makeText(getApplicationContext(), "debes tener asignaturas o trimestres creados", Toast.LENGTH_LONG).show();

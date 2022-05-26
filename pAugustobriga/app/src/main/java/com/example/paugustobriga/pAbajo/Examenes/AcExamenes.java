@@ -239,7 +239,9 @@ public class AcExamenes extends AppCompatActivity {
 
                     case " Añadir Exámenes ":
                         seleccionado = ((TextView) view.findViewById(R.id.txtIdExamen)).getText().toString();
-                        ad.borrarExamen(Integer.parseInt(seleccionado));
+                        if(!ad.borrarExamen(Integer.parseInt(seleccionado))){
+                            Toast.makeText(getApplicationContext(),"Error al borrar el examen", Toast.LENGTH_LONG).show();
+                        }
                         break;
                 }
                 finish();

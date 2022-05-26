@@ -23,51 +23,75 @@ public class AccesoDatosAgenda {
         miBD = new TareasBD(context);
     }
 
-    public void borrar(int id){
-        //poner parametros mas adelante
-        SQLiteDatabase accesoLectura = miBD.getReadableDatabase();
-        String[] argumentos=new String[]{String.valueOf(id)};
-        accesoLectura.delete("tareas", "id = ?", argumentos);
-        accesoLectura.close();
-    }
-
-    public void modificarDescripcion(int id, String descripcion){
-        SQLiteDatabase accesoLectura = miBD.getReadableDatabase();
-        String[] argumentos=new String[]{String.valueOf(id)};
-        ContentValues registro=new ContentValues();
-        registro.put("descripcion",descripcion);
-        accesoLectura.update("tareas", registro, "id = ?", argumentos);
-        accesoLectura.close();
-    }
-
-    public void realizarTarea(int id){
-        SQLiteDatabase accesoLectura = miBD.getReadableDatabase();
-        String[] argumentos=new String[]{String.valueOf(id)};
-        ContentValues registro=new ContentValues();
-        registro.put("realizado",true);
-        accesoLectura.update("tareas", registro, "id = ?", argumentos);
-        accesoLectura.close();
-    }
-
-    public void modificarTipo(int id, String tipo){
-        SQLiteDatabase accesoLectura = miBD.getReadableDatabase();
-        String[] argumentos=new String[]{String.valueOf(id)};
-        ContentValues registro=new ContentValues();
-        registro.put("tipo",tipo);
-        accesoLectura.update("tareas", registro, "id = ?", argumentos);
-        accesoLectura.close();
-    }
-
-    public void modificarNotificacion(int id, String fecha){
-        SQLiteDatabase accesoLectura = miBD.getReadableDatabase();
-        String[] argumentos=new String[]{String.valueOf(id)};
-        ContentValues registro=new ContentValues();
-        if(fecha == null){
-            fecha="n_a";
+    public boolean borrar(int id){
+        try {
+            SQLiteDatabase accesoLectura = miBD.getReadableDatabase();
+            String[] argumentos = new String[]{String.valueOf(id)};
+            accesoLectura.delete("tareas", "id = ?", argumentos);
+            accesoLectura.close();
+        }catch (Exception ex){
+            return false;
         }
-        registro.put("notificacion",fecha);
-        accesoLectura.update("tareas", registro, "id = ?", argumentos);
-        accesoLectura.close();
+        return true;
+    }
+
+    public boolean modificarDescripcion(int id, String descripcion){
+        try {
+            SQLiteDatabase accesoLectura = miBD.getReadableDatabase();
+            String[] argumentos=new String[]{String.valueOf(id)};
+            ContentValues registro=new ContentValues();
+            registro.put("descripcion",descripcion);
+            accesoLectura.update("tareas", registro, "id = ?", argumentos);
+            accesoLectura.close();
+        }catch (Exception ex){
+            return false;
+        }
+        return true;
+    }
+
+    public boolean realizarTarea(int id){
+        try {
+            SQLiteDatabase accesoLectura = miBD.getReadableDatabase();
+            String[] argumentos=new String[]{String.valueOf(id)};
+            ContentValues registro=new ContentValues();
+            registro.put("realizado",true);
+            accesoLectura.update("tareas", registro, "id = ?", argumentos);
+            accesoLectura.close();
+        }catch (Exception ex){
+            return false;
+        }
+        return true;
+    }
+
+    public boolean modificarTipo(int id, String tipo){
+        try {
+            SQLiteDatabase accesoLectura = miBD.getReadableDatabase();
+            String[] argumentos=new String[]{String.valueOf(id)};
+            ContentValues registro=new ContentValues();
+            registro.put("tipo",tipo);
+            accesoLectura.update("tareas", registro, "id = ?", argumentos);
+            accesoLectura.close();
+        }catch (Exception ex){
+            return false;
+        }
+        return true;
+    }
+
+    public boolean modificarNotificacion(int id, String fecha){
+        try {
+            SQLiteDatabase accesoLectura = miBD.getReadableDatabase();
+            String[] argumentos=new String[]{String.valueOf(id)};
+            ContentValues registro=new ContentValues();
+            if(fecha == null){
+                fecha="n_a";
+            }
+            registro.put("notificacion",fecha);
+            accesoLectura.update("tareas", registro, "id = ?", argumentos);
+            accesoLectura.close();
+        }catch (Exception ex){
+            return false;
+        }
+        return true;
     }
 
     public String obtenerDescripcion(String id){
@@ -285,27 +309,32 @@ public class AccesoDatosAgenda {
         return resultado;
     }
 
-    public void insertarTarea(Tarea t){
-        SQLiteDatabase accesoEscritura = miBD.getWritableDatabase();
+    public boolean insertarTarea(Tarea t){
+        try{
+            SQLiteDatabase accesoEscritura = miBD.getWritableDatabase();
 
-        ContentValues registro=new ContentValues();
-        registro.put("fecha",formato.format(t.getFecha()));
-        registro.put("descripcion",t.getDescripcion());
-        if(t.getNotificacion()!=null){
-            registro.put("notificacion",formatoFinal.format(t.getNotificacion()));
-        }else{
-            registro.put("notificacion","n_a");
-        }
-        registro.put("realizado",t.isRealizado());
-        registro.put("tipo",t.getTipo());
+            ContentValues registro=new ContentValues();
+            registro.put("fecha",formato.format(t.getFecha()));
+            registro.put("descripcion",t.getDescripcion());
+            if(t.getNotificacion()!=null){
+                registro.put("notificacion",formatoFinal.format(t.getNotificacion()));
+            }else{
+                registro.put("notificacion","n_a");
+            }
+            registro.put("realizado",t.isRealizado());
+            registro.put("tipo",t.getTipo());
 
-        long resultado=accesoEscritura.insert("tareas",null,registro);
-        if(resultado!=-1){
-            Toast.makeText(contexto, "Se ha creado el registro con id "+resultado, Toast.LENGTH_SHORT).show();
-        }else{
-            Toast.makeText(contexto, "Error de inserción "+resultado, Toast.LENGTH_LONG).show();
+            long codigo=accesoEscritura.insert("tareas",null,registro);
+            accesoEscritura.close();
+            if(codigo!=-1){
+                return true;
+            }else{
+                return false;
+            }
+
+        }catch (Exception ex){
+            return false;
         }
-        accesoEscritura.close();
     }
 
     public boolean comprobarHecho(String seleccionado) {

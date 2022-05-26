@@ -1,5 +1,6 @@
 package com.example.paugustobriga.pMedio.Profesorado;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.res.ResourcesCompat;
 
@@ -48,7 +49,6 @@ public class AcProfesorado extends AppCompatActivity {
         irOrganizacion();
         irTutorias();
         irDepartamentos();
-
 
     }
 

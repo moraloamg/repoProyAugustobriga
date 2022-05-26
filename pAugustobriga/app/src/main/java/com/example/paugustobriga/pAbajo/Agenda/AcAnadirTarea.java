@@ -164,12 +164,18 @@ public class AcAnadirTarea extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if(editDescripcion.getText().toString().length()>0) {
-                    ad.modificarTipo(Integer.parseInt(id),tipo);
+                    if(!ad.modificarTipo(Integer.parseInt(id),tipo)){
+                        Toast.makeText(getApplicationContext(), "Error al modificar el tipo", Toast.LENGTH_LONG).show();
+                    }
                     if(chkHecho.isChecked()){
-                        ad.realizarTarea(Integer.parseInt(id));
+                        if(!ad.realizarTarea(Integer.parseInt(id))){
+                            Toast.makeText(getApplicationContext(), "Error al realizar la tarea", Toast.LENGTH_LONG).show();
+                        }
                     }
 
-                    ad.modificarDescripcion(Integer.parseInt(id), editDescripcion.getText().toString());
+                    if(!ad.modificarDescripcion(Integer.parseInt(id), editDescripcion.getText().toString())){
+                        Toast.makeText(getApplicationContext(), "Error al modificar", Toast.LENGTH_LONG).show();
+                    }
                     onBackPressed();
                 }else{
                     Toast.makeText(getApplicationContext(), "no has añadido ninguna descripción", Toast.LENGTH_LONG).show();
@@ -203,7 +209,11 @@ public class AcAnadirTarea extends AppCompatActivity {
                     } catch (ParseException e) {
                         e.printStackTrace();
                     }
-                    ad.insertarTarea(t);
+                    if(!ad.insertarTarea(t)){
+                        Toast.makeText(getApplicationContext(), "Error de inserción ", Toast.LENGTH_LONG).show();
+                    }else{
+                        Toast.makeText(getApplicationContext(), "Tarea creada ", Toast.LENGTH_LONG).show();
+                    }
                     onBackPressed();
                 }else{
                     Toast.makeText(getApplicationContext(), "no has añadido ninguna descripción", Toast.LENGTH_LONG).show();

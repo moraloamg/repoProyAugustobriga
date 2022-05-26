@@ -1,6 +1,13 @@
 package com.example.paugustobriga.pMedio.Profesorado;
 
+import android.content.Context;
 import android.os.AsyncTask;
+import android.view.WindowManager;
+
+import androidx.appcompat.app.AlertDialog;
+
+import com.example.paugustobriga.AcPrincipal;
+import com.example.paugustobriga.pAbajo.Agenda.AcVerTareas;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -17,8 +24,11 @@ public class AccesoHtml extends AsyncTask {
     private String tipo;
     //Aquí si hay poliformismo, por ende se usa una interfaz que se aplica a varias clases
     public AsyncRespuestaHtml delegar = null;
+    public Context c;
 
     ArrayList<Object[]> datos=new ArrayList<>();
+
+    boolean errorDeConexion = false;
 
 
     public AccesoHtml(String url, String tipo)
@@ -30,14 +40,23 @@ public class AccesoHtml extends AsyncTask {
     @Override
     protected void onPostExecute(Object o) {
         super.onPostExecute(o);
-        delegar.procesoFinalizado(datos);
+        if(errorDeConexion){
+            delegar.errorDeConexion();
+        }else{
+            delegar.procesoFinalizado(datos);
+        }
     }
 
     @Override
     protected Object doInBackground(Object[] objects) {
-        conectarUrl();
-        sacarTipo(tipo);
-        return true;
+        try{
+            conectarUrl();
+            sacarTipo(tipo);
+        }catch (Exception ex){
+            errorDeConexion=true;
+        }finally {
+            return true;
+        }
     }
 
     private void conectarUrl(){
@@ -49,6 +68,7 @@ public class AccesoHtml extends AsyncTask {
     }
 
     private void sacarTipo(String tipo){
+
         switch (tipo){
             case "organizacion":
                 organizacion();
@@ -63,7 +83,6 @@ public class AccesoHtml extends AsyncTask {
     }
 
     private void organizacion(){
-
         Element tabla = html.select("table").get(2);
         Elements filas = tabla.select("tr");
         for(int i=0;i< filas.size();i++){

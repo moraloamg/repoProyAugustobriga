@@ -188,8 +188,11 @@ public class AcNotificacion extends AppCompatActivity {
                     if(fechaRecibida!=null){
                         borrarAlarma(id);
                     }
-                    ad.modificarNotificacion(Integer.parseInt(id),formatoFinal.format(calendar.getTime()));
-                    Toast.makeText(getApplicationContext(), "Alarma guardada", Toast.LENGTH_SHORT).show();
+                    if(!ad.modificarNotificacion(Integer.parseInt(id),formatoFinal.format(calendar.getTime()))){
+                            Toast.makeText(getApplicationContext(), "Error al guardar la notificacion", Toast.LENGTH_SHORT).show();
+                    }else{
+                        Toast.makeText(getApplicationContext(), "Alarma guardada", Toast.LENGTH_SHORT).show();
+                    }
                     volver();
                 }else{
                     Toast.makeText(getApplicationContext(), "No puedes poner una alarma anterior a hoy",Toast.LENGTH_SHORT).show();
@@ -204,8 +207,11 @@ public class AcNotificacion extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 WorkManager.getInstance(getApplicationContext()).cancelAllWorkByTag(tag);
-                ad.modificarNotificacion(Integer.parseInt(id),null); //??
-                Toast.makeText(getApplicationContext(), "Alarma eliminada", Toast.LENGTH_SHORT).show();
+                if(!ad.modificarNotificacion(Integer.parseInt(id),null)){
+                    Toast.makeText(getApplicationContext(), "Error al borrar la notificación", Toast.LENGTH_SHORT).show();
+                }else{
+                    Toast.makeText(getApplicationContext(), "Alarma eliminada", Toast.LENGTH_SHORT).show();
+                }
                 volver();
 
             }

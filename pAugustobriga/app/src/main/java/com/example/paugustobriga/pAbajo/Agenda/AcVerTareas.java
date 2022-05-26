@@ -316,10 +316,16 @@ public class AcVerTareas extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 String seleccionado = ((TextView) view.findViewById(R.id.idTarea)).getText().toString();
-                ad.borrar(Integer.parseInt(seleccionado));
+                if(!ad.borrar(Integer.parseInt(seleccionado))){
+                    Toast.makeText(getApplicationContext(),"Error al borrar la tarea", Toast.LENGTH_LONG).show();
+
+                }
                 WorkManager.getInstance(getApplicationContext()).cancelAllWorkByTag(seleccionado);
                 //borrar en vez de modificar?
-                ad.modificarNotificacion(Integer.parseInt(seleccionado),null);
+                if(!ad.modificarNotificacion(Integer.parseInt(seleccionado),null)){
+                    Toast.makeText(getApplicationContext(),"Error al modificar la notificacion", Toast.LENGTH_LONG).show();
+
+                }
 
                 Toast.makeText(getApplicationContext(),"Has borrado la tarea", Toast.LENGTH_LONG).show();
                 finish();
@@ -342,7 +348,10 @@ public class AcVerTareas extends AppCompatActivity {
                 if(ta.isRealizado() || ta.getNotificacion().before(new Date())){
 
                     //borrar en vez de modificar????
-                    ad.modificarNotificacion(ta.getId(),null);
+                    if(!ad.modificarNotificacion(ta.getId(),null)){
+                        Toast.makeText(getApplicationContext(),"Error al modificar la notificacion", Toast.LENGTH_LONG).show();
+
+                    }
                     WorkManager.getInstance(getApplicationContext()).cancelAllWorkByTag(String.valueOf(ta.getId()));
                     t.get(t.indexOf(ta)).setNotificacion(null);
                 }

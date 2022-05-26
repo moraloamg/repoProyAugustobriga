@@ -1,5 +1,6 @@
 package com.example.paugustobriga;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.res.ResourcesCompat;
 
@@ -8,6 +9,7 @@ import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
@@ -72,7 +74,6 @@ public class AcPrincipal extends AppCompatActivity {
         accionIcAbajoUno();
         accionIcAbajoDos();
         accionIcAbajoTres();
-
 
 
 
@@ -197,9 +198,11 @@ public class AcPrincipal extends AppCompatActivity {
                 break;
 
             case "abajoUno":
+
                 Intent irPlano=new Intent(Intent.ACTION_VIEW,
                         Uri.parse("https://raw.githubusercontent.com/moraloamg/pruebaAugustobriga/main/plano/plano.png"));
                 startActivity(irPlano);
+
                 break;
 
             case "abajoDos":
@@ -288,6 +291,17 @@ public class AcPrincipal extends AppCompatActivity {
         //texto de la cabecera
         txtCab1 = findViewById(R.id.txtCabecera1);
         txtCab2 = findViewById(R.id.txtCabecera2);
+    }
+
+    public void mostrarMensajeErrorInternet(){
+
+        AlertDialog.Builder dialogo1=new AlertDialog.Builder(getApplicationContext());
+        dialogo1.setTitle("Error");
+        dialogo1.setMessage("Error de conexión con la web");
+        dialogo1.setCancelable(false);
+        dialogo1.setPositiveButton("Aceptar",null);
+        dialogo1.show();
+
     }
 
     @Override

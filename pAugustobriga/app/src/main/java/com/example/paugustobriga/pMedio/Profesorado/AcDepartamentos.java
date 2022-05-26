@@ -1,7 +1,9 @@
 package com.example.paugustobriga.pMedio.Profesorado;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -42,6 +44,23 @@ public class AcDepartamentos extends AppCompatActivity implements AsyncRespuesta
         Intent i=new Intent(getApplicationContext(), AcProfesorado.class);
         i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(i);
+    }
+
+    @Override
+    public void errorDeConexion(){
+        AlertDialog.Builder dialogo1=new AlertDialog.Builder(AcDepartamentos.this);
+        dialogo1.setTitle("Error");
+        dialogo1.setMessage("Error de conexión");
+        dialogo1.setCancelable(false);
+        dialogo1.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                Intent i1=new Intent(getApplicationContext(), AcPrincipal.class);
+                i1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(i1);
+            }
+        });
+        dialogo1.show();
     }
 
     @Override
