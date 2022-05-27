@@ -37,7 +37,7 @@ public class AcVerTareasDia extends AppCompatActivity {
     CheckBox chkCompletada, chkPasada;
     ListView lsTareasDia;
 
-    Typeface fuenteContenedores;
+    Typeface fuenteContenedores, fuenteNegrita;
 
     //no formateada se refiere sin el nombre del mes, solo con el número
     String fechaNoFormateada;
@@ -50,11 +50,12 @@ public class AcVerTareasDia extends AppCompatActivity {
 
         identificarElementos();
         importarFuentes();
+        disponerFuentes();
         fechaNoFormateada = recibirDatos();
         ArrayList<Tarea> listaTareas = ad.obtenerTareasDia(fechaNoFormateada);
         txtFecha.setText(fechaFormateada(fechaNoFormateada));
         limpiarNotificacionesPasadas(listaTareas);
-        lsTareasDia.setAdapter(new AdaptadorVerTareaDia(this,fuenteContenedores,listaTareas));
+        lsTareasDia.setAdapter(new AdaptadorVerTareaDia(this,fuenteNegrita,listaTareas));
 
         int tareasCompletadas = 0;
         int totalTareas = 0;
@@ -141,6 +142,14 @@ public class AcVerTareasDia extends AppCompatActivity {
         return resultado;
     }
 
+    private void disponerFuentes(){
+        txtFecha.setTypeface(fuenteContenedores);
+        txtTareasCompletadas.setTypeface(fuenteContenedores);
+        btnAnadirTarea.setTypeface(fuenteNegrita);
+        chkCompletada.setTypeface(fuenteContenedores);
+        chkPasada.setTypeface(fuenteContenedores);
+    }
+
 
 
     private void identificarElementos(){
@@ -160,7 +169,8 @@ public class AcVerTareasDia extends AppCompatActivity {
     }
 
     private void importarFuentes(){
-        fuenteContenedores = ResourcesCompat.getFont(this, R.font.ibm_plex_sans_thai_bold);
+        fuenteContenedores = ResourcesCompat.getFont(this, R.font.clear_sans_thin);
+        fuenteNegrita = ResourcesCompat.getFont(this,R.font.ibm_plex_sans_thai_bold);
     }
 
     @Override

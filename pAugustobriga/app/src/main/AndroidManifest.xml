@@ -64,10 +64,6 @@
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".pMedio.Proyectos.AcProyectos"
-            android:exported="false"
-            android:screenOrientation="portrait" />
-        <activity
             android:name=".pMedio.Profesorado.AcOrganizacion"
             android:exported="false"
             android:screenOrientation="portrait" />

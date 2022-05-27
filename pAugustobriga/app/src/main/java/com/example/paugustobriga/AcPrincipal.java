@@ -9,7 +9,6 @@ import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
-import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
@@ -21,7 +20,6 @@ import com.example.paugustobriga.pAbajo.Examenes.AcExamenes;
 import com.example.paugustobriga.pArriba.Horarios.AcHorarios;
 import com.example.paugustobriga.pArriba.NuestroCentro.AcNuestroCentro;
 import com.example.paugustobriga.pMedio.Profesorado.AcProfesorado;
-import com.example.paugustobriga.pMedio.Proyectos.AcProyectos;
 import com.example.paugustobriga.pMedio.calendario.AcCalendario;
 
 import java.util.ArrayList;

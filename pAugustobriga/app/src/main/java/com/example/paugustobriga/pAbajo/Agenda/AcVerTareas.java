@@ -42,7 +42,7 @@ public class AcVerTareas extends AppCompatActivity {
     //Estas opciones serán únicas
     final String[] opciones=new String[]{"Todo","Exámenes","Tareas","Otros","Realizadas","No Realizadas","Pasadas","Con Notificación"};
     ArrayList<Tarea> datos;
-    Typeface fuenteContenedores;
+    Typeface fuenteContenedores, fuenteNegrita;
     SimpleDateFormat formato=new SimpleDateFormat("dd/MM/yyyy");
 
     @Override
@@ -55,9 +55,10 @@ public class AcVerTareas extends AppCompatActivity {
         iniciarOpcionesSpinner();
         elegirOpcionSpinner();
         importarFuentes();
+        disponerFuentes();
         datos=ad.obtenerTareas();
         limpiarNotificacionesPasadas(datos);
-        lstVerTareas.setAdapter(new AdaptadorVerTareaDia(this,fuenteContenedores,datos));
+        lstVerTareas.setAdapter(new AdaptadorVerTareaDia(this,fuenteNegrita,datos));
         actualizarContadores(datos);
 
         buscarDatos();
@@ -101,7 +102,7 @@ public class AcVerTareas extends AppCompatActivity {
     //método que comprueba que al estar vacío el EditText no se quede vacía la lista
     private void comprobarEditTextVacio(){
         if(editBuscar.getText().toString().length()==0){
-            lstVerTareas.setAdapter(new AdaptadorVerTareaDia(getApplicationContext(),fuenteContenedores,datos));
+            lstVerTareas.setAdapter(new AdaptadorVerTareaDia(getApplicationContext(),fuenteNegrita,datos));
             actualizarContadores(datos);
         }
     }
@@ -238,8 +239,17 @@ public class AcVerTareas extends AppCompatActivity {
         startActivity(i);
     }
 
+    private void disponerFuentes(){
+        txtTotal.setTypeface(fuenteContenedores);
+        txtPas.setTypeface(fuenteContenedores);
+        txtComp.setTypeface(fuenteContenedores);
+        btnBuscar.setTypeface(fuenteNegrita);
+        editBuscar.setTypeface(fuenteContenedores);
+    }
+
     private void importarFuentes(){
-        fuenteContenedores = ResourcesCompat.getFont(this, R.font.ibm_plex_sans_thai_bold);
+        fuenteContenedores = ResourcesCompat.getFont(this, R.font.clear_sans_thin);
+        fuenteNegrita = ResourcesCompat.getFont(this, R.font.ibm_plex_sans_thai_bold);
     }
 
     //-------------------------- NOTIFICACIONES ---------------------------------------
@@ -257,6 +267,7 @@ public class AcVerTareas extends AppCompatActivity {
                 myDialog.setCancelable(true);
 
                 Button irNotificacion = (Button) myDialog.findViewById(R.id.irNotificacion);
+                irNotificacion.setTypeface(fuenteNegrita);
 
 
                 String compNoti = ((TextView) view.findViewById(R.id.txtNotificacion)).getText().toString();
@@ -272,6 +283,7 @@ public class AcVerTareas extends AppCompatActivity {
                 });
 
                 Button irBorrar= (Button) myDialog.findViewById(R.id.irBorrarTarea);
+                irBorrar.setTypeface(fuenteNegrita);
                 irBorrar.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view2) {

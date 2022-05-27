@@ -2,12 +2,17 @@ package com.example.paugustobriga.pAbajo.Agenda;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.res.ResourcesCompat;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.CalendarView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,10 +34,14 @@ public class AcCalendarioAgenda extends AppCompatActivity {
     //elementos interfaz
     CalendarView calendario;
     TextView txtAgenda,txtContRojo,txtContAzul,txtContAmarillo,txtFecha;
+    LinearLayout contResumen, linearCalendario;
     Button btnAnadir,btnVerTareas;
     //Variables
     SimpleDateFormat formato=new SimpleDateFormat("dd/MM/yyyy");
     Date fecha;
+
+    Typeface fuenteContenedores, fuenteNegrita;
+    Animation atgCabecera, atgPanel1, atgPanel2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +51,10 @@ public class AcCalendarioAgenda extends AppCompatActivity {
 
         identificarElementos();
         seleccionarFecha();
+        importarFuentes();
+        disponerFuentes();
+        cargarAnimaciones();
+        disponerAnimaciones();
 
     }
 
@@ -66,6 +79,9 @@ public class AcCalendarioAgenda extends AppCompatActivity {
         txtContRojo.setText(String.valueOf(contRojos));
         txtContAzul.setText(String.valueOf(contAzul));
         txtContAmarillo.setText(String.valueOf(contAmarillo));
+        txtContAmarillo.setTypeface(fuenteContenedores);
+        txtContAzul.setTypeface(fuenteContenedores);
+        txtContRojo.setTypeface(fuenteContenedores);
     }
 
 
@@ -129,6 +145,36 @@ public class AcCalendarioAgenda extends AppCompatActivity {
         txtContAzul = findViewById(R.id.txtContAzul);
         txtContAmarillo = findViewById(R.id.txtContAmarillo);
         txtFecha = findViewById(R.id.txtFecha);
+        contResumen = findViewById(R.id.contResumen);
+        linearCalendario = findViewById(R.id.linearLayoutCalendario);
+    }
+
+    private void importarFuentes(){
+        fuenteContenedores = ResourcesCompat.getFont(this, R.font.clear_sans_thin);
+        fuenteNegrita = ResourcesCompat.getFont(this,R.font.ibm_plex_sans_thai_bold);
+    }
+
+    private void disponerFuentes(){
+        txtAgenda.setTypeface(fuenteContenedores);
+        btnAnadir.setTypeface(fuenteNegrita);
+        btnVerTareas.setTypeface(fuenteNegrita);
+        txtFecha.setTypeface(fuenteContenedores);
+        txtContAzul.setTypeface(fuenteContenedores);
+        txtContAmarillo.setTypeface(fuenteContenedores);
+        txtContRojo.setTypeface(fuenteContenedores);
+    }
+
+    private void cargarAnimaciones(){
+        atgCabecera = AnimationUtils.loadAnimation(this,R.anim.atg_cabecera);
+        atgPanel1 = AnimationUtils.loadAnimation(this,R.anim.atg_horarios1);
+        atgPanel2 = AnimationUtils.loadAnimation(this,R.anim.atg_horarios2);
+    }
+
+    private void disponerAnimaciones(){
+
+        txtAgenda.startAnimation(atgCabecera);
+        contResumen.startAnimation(atgPanel1);
+        linearCalendario.startAnimation(atgPanel2);
     }
 
     @Override

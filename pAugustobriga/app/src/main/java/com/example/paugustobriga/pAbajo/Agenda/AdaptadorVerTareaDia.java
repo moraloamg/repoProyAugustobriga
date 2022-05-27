@@ -106,6 +106,9 @@ public class AdaptadorVerTareaDia extends BaseAdapter {
         if(fuente!=null){
             desc.setTypeface(fuente);
             fechaNotif.setTypeface(fuente);
+            fecha.setTypeface(fuente);
+            hecha.setTypeface(fuente);
+            pasada.setTypeface(fuente);
         }
 
         //Añadimos una animacion

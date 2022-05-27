@@ -15,6 +15,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.CheckBox;
@@ -39,14 +41,15 @@ public class AcAnadirTarea extends AppCompatActivity {
     AccesoDatosAgenda ad;
     SimpleDateFormat formato=new SimpleDateFormat("dd/MM/yyyy");
 
-    ImageView rojo,azul,amarillo, btnNotificacion;
-    TextView txtFecha;
+    ImageView rojo,azul,amarillo;
+    TextView txtFecha, textoAmarillo, textoRojo, textoAzul, textoCabeceraDescripcion;
     CheckBox chkHecho;
     EditText editDescripcion;
     Button btnAnadirTarea;
     LinearLayout lyFondo;
 
-    Typeface fuenteContenedores;
+    Typeface fuenteContenedores, fuenteNegrita;
+    Animation atgPanel1;
 
     String tipo="OTRO";
     String fecha;
@@ -63,6 +66,10 @@ public class AcAnadirTarea extends AppCompatActivity {
 
         identificarElementos();
         importarFuentes();
+        disponerFuentes();
+        cargarAnimaciones();
+        disponerAnimaciones();
+
         fecha = recibirDatos();
         if(fecha.contains("P")){
 
@@ -109,6 +116,10 @@ public class AcAnadirTarea extends AppCompatActivity {
         editDescripcion = findViewById(R.id.editTextAnadirTarea);
         btnAnadirTarea = findViewById(R.id.btnCrearTarea);
         lyFondo = findViewById(R.id.lyFondoCrearTarea);
+        textoCabeceraDescripcion = findViewById(R.id.textViewCabeceraDescripcion);
+        textoAmarillo = findViewById(R.id.textViewAmarilloOtro);
+        textoRojo = findViewById(R.id.textViewRojoExamen);
+        textoAzul = findViewById(R.id.textViewAzulTarea);
 
     }
 
@@ -139,9 +150,30 @@ public class AcAnadirTarea extends AppCompatActivity {
         return resultado;
     }
 
+    private void disponerFuentes(){
+        txtFecha.setTypeface(fuenteContenedores);
+        editDescripcion.setTypeface(fuenteNegrita);
+        chkHecho.setTypeface(fuenteContenedores);
+        btnAnadirTarea.setTypeface(fuenteNegrita);
+        textoCabeceraDescripcion.setTypeface(fuenteContenedores);
+        textoAzul.setTypeface(fuenteContenedores);
+        textoAmarillo.setTypeface(fuenteContenedores);
+        textoRojo.setTypeface(fuenteContenedores);
+    }
+
+    private void cargarAnimaciones(){
+        atgPanel1 = AnimationUtils.loadAnimation(this,R.anim.atg_lista_deslizar_izq);
+    }
+
+    private void disponerAnimaciones(){
+        lyFondo.startAnimation(atgPanel1);
+    }
+
+
 
     private void importarFuentes(){
-        fuenteContenedores = ResourcesCompat.getFont(this, R.font.ibm_plex_sans_thai_bold);
+        fuenteContenedores = ResourcesCompat.getFont(this, R.font.clear_sans_thin);
+        fuenteNegrita = ResourcesCompat.getFont(this, R.font.ibm_plex_sans_thai_bold);
     }
 
     @Override
