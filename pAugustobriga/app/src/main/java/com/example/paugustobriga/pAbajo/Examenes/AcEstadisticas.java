@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 
 import com.example.paugustobriga.R;
 import com.example.paugustobriga.pAbajo.Examenes.AcExamenes;
@@ -26,6 +28,7 @@ import java.util.ArrayList;
 public class AcEstadisticas extends AppCompatActivity {
 
     PieChart tarta, tarta2, tarta3, tarta4;
+    Animation atgGraficas;
     AccesoDatosExamenes ad;
 
     @Override
@@ -42,7 +45,21 @@ public class AcEstadisticas extends AppCompatActivity {
         aprobadosPorAsignatura(ad.aprobadosPorAsignatura());
         suspensosPorAsignatura(ad.suspensosPorAsignatura());
 
+        cargarAnimaciones();
+        disponerAnimaciones();
 
+
+    }
+
+    private void cargarAnimaciones(){
+        atgGraficas= AnimationUtils.loadAnimation(this,R.anim.atg_cabecera);
+    }
+
+    private void disponerAnimaciones(){
+        tarta.startAnimation(atgGraficas);
+        tarta2.startAnimation(atgGraficas);
+        tarta3.startAnimation(atgGraficas);
+        tarta4.startAnimation(atgGraficas);
     }
 
     private void aprobadosPorAsignatura(ArrayList<Object[]> listaAprobados){

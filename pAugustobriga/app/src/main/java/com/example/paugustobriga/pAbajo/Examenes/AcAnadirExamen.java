@@ -13,6 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.paugustobriga.R;
@@ -27,6 +28,7 @@ public class AcAnadirExamen extends AppCompatActivity {
 
     Button btnAnadirExamen;
     EditText editCalificacion, editNombreExamen;
+    TextView nombreExamen,nombreCalificacion, cabecera;
     Spinner spTrimestre, spAsignatura;
     Typeface fuenteContenedores;
     AccesoDatosExamenes ad;
@@ -47,6 +49,7 @@ public class AcAnadirExamen extends AppCompatActivity {
 
         identificarElementos();
         importarFuentes();
+        disponerFuentes();
 
         //mejorar esto
         try {
@@ -198,9 +201,18 @@ public class AcAnadirExamen extends AppCompatActivity {
 
     }
 
+    private void disponerFuentes(){
+        btnAnadirExamen.setTypeface(fuenteContenedores);
+        editCalificacion.setTypeface(fuenteContenedores);
+        editNombreExamen.setTypeface(fuenteContenedores);
+        btnAnadirExamen.setTypeface(fuenteContenedores);
+        nombreExamen.setTypeface(fuenteContenedores);
+        nombreCalificacion.setTypeface(fuenteContenedores);
+        cabecera.setTypeface(fuenteContenedores);
+    }
 
     private void importarFuentes(){
-        fuenteContenedores = ResourcesCompat.getFont(this, R.font.ibm_plex_sans_thai_bold);
+        fuenteContenedores = ResourcesCompat.getFont(this, R.font.clear_sans_thin);
     }
 
     private void identificarElementos(){
@@ -209,6 +221,9 @@ public class AcAnadirExamen extends AppCompatActivity {
         editNombreExamen = findViewById(R.id.editTextExamen);
         spAsignatura = findViewById(R.id.spAsignatura);
         spTrimestre = findViewById(R.id.spTrimestre);
+        nombreCalificacion = findViewById(R.id.textViewNotaExamen);
+        nombreExamen = findViewById(R.id.textViewNombreExamen);
+        cabecera = findViewById(R.id.textViewCabeceraAnadirExamen);
     }
 
     private void iniciarOpcionesSpinnerTrimestre(ArrayList<Trimestre> trimestres){

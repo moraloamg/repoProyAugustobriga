@@ -26,7 +26,7 @@
 
 
     <View
-        android:id="@+id/view8"
+        android:id="@+id/ViewNotificacion"
         android:layout_width="351dp"
         android:layout_height="515dp"
         android:background="@drawable/fondo_calendario"

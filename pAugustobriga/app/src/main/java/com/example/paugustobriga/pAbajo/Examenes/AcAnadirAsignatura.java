@@ -7,8 +7,11 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.paugustobriga.R;
@@ -17,7 +20,9 @@ public class AcAnadirAsignatura extends AppCompatActivity {
 
     Button btnAnadirAsignatura;
     EditText editEscribirAsignatura;
-    Typeface fuenteContenedores;
+    Typeface fuenteNegrita, fuenteContenedores;
+    TextView txtCabecera, txtMensaje;
+
     AccesoDatosExamenes ad;
 
     String nombre="";
@@ -31,6 +36,7 @@ public class AcAnadirAsignatura extends AppCompatActivity {
 
         identificarElementos();
         importarFuentes();
+        disponerFuentes();
 
         //mejorar esto
         try{
@@ -49,6 +55,7 @@ public class AcAnadirAsignatura extends AppCompatActivity {
 
 
     }
+
 
     private void editarAsignatura(String nombre) {
         btnAnadirAsignatura.setText("Editar asignatura");
@@ -93,13 +100,23 @@ public class AcAnadirAsignatura extends AppCompatActivity {
         return resultado;
     }
 
+    private void disponerFuentes(){
+        txtCabecera.setTypeface(fuenteContenedores);
+        btnAnadirAsignatura.setTypeface(fuenteContenedores);
+        editEscribirAsignatura.setTypeface(fuenteContenedores);
+        txtMensaje.setTypeface(fuenteContenedores);
+    }
+
     private void importarFuentes(){
-        fuenteContenedores = ResourcesCompat.getFont(this, R.font.ibm_plex_sans_thai_bold);
+        fuenteNegrita = ResourcesCompat.getFont(this, R.font.ibm_plex_sans_thai_bold);
+        fuenteContenedores = ResourcesCompat.getFont(this, R.font.clear_sans_thin);
     }
 
     private void identificarElementos(){
         btnAnadirAsignatura = findViewById(R.id.btnAnadirAsignatura);
         editEscribirAsignatura = findViewById(R.id.editTextAsignatura);
+        txtCabecera = findViewById(R.id.textViewCabeceraAsignatura);
+        txtMensaje = findViewById(R.id.textViewMensajeAsignatura);
     }
 
     @Override

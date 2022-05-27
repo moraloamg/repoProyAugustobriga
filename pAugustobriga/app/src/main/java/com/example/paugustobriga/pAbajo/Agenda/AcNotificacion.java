@@ -1,14 +1,18 @@
 package com.example.paugustobriga.pAbajo.Agenda;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.work.Data;
 import androidx.work.WorkManager;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.TextView;
@@ -35,6 +39,7 @@ public class AcNotificacion extends AppCompatActivity {
     Calendar actual = Calendar.getInstance();
     Calendar calendar = Calendar.getInstance();
 
+    Typeface fuenteContenedores, fuenteNegrita;
 
     private int minutos, hora, dia, mes, anio;
 
@@ -52,6 +57,8 @@ public class AcNotificacion extends AppCompatActivity {
         ad=new AccesoDatosAgenda(this);
 
         identificarElementos();
+        importarFuentes();
+        disponerFuentes();
         String datos = recibirDatos();
         id=datos.split("@")[0];
         claseOrigen = datos.split("@")[1];
@@ -71,6 +78,22 @@ public class AcNotificacion extends AppCompatActivity {
 
         guardarAlarma();
 
+    }
+
+
+
+    private void disponerFuentes(){
+        txtHora.setTypeface(fuenteContenedores);
+        btnGuardarNot.setTypeface(fuenteContenedores);
+        btnBorrarNot.setTypeface(fuenteContenedores);
+        btnElegirHora.setTypeface(fuenteContenedores);
+        btnElegirDia.setTypeface(fuenteContenedores);
+        txtDia.setTypeface(fuenteContenedores);
+    }
+
+    private void importarFuentes(){
+        fuenteContenedores = ResourcesCompat.getFont(this, R.font.clear_sans_thin);
+        fuenteNegrita = ResourcesCompat.getFont(this, R.font.ibm_plex_sans_thai_bold);
     }
 
     private String recibirTipo() {
@@ -249,7 +272,6 @@ public class AcNotificacion extends AppCompatActivity {
         btnElegirHora = findViewById(R.id.btnNotHora);
         txtHora = findViewById(R.id.txtNotHora);
         txtDia = findViewById(R.id.txtNotDia);
-
     }
 
 

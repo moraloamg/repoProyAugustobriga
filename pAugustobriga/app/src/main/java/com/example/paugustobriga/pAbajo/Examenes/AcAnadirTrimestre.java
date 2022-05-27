@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.paugustobriga.R;
@@ -17,7 +18,9 @@ public class AcAnadirTrimestre extends AppCompatActivity {
 
     Button btnAnadirTrimestre;
     EditText editEscribirTrimestre;
-    Typeface fuenteContenedores;
+    Typeface fuenteContenedores, fuenteNegrita;
+    TextView txtCabecera, txtMensajeTrimestre;
+
     AccesoDatosExamenes ad;
 
     String nombre="";
@@ -31,6 +34,7 @@ public class AcAnadirTrimestre extends AppCompatActivity {
 
         identificarElementos();
         importarFuentes();
+        disponerFuentes();
 
         //mejorar esto
         try{
@@ -93,13 +97,23 @@ public class AcAnadirTrimestre extends AppCompatActivity {
         return resultado;
     }
 
+    private void disponerFuentes(){
+        txtCabecera.setTypeface(fuenteContenedores);
+        txtMensajeTrimestre.setTypeface(fuenteContenedores);
+        editEscribirTrimestre.setTypeface(fuenteContenedores);
+        btnAnadirTrimestre.setTypeface(fuenteContenedores);
+    }
+
     private void importarFuentes(){
-        fuenteContenedores = ResourcesCompat.getFont(this, R.font.ibm_plex_sans_thai_bold);
+        fuenteContenedores = ResourcesCompat.getFont(this, R.font.clear_sans_thin);
+        fuenteNegrita = ResourcesCompat.getFont(this, R.font.clear_sans_thin);
     }
 
     private void identificarElementos(){
         btnAnadirTrimestre = findViewById(R.id.btnAnadirTrimestre);
         editEscribirTrimestre = findViewById(R.id.editTextTrimestre);
+        txtCabecera = findViewById(R.id.textViewCabeceraTrimestre);
+        txtMensajeTrimestre = findViewById(R.id.textViewMensajeTrimestre);
     }
 
     @Override

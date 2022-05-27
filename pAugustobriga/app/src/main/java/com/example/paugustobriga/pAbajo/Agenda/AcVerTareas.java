@@ -113,37 +113,37 @@ public class AcVerTareas extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 switch (opciones[i]){
                     case "Todo":
-                        lstVerTareas.setAdapter(new AdaptadorVerTareaDia(getApplicationContext(),fuenteContenedores,datos));
+                        lstVerTareas.setAdapter(new AdaptadorVerTareaDia(getApplicationContext(),fuenteNegrita,datos));
                         actualizarContadores(datos);
                         break;
                     case "Exámenes":
                         ArrayList<Tarea> tipoExamenes = ad.buscarTipo("EXAMEN");
-                        lstVerTareas.setAdapter(new AdaptadorVerTareaDia(getApplicationContext(),fuenteContenedores,tipoExamenes));
+                        lstVerTareas.setAdapter(new AdaptadorVerTareaDia(getApplicationContext(),fuenteNegrita,tipoExamenes));
                         actualizarContadores(tipoExamenes);
                         break;
                     case "Tareas":
                         ArrayList<Tarea> tipoTarea = ad.buscarTipo("TAREA");
-                        lstVerTareas.setAdapter(new AdaptadorVerTareaDia(getApplicationContext(),fuenteContenedores,tipoTarea));
+                        lstVerTareas.setAdapter(new AdaptadorVerTareaDia(getApplicationContext(),fuenteNegrita,tipoTarea));
                         actualizarContadores(tipoTarea);
                         break;
                     case "Otros":
                         ArrayList<Tarea> tipoOtro = ad.buscarTipo("OTRO");
-                        lstVerTareas.setAdapter(new AdaptadorVerTareaDia(getApplicationContext(),fuenteContenedores,tipoOtro));
+                        lstVerTareas.setAdapter(new AdaptadorVerTareaDia(getApplicationContext(),fuenteNegrita,tipoOtro));
                         actualizarContadores(tipoOtro);
                         break;
                     case "Realizadas":
                         ArrayList<Tarea> realizadas = ad.buscarRealizadas();
-                        lstVerTareas.setAdapter(new AdaptadorVerTareaDia(getApplicationContext(),fuenteContenedores,realizadas));
+                        lstVerTareas.setAdapter(new AdaptadorVerTareaDia(getApplicationContext(),fuenteNegrita,realizadas));
                         actualizarContadores(realizadas);
                         break;
                     case "No Realizadas":
                         ArrayList<Tarea> noRealizadas = ad.buscarNoRealizadas();
-                        lstVerTareas.setAdapter(new AdaptadorVerTareaDia(getApplicationContext(),fuenteContenedores,noRealizadas));
+                        lstVerTareas.setAdapter(new AdaptadorVerTareaDia(getApplicationContext(),fuenteNegrita,noRealizadas));
                         actualizarContadores(noRealizadas);
                         break;
                     case "Con Notificación":
                         ArrayList<Tarea> lsNotif = ad.buscarConNotificaciones();
-                        lstVerTareas.setAdapter(new AdaptadorVerTareaDia(getApplicationContext(),fuenteContenedores,lsNotif));
+                        lstVerTareas.setAdapter(new AdaptadorVerTareaDia(getApplicationContext(),fuenteNegrita,lsNotif));
                         actualizarContadores(lsNotif);
                         break;
                     case "Pasadas":
@@ -157,7 +157,7 @@ public class AcVerTareas extends AppCompatActivity {
                                 e.printStackTrace();
                             }
                         }
-                        lstVerTareas.setAdapter(new AdaptadorVerTareaDia(getApplicationContext(),fuenteContenedores,listaPasadas));
+                        lstVerTareas.setAdapter(new AdaptadorVerTareaDia(getApplicationContext(),fuenteNegrita,listaPasadas));
                         actualizarContadores(listaPasadas);
                         break;
                 }
@@ -195,7 +195,7 @@ public class AcVerTareas extends AppCompatActivity {
                 if(editBuscar.getText().toString().trim().length() > 0){
                     String busqueda = editBuscar.getText().toString();
                     ArrayList<Tarea> resultado = ad.buscarTarea(busqueda);
-                    lstVerTareas.setAdapter(new AdaptadorVerTareaDia(getApplicationContext(),fuenteContenedores,resultado));
+                    lstVerTareas.setAdapter(new AdaptadorVerTareaDia(getApplicationContext(),fuenteNegrita,resultado));
                     actualizarContadores(resultado);
                 }
             }

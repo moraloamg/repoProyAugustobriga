@@ -14,6 +14,8 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
@@ -30,11 +32,13 @@ import java.util.ArrayList;
 public class AcExamenes extends AppCompatActivity {
 
     TabLayout pestanas;
-    Typeface fuenteContenedores;
+    Typeface fuenteNegrita, fuenteContenedores;
     AccesoDatosExamenes ad;
     ListView lsPestanas;
     Button btnAnadirGenerico, btnBuscarGenerico, btnEstadisticas;
     EditText busqueda;
+    TextView cabeceraExamenes;
+    Animation atgCabecera;
 
     ArrayList<Trimestre> lTrimestres = new ArrayList<>();
     ArrayList<Examen> lExamenes = new ArrayList<>();
@@ -51,8 +55,11 @@ public class AcExamenes extends AppCompatActivity {
 
         identificarElementos();
         importarFuentes();
+        disponerFuentes();
+        cargarAnimaciones();
+        disponerAnimaciones();
         lAsignaturas = ad.obtenerAsignaturas();
-        lsPestanas.setAdapter(new AdaptadorAsignatura(getApplicationContext(),fuenteContenedores,lAsignaturas));
+        lsPestanas.setAdapter(new AdaptadorAsignatura(getApplicationContext(), fuenteNegrita,lAsignaturas));
         elegirPestana();
         anadirGenerico();
         opcionesSeleccion();
@@ -61,6 +68,18 @@ public class AcExamenes extends AppCompatActivity {
         cambioTexto();
         genericoExamen();
 
+    }
+
+    private void cargarAnimaciones(){
+        atgCabecera= AnimationUtils.loadAnimation(this,R.anim.atg_cabecera);
+    }
+
+    private void disponerAnimaciones(){
+        cabeceraExamenes.startAnimation(atgCabecera);
+    }
+
+    private void disponerFuentes() {
+        cabeceraExamenes.setTypeface(fuenteContenedores);
     }
 
     //método que comprueba que al estar vacío el EditText no se quede vacía la lista
@@ -89,16 +108,16 @@ public class AcExamenes extends AppCompatActivity {
             switch (btnAnadirGenerico.getText().toString()){
                 case " Añadir Asignaturas ":
                     lAsignaturas = ad.obtenerAsignaturas();
-                    lsPestanas.setAdapter(new AdaptadorAsignatura(getApplicationContext(),fuenteContenedores,lAsignaturas));
+                    lsPestanas.setAdapter(new AdaptadorAsignatura(getApplicationContext(), fuenteNegrita,lAsignaturas));
                     break;
                 case " Añadir Trimestres ":
                     lTrimestres = ad.obtenerTrimestres();
-                    lsPestanas.setAdapter(new AdaptadorTrimestre(getApplicationContext(),fuenteContenedores,lTrimestres));
+                    lsPestanas.setAdapter(new AdaptadorTrimestre(getApplicationContext(), fuenteNegrita,lTrimestres));
                     break;
 
                 case " Añadir Exámenes ":
                     lExamenes = ad.obtenerExamenes();
-                    lsPestanas.setAdapter(new AdaptadorExamenes(getApplicationContext(),fuenteContenedores,lExamenes));
+                    lsPestanas.setAdapter(new AdaptadorExamenes(getApplicationContext(), fuenteNegrita,lExamenes));
                     break;
             }
 
@@ -131,6 +150,7 @@ public class AcExamenes extends AppCompatActivity {
 
 
     private void buscarDatos(){
+        busqueda.setTypeface(fuenteContenedores);
         btnBuscarGenerico.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -138,16 +158,16 @@ public class AcExamenes extends AppCompatActivity {
                     switch (btnAnadirGenerico.getText().toString()){
                         case " Añadir Asignaturas ":
                             ArrayList<Asignatura> resultadoAsignatura = ad.buscarAsignatura(busqueda.getText().toString());
-                            lsPestanas.setAdapter(new AdaptadorAsignatura(getApplicationContext(),fuenteContenedores,resultadoAsignatura));
+                            lsPestanas.setAdapter(new AdaptadorAsignatura(getApplicationContext(), fuenteNegrita,resultadoAsignatura));
                             break;
                         case " Añadir Trimestres ":
                             ArrayList<Trimestre> resultadoTrimestres = ad.buscarTrimestre(busqueda.getText().toString());
-                            lsPestanas.setAdapter(new AdaptadorTrimestre(getApplicationContext(),fuenteContenedores,resultadoTrimestres));
+                            lsPestanas.setAdapter(new AdaptadorTrimestre(getApplicationContext(), fuenteNegrita,resultadoTrimestres));
                             break;
 
                         case " Añadir Exámenes ":
                             ArrayList<Examen> resultadoExamenes = ad.buscarExamenes(busqueda.getText().toString());
-                            lsPestanas.setAdapter(new AdaptadorExamenes(getApplicationContext(),fuenteContenedores,resultadoExamenes));
+                            lsPestanas.setAdapter(new AdaptadorExamenes(getApplicationContext(), fuenteNegrita,resultadoExamenes));
                             break;
                     }
                 }
@@ -194,6 +214,7 @@ public class AcExamenes extends AppCompatActivity {
                 myDialog.setCancelable(true);
 
                 Button editar = (Button) myDialog.findViewById(R.id.EditarGenerico);
+                editar.setTypeface(fuenteNegrita);
                 editar.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -201,6 +222,7 @@ public class AcExamenes extends AppCompatActivity {
                     }
                 });
                 Button borrar = (Button) myDialog.findViewById(R.id.borrarGenerico);
+                borrar.setTypeface(fuenteNegrita);
                 borrar.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -282,6 +304,7 @@ public class AcExamenes extends AppCompatActivity {
     }
 
     private void elegirPestana(){
+        btnAnadirGenerico.setTypeface(fuenteNegrita);
         pestanas.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
@@ -289,17 +312,17 @@ public class AcExamenes extends AppCompatActivity {
                     case 0:
                         btnAnadirGenerico.setText(" Añadir Asignaturas ");
                         lAsignaturas = ad.obtenerAsignaturas();
-                        lsPestanas.setAdapter(new AdaptadorAsignatura(getApplicationContext(),fuenteContenedores,lAsignaturas));
+                        lsPestanas.setAdapter(new AdaptadorAsignatura(getApplicationContext(), fuenteNegrita,lAsignaturas));
                         break;
                     case 1:
                         btnAnadirGenerico.setText(" Añadir Trimestres ");
                         lTrimestres = ad.obtenerTrimestres();
-                        lsPestanas.setAdapter(new AdaptadorTrimestre(getApplicationContext(),fuenteContenedores,lTrimestres));
+                        lsPestanas.setAdapter(new AdaptadorTrimestre(getApplicationContext(), fuenteNegrita,lTrimestres));
                         break;
                     case 2:
                         btnAnadirGenerico.setText(" Añadir Exámenes ");
                         lExamenes = ad.obtenerExamenes();
-                        lsPestanas.setAdapter(new AdaptadorExamenes(getApplicationContext(),fuenteContenedores,lExamenes));
+                        lsPestanas.setAdapter(new AdaptadorExamenes(getApplicationContext(), fuenteNegrita,lExamenes));
                         break;
                 }
 
@@ -318,6 +341,7 @@ public class AcExamenes extends AppCompatActivity {
     }
 
     private void irEstadisticas(){
+        btnEstadisticas.setTypeface(fuenteNegrita);
         btnEstadisticas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -335,10 +359,16 @@ public class AcExamenes extends AppCompatActivity {
         btnBuscarGenerico = findViewById(R.id.btnBuscarGenerico);
         busqueda = findViewById(R.id.editTextBusquedaGenerica);
         btnEstadisticas = findViewById(R.id.btnEstadisticas);
+        cabeceraExamenes = findViewById(R.id.textViewCabeceraCalificaciones);
+
+
+
+
     }
 
     private void importarFuentes(){
-        fuenteContenedores = ResourcesCompat.getFont(this, R.font.ibm_plex_sans_thai_bold);
+        fuenteNegrita = ResourcesCompat.getFont(this, R.font.ibm_plex_sans_thai_bold);
+        fuenteContenedores = ResourcesCompat.getFont(this, R.font.clear_sans_thin);
     }
 
     @Override
