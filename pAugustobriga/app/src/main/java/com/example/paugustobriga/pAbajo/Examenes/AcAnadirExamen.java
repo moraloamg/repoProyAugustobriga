@@ -8,7 +8,6 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Adapter;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -17,12 +16,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.paugustobriga.R;
-import com.example.paugustobriga.pAbajo.Agenda.AdaptadorVerTareaDia;
-import com.example.paugustobriga.pAbajo.Agenda.Tarea;
 
-import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Date;
 
 public class AcAnadirExamen extends AppCompatActivity {
 
@@ -66,7 +61,7 @@ public class AcAnadirExamen extends AppCompatActivity {
             editCalificacion.setText(String.valueOf(ex.getNota()));
             spTrimestre.setSelection(disponerTrimestre());
             spAsignatura.setSelection(disponerAsignatura());
-            editarAsignatura(ex.getId());
+            editarExamen(ex.getId());
         }else{
             anadir();
         }
@@ -117,8 +112,9 @@ public class AcAnadirExamen extends AppCompatActivity {
 
     }
 
-    private void editarAsignatura(int id){
+    private void editarExamen(int id){
         btnAnadirExamen.setText("Editar examen");
+        cabecera.setText("Editar examen");
         btnAnadirExamen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

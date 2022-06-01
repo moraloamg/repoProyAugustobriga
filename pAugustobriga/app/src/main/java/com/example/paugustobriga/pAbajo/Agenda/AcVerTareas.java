@@ -263,7 +263,6 @@ public class AcVerTareas extends AppCompatActivity {
                 final Dialog myDialog = new Dialog(AcVerTareas.this);
                 myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 myDialog.setContentView(R.layout.dialog_tareas);
-                myDialog.setTitle("Elige una opción"); //?? esto no se porqué no sale
                 myDialog.setCancelable(true);
 
                 Button irNotificacion = (Button) myDialog.findViewById(R.id.irNotificacion);
@@ -353,13 +352,13 @@ public class AcVerTareas extends AppCompatActivity {
         dialogo1.show();
     }
 
-    //arreglar o refactorizar eso? ponerlo en una interfaz?
+
     private void limpiarNotificacionesPasadas(ArrayList<Tarea> t){
         for(Tarea ta:t){
             if(ta.getNotificacion()!=null){
                 if(ta.isRealizado() || ta.getNotificacion().before(new Date())){
 
-                    //borrar en vez de modificar????
+
                     if(!ad.modificarNotificacion(ta.getId(),null)){
                         Toast.makeText(getApplicationContext(),"Error al modificar la notificacion", Toast.LENGTH_LONG).show();
 

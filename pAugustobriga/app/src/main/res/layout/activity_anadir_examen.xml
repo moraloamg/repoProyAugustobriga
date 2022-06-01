@@ -92,7 +92,7 @@
 
     <TextView
         android:id="@+id/textViewNombreExamen"
-        android:layout_width="119dp"
+        android:layout_width="176dp"
         android:layout_height="25dp"
         android:gravity="center"
         android:text="escribe el nombre"
@@ -105,8 +105,8 @@
 
     <TextView
         android:id="@+id/textViewNotaExamen"
-        android:layout_width="119dp"
-        android:layout_height="25dp"
+        android:layout_width="190dp"
+        android:layout_height="26dp"
         android:gravity="center"
         android:text="escribe la nota"
         app:layout_constraintBottom_toBottomOf="@+id/view"

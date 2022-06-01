@@ -40,8 +40,8 @@
 
     <LinearLayout
         android:id="@+id/linearLayoutCalendario"
-        android:layout_width="319dp"
-        android:layout_height="334dp"
+        android:layout_width="338dp"
+        android:layout_height="351dp"
         android:layout_marginTop="44dp"
         android:background="@drawable/fondo_calendario"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -52,7 +52,7 @@
         <CalendarView
             android:id="@+id/calendario"
             android:layout_width="wrap_content"
-            android:layout_height="320dp"></CalendarView>
+            android:layout_height="match_parent"></CalendarView>
     </LinearLayout>
 
     <!-- anulamos el color por defecto del boton BackgroundTint="@null" -->
@@ -103,8 +103,9 @@
     <!-- contenedor resumen -->
     <LinearLayout
         android:id="@+id/contResumen"
-        android:layout_width="320dp"
+        android:layout_width="340dp"
         android:layout_height="60dp"
+        android:layout_marginBottom="80dp"
         android:background="@drawable/fondo_calendario"
         android:orientation="horizontal"
         android:weightSum="4"

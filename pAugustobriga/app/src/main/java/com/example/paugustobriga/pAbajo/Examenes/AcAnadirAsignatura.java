@@ -59,6 +59,7 @@ public class AcAnadirAsignatura extends AppCompatActivity {
 
     private void editarAsignatura(String nombre) {
         btnAnadirAsignatura.setText("Editar asignatura");
+        txtCabecera.setText("Editar asignatura");
         btnAnadirAsignatura.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

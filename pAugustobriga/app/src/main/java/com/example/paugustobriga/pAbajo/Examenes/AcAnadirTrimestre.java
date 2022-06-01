@@ -56,6 +56,7 @@ public class AcAnadirTrimestre extends AppCompatActivity {
 
     private void editarTrimestre(String nombre) {
         btnAnadirTrimestre.setText("Editar trimestre");
+        txtCabecera.setText("Editar trimestre");
         btnAnadirTrimestre.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
