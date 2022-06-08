@@ -60,9 +60,7 @@ public class AcNuestroCentro extends AppCompatActivity {
 
     private void obtenerDatosFichero(String url){
         LecturaFicheroTexto lector=new LecturaFicheroTexto(url);
-        //creamos una referencia de esta objeto en la clase LecturaFichero
         lector.delegar = this;
-        //una vez se ejecute el siguiente método, el hilo de la clase actual acabará y empezará el hilo de lectura
         lector.execute();
     }
 

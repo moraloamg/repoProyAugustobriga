@@ -145,7 +145,7 @@ public class AcNotificacion extends AppCompatActivity {
                         try {
                             //no se puede comprobar con el comprobarFecha() ya que ahí se utiliza junto con la hora
                             if(formato.parse(strDate).before(formato.parse(formato.format(new Date())))){
-                                Toast.makeText(getApplicationContext(), "No puedes poner una alarma anterior a hoy",Toast.LENGTH_SHORT).show();
+                                txtDia.setText(strDate);
                             }else{
                                 txtDia.setText(strDate);
                             }
@@ -182,7 +182,7 @@ public class AcNotificacion extends AppCompatActivity {
                             if (comprobarFecha(calendar)) {
                                 txtHora.setText(String.format("%02d:%02d", i, i1));
                             } else {
-                                Toast.makeText(getApplicationContext(), "No puedes poner una alarma anterior la hora actual", Toast.LENGTH_SHORT).show();
+                                txtHora.setText(String.format("%02d:%02d", i, i1));
                             }
 
                         }
@@ -202,7 +202,6 @@ public class AcNotificacion extends AppCompatActivity {
             public void onClick(View view) {
                 String tag = id;
                 Long alerta = calendar.getTimeInMillis() - System.currentTimeMillis();
-                //int random = (int)(Math.random() * 50 + 1);
 
                 if(comprobarFecha(calendar)){
                     int tmp=Integer.parseInt(id);
@@ -219,7 +218,6 @@ public class AcNotificacion extends AppCompatActivity {
                     volver();
                 }else{
                     Toast.makeText(getApplicationContext(), "No puedes poner una alarma anterior a hoy",Toast.LENGTH_SHORT).show();
-
                 }
             }
         });

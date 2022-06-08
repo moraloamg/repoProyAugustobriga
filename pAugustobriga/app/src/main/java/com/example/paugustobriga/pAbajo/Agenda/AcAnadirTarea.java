@@ -78,7 +78,7 @@ public class AcAnadirTarea extends AppCompatActivity {
 
             if(id.contains("V")){
                 id = id.replace("V","");
-                verTareas=true;  //implementar una interfaz para ver de que actividad viene la peticion??
+                verTareas=true;
             }
 
             txtFecha.setText(fechaFormateada(fecha));

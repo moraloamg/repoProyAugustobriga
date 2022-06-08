@@ -254,7 +254,6 @@ public class AcVerTareas extends AppCompatActivity {
 
     //-------------------------- NOTIFICACIONES ---------------------------------------
 
-    //MEJORAR ESTA PARTE
     private void opcionesTarea(){
         lstVerTareas.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
@@ -332,7 +331,7 @@ public class AcVerTareas extends AppCompatActivity {
 
                 }
                 WorkManager.getInstance(getApplicationContext()).cancelAllWorkByTag(seleccionado);
-                //borrar en vez de modificar?
+
                 if(!ad.modificarNotificacion(Integer.parseInt(seleccionado),null)){
                     Toast.makeText(getApplicationContext(),"Error al modificar la notificacion", Toast.LENGTH_LONG).show();
 

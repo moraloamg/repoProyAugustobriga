@@ -16,7 +16,6 @@ public class LecturaFicheroTexto extends AsyncTask {
 
     private String url;
     private String contenido;
-    //No hay poliformismo, ya que sólo utilizamos una clase.
     public AcNuestroCentro delegar = null;
 
     public LecturaFicheroTexto(String url) {
@@ -53,13 +52,4 @@ public class LecturaFicheroTexto extends AsyncTask {
         return true;
     }
 
-
-
-    public String getContenido() {
-        return contenido;
-    }
-
-    public void setContenido(String contenido) {
-        this.contenido = contenido;
-    }
 }

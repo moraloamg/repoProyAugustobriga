@@ -235,12 +235,12 @@ public class AcVerTareasDia extends AppCompatActivity {
                 final Dialog myDialog = new Dialog(AcVerTareasDia.this);
                 myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 myDialog.setContentView(R.layout.dialog_tareas);
-                myDialog.setTitle("Elige una opción"); //?? esto no se porqué no sale
+                myDialog.setTitle("Elige una opción");
                 myDialog.setCancelable(true);
 
                 Button irNotificacion = (Button) myDialog.findViewById(R.id.irNotificacion);
 
-                //mejorar esto más adelante, hacer que aparezca el botón o no en función de si está pasada
+
                 String compNoti = ((TextView) view.findViewById(R.id.txtNotificacion)).getText().toString();
                 if(compNoti.equalsIgnoreCase("Con notif")){
                     irNotificacion.setText("Editar notificacion");
@@ -303,7 +303,7 @@ public class AcVerTareasDia extends AppCompatActivity {
 
                 }
                 WorkManager.getInstance(getApplicationContext()).cancelAllWorkByTag(seleccionado);
-                //borrar en vez de modificar?
+
                 if(!ad.modificarNotificacion(Integer.parseInt(seleccionado),null)){
                     Toast.makeText(getApplicationContext(),"Error al modificar la notificacion", Toast.LENGTH_LONG).show();
                 }
@@ -322,13 +322,13 @@ public class AcVerTareasDia extends AppCompatActivity {
         dialogo1.show();
     }
 
-    //arreglar o refactorizar eso? ponerlo en una interfaz?
+
     private void limpiarNotificacionesPasadas(ArrayList<Tarea> t){
         for(Tarea ta:t){
             if(ta.getNotificacion()!=null){
                 if(ta.isRealizado() || ta.getNotificacion().before(new Date())){
 
-                    //borrar en vez de modificar????
+
                     if(ad.modificarNotificacion(ta.getId(),null)){
                         //Toast.makeText(getApplicationContext(),"Error al modificar la notificacion", Toast.LENGTH_LONG).show();
                     }

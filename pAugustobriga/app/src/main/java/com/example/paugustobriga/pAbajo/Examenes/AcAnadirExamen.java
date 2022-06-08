@@ -46,10 +46,10 @@ public class AcAnadirExamen extends AppCompatActivity {
         importarFuentes();
         disponerFuentes();
 
-        //mejorar esto
+
         try {
             recibirDatos();
-        }catch (Exception ex){
+        }catch (Exception nulException){ //en caso de que no exista el examen todavía
 
         }
 

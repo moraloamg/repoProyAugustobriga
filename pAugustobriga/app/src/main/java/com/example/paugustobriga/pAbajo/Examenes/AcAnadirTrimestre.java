@@ -36,10 +36,10 @@ public class AcAnadirTrimestre extends AppCompatActivity {
         importarFuentes();
         disponerFuentes();
 
-        //mejorar esto
+
         try{
             nombre = recibirDatos();
-        }catch (Exception ex){
+        }catch (Exception nulException){ //en caso de que no exista el trimestre todavía
 
         }
         if(nombre.length()>0){

@@ -57,8 +57,4 @@ public class LecturaFichero extends AsyncTask {
     public ArrayList<String> getContenido() {
         return contenido;
     }
-
-    public void setContenido(ArrayList<String> contenido) {
-        this.contenido = contenido;
-    }
 }

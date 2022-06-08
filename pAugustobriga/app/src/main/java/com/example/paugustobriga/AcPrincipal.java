@@ -229,7 +229,6 @@ public class AcPrincipal extends AppCompatActivity {
         ico_abajo_tres = findViewById(R.id.ico_abajo_tres);
     }
 
-    //aquí se hace uso de la lista de TextView para cambiar la fuente de los texto de manera automática
     private void disponerFuentes(Typeface f1, Typeface f2){
         for(TextView x: lFuentesCuerpo){
             x.setTypeface(f1,Typeface.NORMAL);
@@ -239,7 +238,6 @@ public class AcPrincipal extends AppCompatActivity {
         }
     }
 
-    //introducir los TextViews en una lista para posteriores usos, como cambiar la fuente
     private void prepararFuentes(){
         lFuentesCuerpo=new ArrayList<TextView>(Arrays.asList(arribaUno,
                 arribaDos,arribaTres,medioUno,medioDos,medioTres,abajoUno,abajoDos,abajoTres));
@@ -291,20 +289,8 @@ public class AcPrincipal extends AppCompatActivity {
         txtCab2 = findViewById(R.id.txtCabecera2);
     }
 
-    public void mostrarMensajeErrorInternet(){
-
-        AlertDialog.Builder dialogo1=new AlertDialog.Builder(getApplicationContext());
-        dialogo1.setTitle("Error");
-        dialogo1.setMessage("Error de conexión con la web");
-        dialogo1.setCancelable(false);
-        dialogo1.setPositiveButton("Aceptar",null);
-        dialogo1.show();
-
-    }
-
     @Override
     public void onBackPressed() {
         this.finishAffinity();
-        //System.exit(0);
     }
 }

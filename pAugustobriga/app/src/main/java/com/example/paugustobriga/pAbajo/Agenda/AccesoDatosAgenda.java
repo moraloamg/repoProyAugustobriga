@@ -189,7 +189,7 @@ public class AccesoDatosAgenda {
 
 
             } catch (ParseException e) {
-                t.setNotificacion(null); //?
+                t.setNotificacion(null);
             }
             t.setRealizado(cursor.getInt(4) > 0);
             t.setTipo(cursor.getString(5));

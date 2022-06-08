@@ -41,7 +41,7 @@ public class AcAnadirAsignatura extends AppCompatActivity {
         //mejorar esto
         try{
             nombre = recibirDatos();
-        }catch (Exception ex){
+        }catch (Exception nulException){ //en caso de que no exista la asignatura todavía
 
         }
 

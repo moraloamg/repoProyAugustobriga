@@ -31,13 +31,6 @@ public class AdaptadorVerTareaDia extends BaseAdapter {
         this.contexto = c;
         this.fuente = fuenteContenedores;
 
-        //se utiliza un for y no un foreach debido a que este ultimo no coge los datos en orden
-        /*
-        for(int i=0;i<datos.size();i++){
-            tareas.add(datos.get(i));
-        }
-
-         */
     }
 
     @Override

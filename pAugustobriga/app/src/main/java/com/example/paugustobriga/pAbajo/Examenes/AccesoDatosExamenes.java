@@ -194,7 +194,7 @@ public class AccesoDatosExamenes {
 
     public boolean borrarAsignatura(String id) {
         boolean resultado=true;
-        //poner parametros mas adelante
+
         try{
             SQLiteDatabase accesoLectura = examenesBD.getReadableDatabase();
             String[] argumentos=new String[]{String.valueOf(id)};
@@ -208,7 +208,7 @@ public class AccesoDatosExamenes {
 
     public boolean borrarTrimestre(String id) {
         boolean resultado=true;
-        //poner parametros mas adelante
+
         try{
             SQLiteDatabase accesoLectura = examenesBD.getReadableDatabase();
             String[] argumentos=new String[]{String.valueOf(id)};
@@ -299,8 +299,6 @@ public class AccesoDatosExamenes {
         return resultado;
     }
 
-
-    //estos dos métodos se pueden juntar en uno sólo???
 
     public ArrayList<Examen> obtenerExamenAsig(String tabla) {
         ArrayList<Examen> resultado=new ArrayList<Examen>();

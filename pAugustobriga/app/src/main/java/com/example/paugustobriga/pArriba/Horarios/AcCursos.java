@@ -82,16 +82,6 @@ public class AcCursos extends AppCompatActivity{
         startActivity(i);
     }
 
-    //usar?
-
-    public ArrayList<String> getContenidoFichero() {
-        return contenidoFichero;
-    }
-
-    public void setContenidoFichero(ArrayList<String> contenidoFichero) {
-        this.contenidoFichero = contenidoFichero;
-    }
-
     private void importarFuentes(){
         fuenteContenedores = ResourcesCompat.getFont(this, R.font.ibm_plex_sans_thai_bold);
     }
