@@ -167,25 +167,29 @@ public class AcAnadirExamen extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if(editNombreExamen.getText().toString().length()>0){
-                    if(editCalificacion.getText().toString().length()>0 && (Float.parseFloat(editCalificacion.getText().toString()) >=0 && Float.parseFloat(editCalificacion.getText().toString())<=10)){
-                        if(spAsignatura.getAdapter().getCount() > 0 && spTrimestre.getAdapter().getCount() > 0){
-                            Examen ex=new Examen();
-                            ex.setNombre(editNombreExamen.getText().toString());
-                            ex.setNota(Float.parseFloat(editCalificacion.getText().toString()));
-                            ex.setAsig(new Asignatura(spAsignatura.getSelectedItem().toString(),null));
-                            ex.setTri(new Trimestre(spTrimestre.getSelectedItem().toString(), null));
-                            if(!ad.insertarExamen(ex)){
-                                Toast.makeText(getApplicationContext(), "Ha ocurrido un error al crear el examen", Toast.LENGTH_LONG).show();
-                            }else{
-                                Intent i=new Intent(getApplicationContext(), AcExamenes.class);
-                                i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                                startActivity(i);
+                    try {
+                        if (editCalificacion.getText().toString().length() > 0 && (Float.parseFloat(editCalificacion.getText().toString()) >= 0 && Float.parseFloat(editCalificacion.getText().toString()) <= 10)) {
+                            if (spAsignatura.getAdapter().getCount() > 0 && spTrimestre.getAdapter().getCount() > 0) {
+                                Examen ex = new Examen();
+                                ex.setNombre(editNombreExamen.getText().toString());
+                                ex.setNota(Float.parseFloat(editCalificacion.getText().toString()));
+                                ex.setAsig(new Asignatura(spAsignatura.getSelectedItem().toString(), null));
+                                ex.setTri(new Trimestre(spTrimestre.getSelectedItem().toString(), null));
+                                if (!ad.insertarExamen(ex)) {
+                                    Toast.makeText(getApplicationContext(), "Ha ocurrido un error al crear el examen", Toast.LENGTH_LONG).show();
+                                } else {
+                                    Intent i = new Intent(getApplicationContext(), AcExamenes.class);
+                                    i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                    startActivity(i);
+                                }
+                            } else {
+                                Toast.makeText(getApplicationContext(), "debes tener asignaturas o trimestres creados", Toast.LENGTH_LONG).show();
                             }
-                        }else{
-                            Toast.makeText(getApplicationContext(), "debes tener asignaturas o trimestres creados", Toast.LENGTH_LONG).show();
+                            String text = spAsignatura.getSelectedItem().toString();
+                        } else {
+                            Toast.makeText(getApplicationContext(), "debes añadir una nota entre el 0 y el 10", Toast.LENGTH_LONG).show();
                         }
-                        String text = spAsignatura.getSelectedItem().toString();
-                    }else{
+                    }catch (NumberFormatException ex){
                         Toast.makeText(getApplicationContext(), "debes añadir una nota entre el 0 y el 10", Toast.LENGTH_LONG).show();
                     }
                 }else{
