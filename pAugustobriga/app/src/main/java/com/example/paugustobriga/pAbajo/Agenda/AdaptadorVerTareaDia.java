@@ -84,7 +84,6 @@ public class AdaptadorVerTareaDia extends BaseAdapter {
 
         switch (tareas.get(i).getTipo()){
             case "EXAMEN":
-                //no se si setBackgroundResource es lo adecuado
                 ly.setBackgroundResource(R.drawable.fondo_tarea_ex);
                 break;
             case "TAREA":

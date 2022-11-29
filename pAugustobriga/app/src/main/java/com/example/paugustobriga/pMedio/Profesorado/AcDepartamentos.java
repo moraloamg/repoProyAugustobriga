@@ -7,10 +7,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
-import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -20,7 +18,7 @@ import com.example.paugustobriga.R;
 
 import java.util.ArrayList;
 
-public class AcDepartamentos extends AppCompatActivity implements AsyncRespuestaHtml{
+public class AcDepartamentos extends AppCompatActivity implements AsyncRespuesta {
 
     TableLayout tl;
     TextView pantallaCarga;
@@ -34,7 +32,7 @@ public class AcDepartamentos extends AppCompatActivity implements AsyncRespuesta
         pantallaCarga = findViewById(R.id.txtCargando);
 
 
-        AccesoHtml ac=new AccesoHtml("https://iesaugustobriga.educarex.es/index.php/profesorado-78","departamentos");
+        LecturaCSV ac=new LecturaCSV("https://raw.githubusercontent.com/moraloamg/pruebaAugustobriga/main/departamentos.csv","departamentos");
         ac.delegar = this;
         ac.execute();
     }
@@ -68,6 +66,7 @@ public class AcDepartamentos extends AppCompatActivity implements AsyncRespuesta
         tl.setStretchAllColumns(true); //encogemos y estiramos las filas
         tl.setShrinkAllColumns(true);
         for(Object[] x: salida){ //cada objeto de la lista contendrá información de un departamento
+
             for(int i=0;i<x.length;i++){   //el indice cero siempre será el nombre del departamento, el resto el personal
                 if(i==0){
                     //En esta parte se dispone el nombre del departamento

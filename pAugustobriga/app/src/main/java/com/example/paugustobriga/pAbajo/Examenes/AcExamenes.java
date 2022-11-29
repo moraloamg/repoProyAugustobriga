@@ -210,7 +210,7 @@ public class AcExamenes extends AppCompatActivity {
                 final Dialog myDialog = new Dialog(AcExamenes.this);
                 myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 myDialog.setContentView(R.layout.dialog_examenes);
-                myDialog.setTitle("Elige una opción"); //?? esto no se porqué no sale
+                myDialog.setTitle("Elige una opción");
                 myDialog.setCancelable(true);
 
                 Button editar = (Button) myDialog.findViewById(R.id.EditarGenerico);
